@@ -48,14 +48,15 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 
 ---
 
-## 📂 Belgeler
-
+##  Belgeler
 - [Product Backlog](docs/product-backlog.md)
 - [Sprint 1 Planning](docs/sprint-1/sprint-planning.md)
 - [Sprint 1 Board](docs/sprint-1/sprint-board.md)
-
+- [Daily Scrum Notes](docs/sprint-1/daily-scrum-notes.md)
+- [Sprint 1 Review](docs/sprint-1/sprint-review.md)
+- [Sprint 1 Retrospective](docs/sprint-1/sprint-retrospective.md)
 ---
 
-## 📜 Lisans
+## Lisans
 
 MIT License
