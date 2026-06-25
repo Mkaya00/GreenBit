@@ -16,7 +16,7 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 - **Akıllı Öneriler:** Kişiselleştirilmiş model ve kullanım önerileri
 
 
-## 👥 Takım
+## Takım
 
 | Rol | İsim |
 |---|---|
