@@ -17,6 +17,7 @@
 
 - **Dün (25 Haziran):** GitHub repo açıldı, README ve Scrum dokümanları hazırlandı. Git, GitHub, Markdown, Commit/Push kavramları öğrenildi. 4 commit atıldı.
 - **Bugün:** Node.js ve npm kuruldu (Homebrew ile). Next.js projesi `greenbit-app/` klasörüne kuruldu. TypeScript, ESLint, Tailwind CSS, App Router, AGENTS.md ayarları seçildi. İlk `npm run dev` başarılı, localhost:3000 çalıştı. Frontend/Backend, Node.js, npm, Next.js, React, Tailwind kavramları öğrenildi.
+- **Not:** Git config'i güncellendi, artık Mkaya00 olarak commit atılıyor.
 - **Yarın:** Tekrar okuma yapılacak, kavramlar pekişecek. İlk kod değişiklikleri yapılacak, landing page tasarımına başlanacak.
 - **Engel:** Yok.
 
