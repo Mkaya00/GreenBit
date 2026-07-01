@@ -37,8 +37,8 @@
 ## 1 Temmuz 2026
 
 - **Son 3 gün:** TÜBİTAK için ara verildi.
-- **Bugün:** Projeye geri dönüş yapıldı. Landing page kontrol edildi, `npm run dev` başarıyla çalıştırıldı. Daily scrum ve sprint board güncellendi.
-- **Yarın:** Landing page'e özellikler bölümü ve footer eklenecek. Vercel'e ilk deploy denenecek.
+- **Bugün:** Projeye geri dönüş yapıldı. Landing page kontrol edildi, `npm run dev` başarıyla çalıştırıldı. Daily scrum ve sprint board güncellendi.Landing page'e "GreenBit Ne Yapar?" özellikler bölümü ve footer eklendi. Yeni sayfa `/upload` oluşturuldu (US-001). React State (useState), Client Component ("use client"), Event Handling (onChange), Koşullu Gösterim (conditional rendering) kavramları öğrenildi ve uygulandı. Kullanıcı dosya seçince ekranda ad, boyut ve tür bilgileri görünüyor. TypeScript tipleri (File | null) ile güvenlik sağlandı.
+- **Yarın:** Landing page'e navigation menü eklenecek (ana sayfa ↔ upload sayfası). Upload sayfasına drag & drop özelliği ve dosya format doğrulaması eklenecek. Ana sayfadan upload sayfasına geçiş linki koyulacak.
 - **Engel:** Yok. Ara sonrası kaldığım yerden devam ediyorum.
 
 ---

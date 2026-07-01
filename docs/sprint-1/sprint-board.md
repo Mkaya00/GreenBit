@@ -14,8 +14,6 @@
 - EXTRA: Dosya yükleme sayfası iskeleti
 
 ##  In Progress (Devam Eden)
-
-- US-001: Dosya yükleme komponenti (planlama aşamasında)
 - Landing page geliştirme (detay ekleme)
 
 ##  Done (Tamamlanan)
@@ -32,7 +30,9 @@
 -  Hot reload deneyimi
 -  Git divergent branches sorunu çözüldü
 -  Git config düzeltildi (Mkaya00 + doğru e-mail)
-
+- US-001: Dosya yükleme komponenti (temel UI hazır, drag&drop yarın)
+-  /upload sayfası oluşturuldu
+-  React State, Client Component, Event Handling kavramları öğrenildi
 ---
 
 ## Son Güncelleme Notu (1 Temmuz)
