@@ -26,3 +26,19 @@
 - **Engel:** Yok.
 
 ---
+
+## 28-30 Haziran 2026 (Ara Verildi)
+
+- **Durum:** TÜBİTAK yükümlülükleri nedeniyle 3 gün proje çalışmasına ara verildi.
+- **Not:** Scrum'da böyle durumlar planlamada dikkate alınır. Sprint 1'in kalan 5 günü ile hedeflere ulaşılacak.
+
+---
+
+## 1 Temmuz 2026
+
+- **Son 3 gün:** TÜBİTAK için ara verildi.
+- **Bugün:** Projeye geri dönüş yapıldı. Landing page kontrol edildi, `npm run dev` başarıyla çalıştırıldı. Daily scrum ve sprint board güncellendi.
+- **Yarın:** Landing page'e özellikler bölümü ve footer eklenecek. Vercel'e ilk deploy denenecek.
+- **Engel:** Yok. Ara sonrası kaldığım yerden devam ediyorum.
+
+---
