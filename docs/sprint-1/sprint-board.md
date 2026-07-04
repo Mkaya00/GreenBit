@@ -1,42 +1,30 @@
-# Sprint 1 Board (Kanban)
+#  Sprint 1 Board (Kanban)
 
 > Bu pano her güncellendiğinde commit edilir.  
 > Görevler durumlarına göre sütunlar arasında taşınır.
 
 ---
 
-## To Do (Yapılacak)
-
-- US-002: ChatGPT JSON parser
-- US-003: Karbon hesaplama motoru
-- US-004: Dashboard UI
-- EXTRA: Vercel deploy
-- EXTRA: Dosya yükleme sayfası iskeleti
+##  To Do (Yapılacak)
+- EXTRA: Vercel deploy (Canlıya alma)
 
 ##  In Progress (Devam Eden)
-- Landing page geliştirme (detay ekleme)
+- GitHub dokümantasyon son kontrolleri (README, Review, Retrospective)
 
 ##  Done (Tamamlanan)
+- GitHub repo oluşturuldu
+- Product Backlog hazırlandı
+- Sprint 1 planı yazıldı
+- Node.js + Next.js 14 projesi kuruldu
+- İlk kod değişikliği yapıldı (Landing page v1)
+- Git config düzeltildi ve Git divergent branches sorunu çözüldü
+- US-001: Dosya yükleme komponenti ve UI hazır
+- US-002: ChatGPT JSON parser (Tarayıcı içi işleme) eklendi
+- US-003: Karbon hesaplama motoru (Green Algorithms) entegre edildi
+- US-004: Dashboard UI (Recharts ile grafikler) tamamlandı
+- UI/UX: Günlük metrik karşılaştırmaları (kahve, ağaç, ampul) eklendi
+- Routing dizinleri başarıyla düzeltildi
 
--  GitHub repo oluşturuldu
--  Product Backlog hazırlandı
--  Sprint 1 planı yazıldı
--  Node.js + npm kuruldu (Homebrew)
--  Next.js 16.2.9 projesi kuruldu (TypeScript, Tailwind, ESLint, App Router)
--  AGENTS.md ve CLAUDE.md dosyaları eklendi
--  Localhost'ta sunucu başarıyla çalıştırıldı
--  İlk kod değişikliği yapıldı (Next.js karşılama → custom sayfa)
--  Landing page v1 hazır (başlık, açıklama, butonlar, yeşil tema)
--  Hot reload deneyimi
--  Git divergent branches sorunu çözüldü
--  Git config düzeltildi (Mkaya00 + doğru e-mail)
-- US-001: Dosya yükleme komponenti (temel UI hazır, drag&drop yarın)
--  /upload sayfası oluşturuldu
--  React State, Client Component, Event Handling kavramları öğrenildi
 ---
-
-## Son Güncelleme Notu (1 Temmuz)
-
-- 3 günlük ara verildi (TÜBİTAK yükümlülükleri)
-- Sprint 1 sonuna 5 gün kaldı
-- Öncelikler: Landing page detayları, Vercel deploy, dosya yükleme sayfası iskeleti
+##  Son Güncelleme Notu (4 Temmuz)
+- Sprint 1 hedeflerinin %95'i tamamlandı. Geliştirilen "Hepsi Bir Arada" arayüz Github'a pushlandı. Büyük dosya işleme (Chunking/IndexedDB) mimarisi Sprint 2'ye bırakılarak 50MB sınırı MVP kapsamında kabul edildi. Geriye sadece Vercel deploy kaldı.

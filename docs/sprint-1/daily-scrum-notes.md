@@ -42,3 +42,18 @@
 - **Engel:** Yok. Ara sonrası kaldığım yerden devam ediyorum.
 
 ---
+
+2 - 3 Temmuz 2026
+- **Dün:** Upload sayfasının temel UI'ı tamamlandı.
+- **Bugün:** Green Algorithms metodolojisi koda dökülerek karbon hesaplama motoru (carbon.ts) yazıldı. Kullanıcının günlük hayattan metrikler (kahve, ampul) görebileceği UI eklendi. Recharts kütüphanesi ile Dashboard grafikleri tasarlandı.
+- **Engel:** Yok, hesaplama mantığı başarılı.
+
+---
+
+## 4 Temmuz 2026 (Bugün)
+- **Dün:** Hesaplama motoru ve UI bileşenleri tamamlandı.
+- **Bugün:** Git versiyon kontrolünde yaşanan sayfa yönlendirme (routing) karışıklığı "Fix Forward" stratejisiyle temizlendi. Ana sayfa, Upload ve Dashboard UI profesyonel commit mesajlarıyla (atomic commits) GitHub'a eklendi. 50 MB JSON dosya sınırının MVP için bilinçli bir teknik borç (technical debt) olarak bırakılmasına karar verildi. Tüm Scrum belgeleri güncellendi.
+- **Yarın:** Sprint 1 resmi olarak kapanacak. Proje Vercel üzerinden canlıya alınacak.
+- **Engel:** Yok. Sprint hedefine ulaşıldı!
+
+---

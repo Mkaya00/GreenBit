@@ -9,12 +9,12 @@
 
 | ID | User Story | Tahmini Süre | Durum |
 |---|---|---|---|
-| US-001 | Dosya yükleme | 2 gün | ⬜ Bekliyor |
-| US-002 | Dosya parse (ChatGPT JSON) | 2 gün | ⬜ Bekliyor |
-| US-003 | Karbon hesaplama motoru | 3 gün | ⬜ Bekliyor |
-| US-004 | Temel dashboard UI | 3 gün | ⬜ Bekliyor |
-| EXTRA | Landing page (anasayfa) | 1 gün | ⬜ Bekliyor |
-| EXTRA | GitHub dokümantasyon güncellemeleri | sürekli | ⬜ Devam ediyor |
+| US-001 | Dosya yükleme | 2 gün |  Tamamlandı |
+| US-002 | Dosya parse (ChatGPT JSON) | 2 gün |  Tamamlandı |
+| US-003 | Karbon hesaplama motoru | 3 gün |  Tamamlandı |
+| US-004 | Temel dashboard UI | 3 gün |  Tamamlandı |
+| EXTRA | Landing page (anasayfa) | 1 gün |  Tamamlandı |
+| EXTRA | GitHub dokümantasyon güncellemeleri | sürekli |  Devam ediyor |
 
 ---
 
