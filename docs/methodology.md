@@ -9,16 +9,44 @@ GreenBit, kullanıcının yapay zeka kullanım verilerini analiz ederek 3 temel 
 - **kWh** — Harcanan elektrik enerjisi
 - **CO2** — Salınan karbon miktarı
 
-##  Bilimsel Kaynaklar
+## 🔬 Bilimsel Kaynaklar
 
 Hesaplamalarımız aşağıdaki bilimsel çalışmalara dayanır:
 
-1. **Green Algorithms** — Lannelongue et al. (2021)
-   - Kaynak: https://green-algorithms.org
-2. **ML CO2 Impact** — Lacoste et al. (2019)
-   - Kaynak: https://mlco2.github.io
-3. **Cloud Carbon Footprint** — Thoughtworks (2023)
-   - Kaynak: https://www.cloudcarbonfootprint.org
+### 1. Green Algorithms Initiative — Lannelongue et al. (2021)
+Peer-reviewed bilimsel çalışma. *Advanced Science* dergisinde yayınlandı.
+
+- **Ana site:** https://www.green-algorithms.org/
+- **Kalkülatör:** https://calculator.green-algorithms.org/
+- **Makale (Wiley):** https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202100707
+- **Makale (ücretsiz arXiv):** https://arxiv.org/abs/2007.07610
+
+**Kullanım:** Genel karbon hesaplama metodolojisi, GPU ve CPU enerji tüketimi formülleri.
+
+### 2. ML CO2 Impact — Lacoste et al. (2019)
+Yapay zeka modellerinin karbon salımını hesaplama aracı.
+
+- **Kalkülatör:** https://mlco2.github.io/impact
+- **GitHub:** https://github.com/mlco2/impact
+- **Makale (arXiv):** https://arxiv.org/abs/1910.09700
+
+**Kullanım:** LLM ve derin öğrenme modelleri için özel enerji katsayıları.
+
+### 3. IEA (Uluslararası Enerji Ajansı) — 2023
+Küresel elektrik şebekesi karbon yoğunluğu verileri.
+
+- **Ana site:** https://www.iea.org
+- **World Energy Outlook 2023:** https://www.iea.org/reports/world-energy-outlook-2023
+
+**Kullanım:** Bölgesel CO2/kWh dönüşüm katsayıları.
+
+### 4. NVIDIA — GPU Teknik Dökümanları
+Sunucu GPU'larının resmi güç tüketim verileri.
+
+- **A100 Datasheet:** https://www.nvidia.com/en-us/data-center/a100/
+- **H100 Datasheet:** https://www.nvidia.com/en-us/data-center/h100/
+
+**Kullanım:** Model başına GPU sayısı ve enerji tahminleri.
 
 ## ⚡ Model Enerji Tüketimi
 
@@ -64,7 +92,7 @@ CO2 (g) = Enerji (Wh) × 0.4
 Kullanıcı **5,000 mesaj** göndermiş, hepsi **GPT-4**:
 
 - Token = 5000 × 200 = **1,000,000 token**
-- Enerji = (1,000,000 / 1000) × 30 = **30,000 Wh = 30 kWh**
+- Enerji = (1,000,000 / 1000) × 30 = ** 30,000 Wh = 30 kWh**
 - CO2 = 30,000 × 0.4 = **12,000g = 12 kg CO2**
 
 ##  Karşılaştırma Referansları
