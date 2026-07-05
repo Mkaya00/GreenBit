@@ -6,10 +6,13 @@
 ---
 
 ##  To Do (Yapılacak)
-- EXTRA: Vercel deploy (Canlıya alma)
+- (Sprint 1 kapsamı tamamlandı)
 
-##  In Progress (Devam Eden)
-- GitHub dokümantasyon son kontrolleri (README, Review, Retrospective)
+
+##   Sprint 3'e Planlanan
+- Vercel deploy (Canlıya alma) — ürün olgunlaştığında yapılacak, bilinçli olarak ertelendi
+
+
 
 ##  Done (Tamamlanan)
 - GitHub repo oluşturuldu
@@ -24,7 +27,14 @@
 - US-004: Dashboard UI (Recharts ile grafikler) tamamlandı
 - UI/UX: Günlük metrik karşılaştırmaları (kahve, ağaç, ampul) eklendi
 - Routing dizinleri başarıyla düzeltildi
+- Dashboard gerçek kullanıcı verisine bağlandı
+- GitHub dokümantasyonu tamamlandı ve mimari kararlarla uyumlu hale getirildi
+
 
 ---
-##  Son Güncelleme Notu (4 Temmuz)
-- Sprint 1 hedeflerinin %95'i tamamlandı. Geliştirilen "Hepsi Bir Arada" arayüz Github'a pushlandı. Büyük dosya işleme (Chunking/IndexedDB) mimarisi Sprint 2'ye bırakılarak 50MB sınırı MVP kapsamında kabul edildi. Geriye sadece Vercel deploy kaldı.
+##  Son Güncelleme Notu (5 Temmuz - Sprint 1 Kapanışı)
+- Sprint 1 hedefleri tamamlandı. 4/4 User Story bitirildi (US-001 → US-004).
+- Dashboard, localStorage + useEffect ile gerçek kullanıcı verisine bağlandı; sabit örnek veri kaldırıldı.
+- Client-side mimari bilinçli olarak tercih edildi (hız, sıfır sunucu maliyeti, gizlilik).
+- Sprint 2'ye bırakılanlar: lib/ modüllerinin ortak kullanımı , backend + veritabanı, gerçek token sayacı , büyük dosya işleme (50MB üstü).
+- Sprint 3'e planlanan: Vercel deploy.

@@ -14,7 +14,7 @@
 | US-003 | Karbon hesaplama motoru | 3 gün |  Tamamlandı |
 | US-004 | Temel dashboard UI | 3 gün |  Tamamlandı |
 | EXTRA | Landing page (anasayfa) | 1 gün |  Tamamlandı |
-| EXTRA | GitHub dokümantasyon güncellemeleri | sürekli |  Devam ediyor |
+| EXTRA | GitHub dokümantasyon güncellemeleri | sürekli | Tamamlandı |
 
 ---
 
@@ -58,3 +58,17 @@
 - Cursor + Claude kullanılacak (AI destekli geliştirme)
 - Her gün en az 1 commit hedefli
 - Bloklayıcı durumlar GitHub Issues'a kaydedilecek
+
+---
+
+##  Sprint Sonu Gerçekleşme Notu (5 Temmuz)
+
+Bu belge sprint başında yazılmıştır. Sprint boyunca alınan mimari kararlarla bazı hedefler güncellendi:
+
+- **Client-side mimari tercih edildi:** Başlangıçta planlanan backend API route'ları (`/api/upload`, `/api/analyze`) yerine, dosya işleme ve karbon hesaplama tarayıcıda (client-side) gerçekleştirildi. Sebep: MVP için hız, sıfır sunucu maliyeti ve kullanıcı verisinin sunucuya gönderilmemesi (gizlilik).
+- **Sayfa arası veri paylaşımı** localStorage ile çözüldü (backend/veritabanı yerine).
+- **Vercel deploy** bilinçli olarak Sprint 3'e ertelendi (ürün olgunlaşınca).
+- **US-001 → US-004** tamamlandı. Dashboard 3 metrik + 2 grafik (pasta + zaman serisi) içeriyor.
+- **lib/carbon.ts ve lib/parsers/chatgpt.ts** oluşturuldu; ortak kullanımları (refactor) Sprint 2'ye planlandı.
+
+Backend API + veritabanı, kullanıcı hesapları ve veri saklama gerektiğinde Sprint 2'de eklenecektir.

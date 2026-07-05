@@ -10,14 +10,16 @@
 - Recharts kullanılarak veri görselleştirme (Dashboard) özellikleri koda eklendi.
 - Versiyon kontrolü (Git) hataları "Fix Forward" stratejisiyle temizlenip profesyonel commit geçmişi oluşturuldu.
 
-## Tamamlanmayanlar ve Nedenleri
-- Backend API rotalarının (veritabanı bağlantıları vb.) tam entegrasyonu tamamlanmadı.
-- **Neden:** Arayüz (UI) ve hesaplama motorunun tarayıcı üzerinde sorunsuz çalışmasına öncelik verildiği için karmaşık veritabanı aşamaları Sprint 2'ye kaydırıldı.
+## Mimari Kararlar ve Sprint 2'ye Devredilenler
+- **Client-side (tarayıcı içi) mimari tercih edildi:** Sprint 1'de dosya okuma, JSON parse ve karbon hesaplama tamamen tarayıcıda çalışacak şekilde tasarlandı. Bu tercih; MVP için hızlı geliştirme, sıfır sunucu maliyeti ve kullanıcı verisinin sunucuya gönderilmemesi (gizlilik) avantajı sağladı.
+- **Sayfa arası veri paylaşımı localStorage ile çözüldü:** Upload sayfası analiz sonucunu localStorage'a kaydediyor, Dashboard bu veriyi okuyup Recharts ile görselleştiriyor.
+- **Sprint 2'ye devredilenler:** Kullanıcı hesapları ve veri saklama için backend API + veritabanı entegrasyonu, gerçek token sayacı (tiktoken), lib/ altındaki hesaplama modüllerinin ortak kullanımı (refactor).
 
 ## Sayısal Sonuçlar
-- Tamamlanan story sayısı: 4 / 6 (US-001, US-002, US-003, US-004)
-- Yapılan commit sayısı: 12 (Yaklaşık)
+- Tamamlanan story sayısı: 4 / 4 (Sprint 1 kapsamı) — US-001, US-002, US-003, US-004
+- Not: US-005 (Llama fine-tuning) ve US-006 (prompt analizi) Sprint 2 kapsamındadır.
+- Yapılan commit sayısı: 20 (Yaklaşık)
 - GitHub Issues kapatılan: 0 (Bireysel ilerlendiği için süreç doğrudan Git commit mesajlarıyla yönetildi)
 
 ## Demo Notları
-MVP (Minimum Viable Product) arayüz ve hesaplama motoru lokalde başarıyla test edildi. Vercel üzerinden canlıya alındığında proje linki README'ye eklenecektir.
+MVP arayüz ve hesaplama motoru lokalde (localhost:3000) başarıyla test edildi. Upload → analiz → Dashboard akışı uçtan uca çalışıyor. Vercel canlıya alma Sprint 3'e planlanmıştır; deploy sonrası link README'ye eklenecektir.
