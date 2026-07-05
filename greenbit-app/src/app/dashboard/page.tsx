@@ -2,7 +2,7 @@
 
 // LineChart ve ilgili bileşenleri de ekledik
 import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
-
+import  { useState, useEffect } from "react";
 // ==========================================
 // 1. HESAPLAMA MOTORU
 // ==========================================
@@ -31,8 +31,7 @@ const COLORS = ['#16a34a', '#4ade80', '#86efac', '#22c55e', '#15803d'];
 
 function parseChatGPTExport(conversations: any[]) {
   const modelCounts: Record<string, number> = {};
-  const timeSeriesData: Record<string, number> = {}; // Gün bazlı CO2 tutmak için
-  let totalMessages = 0;
+  const timeSeriesData: Record<string, number> = {}; 
 
   conversations.forEach((conv) => {
     if (!conv.mapping) return;
@@ -50,7 +49,6 @@ function parseChatGPTExport(conversations: any[]) {
       if (node.message && node.message.metadata && node.message.metadata.model_slug) {
         const modelSlug = node.message.metadata.model_slug;
         modelCounts[modelSlug] = (modelCounts[modelSlug] || 0) + 1;
-        totalMessages += 1;
         
         // Sadece bu mesajın CO2'sini hesapla ve sohbete ekle
         const msgMetrics = calculateMetricsForModel(1, modelSlug);
@@ -105,63 +103,53 @@ function parseChatGPTExport(conversations: any[]) {
 }
 
 // ==========================================
-// 3. ÖRNEK VERİ SETİ (Orijinal create_time eklendi)
-// ==========================================
-const rawConversations = [
-  {
-    "title": "Python liste sorusu",
-    "create_time": 1717200000,
-    "mapping": {
-      "msg-1": { "author": { "role": "user" }, "content": "Python...", "message": { "metadata": { "model_slug": "gpt-4" } } },
-      "msg-2": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4" } } }
-    }
-  },
-  {
-    "title": "React bileşen sorusu",
-    "create_time": 1717800000,
-    "mapping": {
-      "msg-1": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-2": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-3": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-4": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } }
-    }
-  },
-  {
-    "title": "TypeScript type sorusu",
-    "create_time": 1718400000,
-    "mapping": {
-      "msg-1": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4" } } },
-      "msg-2": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4" } } },
-      "msg-3": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4" } } },
-      "msg-4": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4" } } }
-    }
-  },
-  {
-    "title": "Next.js App Router",
-    "create_time": 1719000000,
-    "mapping": {
-      "msg-1": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o" } } },
-      "msg-2": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o" } } }
-    }
-  },
-  {
-    "title": "Tailwind ile stil verme",
-    "create_time": 1719600000,
-    "mapping": {
-      "msg-1": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-2": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-3": { "author": { "role": "user" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } },
-      "msg-4": { "author": { "role": "assistant" }, "content": "...", "message": { "metadata": { "model_slug": "gpt-4o-mini" } } }
-    }
-  }
-];
-
-// ==========================================
 // 4. ARAYÜZ (MAIN COMPONENT)
 // ==========================================
-export default function Dashboard() {
-  const { summaryData, modelDistribution, timelineData } = parseChatGPTExport(rawConversations);
 
+  export default function Dashboard() {
+    // State: analiz sonuçlarını tutacak
+    const [data, setData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const savedData = localStorage.getItem("greenbit_conversations");
+      
+      if (savedData) {
+        const conversations = JSON.parse(savedData);
+        const result = parseChatGPTExport(conversations);
+        setData(result);
+      }
+      
+      setLoading(false);
+    }, []);
+  
+    // Yükleniyor durumu
+    if (loading) {
+      return (
+        <main className="p-8 min-h-screen bg-gray-50 flex items-center justify-center">
+          <p className="text-gray-500 text-lg">Yükleniyor...</p>
+        </main>
+      );
+    }
+  
+    // Veri yoksa uyarı göster
+    if (!data) {
+      return (
+        <main className="p-8 min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+          <div className="text-6xl mb-4">📊</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Henüz veri yok</h2>
+          <p className="text-gray-500 mb-6">Dashboard'ı görmek için önce bir dosya yüklemelisin.</p>
+          <a 
+            href="/upload" 
+            className="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-8 rounded-full transition"
+          >
+            📤 Dosya Yükle
+          </a>
+        </main>
+      );
+    }
+    // Veri var: grafikleri göster
+    const { summaryData, modelDistribution, timelineData } = data;
   return (
     <main className="p-8 min-h-screen bg-gray-50 text-gray-800">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -203,8 +191,8 @@ export default function Dashboard() {
                     paddingAngle={5}
                     dataKey="value"
                   >
-                    {modelDistribution.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    {modelDistribution.map((entry: any, index: number) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
                   <RechartsTooltip />
