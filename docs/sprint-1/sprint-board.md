@@ -1,7 +1,4 @@
 #  Sprint 1 Board (Kanban)
-
-![ 1 Board](screenshots/sprint-board-1.png)
-> Bu pano her güncellendiğinde commit edilir.  
 > Görevler durumlarına göre sütunlar arasında taşınır.
 
 ---
