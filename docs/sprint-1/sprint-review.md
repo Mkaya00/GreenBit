@@ -23,3 +23,15 @@
 
 ## Demo Notları
 MVP arayüz ve hesaplama motoru lokalde (localhost:3000) başarıyla test edildi. Upload → analiz → Dashboard akışı uçtan uca çalışıyor. Vercel canlıya alma Sprint 3'e planlanmıştır; deploy sonrası link README'ye eklenecektir.
+
+
+## Ürün Ekran Görüntüleri
+
+### Ana Sayfa (Landing Page)
+![Landing Page](screenshots/landing.png)
+
+### Dosya Yükleme ve Analiz
+![Upload Sayfası](screenshots/upload.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
