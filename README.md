@@ -4,7 +4,6 @@
 
 Yapay zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi — Yapay Zeka & Veri Bilimi Kategorisi
 
-
 ## Proje Hakkında
 
 GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur. Kullanıcılar ChatGPT, Claude gibi servislerden indirdikleri kullanım dosyalarını yükler; GreenBit hibrit AI mimarisi ile bu veriyi analiz eder.
@@ -14,7 +13,6 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 - **Ölçüm:** Token, kWh, CO2 takibi
 - **Prompt Koçluğu:** Daha verimli prompt yazma önerileri (NLP destekli)
 - **Akıllı Öneriler:** Kişiselleştirilmiş model ve kullanım önerileri
-
 
 ## Takım
 
@@ -48,13 +46,16 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 
 ---
 
-##  Belgeler
+## Belgeler
+
+- **[Canlı Sprint Board (Notion)](https://great-colony-435.notion.site/GreenBit-Sprint-Board-398dd1e285178028bf86e87825e031e8)** — yaşayan Kanban board (To Do → In Progress → Done)
 - [Product Backlog](docs/product-backlog.md)
 - [Sprint 1 Planning](docs/sprint-1/sprint-planning.md)
 - [Sprint 1 Board](docs/sprint-1/sprint-board.md)
 - [Daily Scrum Notes](docs/sprint-1/daily-scrum-notes.md)
 - [Sprint 1 Review](docs/sprint-1/sprint-review.md)
 - [Sprint 1 Retrospective](docs/sprint-1/sprint-retrospective.md)
+
 ---
 
 ## Lisans
