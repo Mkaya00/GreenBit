@@ -6,22 +6,30 @@ export async function POST(request: Request) {
       // 1. Tarayıcıdan gelen veriyi al (kullanıcının prompt'u)
       const body = await request.json();
       const userPrompt = body.prompt;
+      const systemInstruction = `Sen bir yapay zeka prompt analiz uzmanısın. Görevin, sana verilen prompt'u değerlendirmek.
+Şunları analiz et:
+1. Prompt yeterince açık ve net mi?
+2. Gereksiz uzun mu, kısaltılabilir mi (token tasarrufu)?
+3. Nasıl daha iyi yazılabilir? Somut bir öneri ver.
+Cevabını TÜRKÇE, kısa ve madde madde ver. Analiz edilecek prompt:`;
+
+// Sistem talimatı + kullanıcı promptunu birleştir
+const fullPrompt = `${systemInstruction}\n\n"${userPrompt}"`;
+
+const ollamaResponse = await fetch("http://localhost:11434/api/generate", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    model: "llama3.1",
+    prompt: fullPrompt,
+    stream: false,
+  }),
+});
   
-      // 2. Ollama'ya (Llama'ya) istek gönder
-      const ollamaResponse = await fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "llama3.2",
-          prompt: userPrompt,
-          stream: false,
-        }),
-      });
-  
-      // 3. Ollama'nın cevabını al
+      // 2. Ollama'nın cevabını al
       const data = await ollamaResponse.json();
   
-      // 4. Cevabı tarayıcıya geri gönder
+      // 3. Cevabı tarayıcıya geri gönder
       return Response.json({ answer: data.response });
   
     } catch (error) {
