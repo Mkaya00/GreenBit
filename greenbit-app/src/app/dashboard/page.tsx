@@ -1,31 +1,13 @@
+
 "use client";
 
 // LineChart ve ilgili bileşenleri de ekledik
 import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import  { useState, useEffect } from "react";
-// ==========================================
-// 1. HESAPLAMA MOTORU
-// ==========================================
-const MODEL_ENERGY_RATES: Record<string, number> = {
-  "gpt-4": 30,
-  "gpt-4o": 15,
-  "gpt-4o-mini": 3,
-  "gpt-3.5-turbo": 5,
-  "claude-3-opus": 25,
-  "claude-3-sonnet": 10,
-  "default": 15
-};
-
-function calculateMetricsForModel(messageCount: number, modelSlug: string) {
-  const tokens = messageCount * 200;
-  const energyRate = MODEL_ENERGY_RATES[modelSlug] || MODEL_ENERGY_RATES["default"];
-  const energyWh = (tokens / 1000) * energyRate;
-  const co2 = energyWh * 0.4;
-  return { tokens, energyWh, co2 };
-}
+import { calculateMetricsForModel } from '../lib/carbon';
 
 // ==========================================
-// 2. PARSER MOTORU (Tarih Hesaplaması Eklendi)
+// 1. PARSER MOTORU (Tarih Hesaplaması Eklendi)
 // ==========================================
 const COLORS = ['#16a34a', '#4ade80', '#86efac', '#22c55e', '#15803d'];
 
@@ -103,7 +85,7 @@ function parseChatGPTExport(conversations: any[]) {
 }
 
 // ==========================================
-// 4. ARAYÜZ (MAIN COMPONENT)
+// 2. ARAYÜZ (MAIN COMPONENT)
 // ==========================================
 
   export default function Dashboard() {
