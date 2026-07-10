@@ -1,91 +1,12 @@
-
 "use client";
 
 // LineChart ve ilgili bileşenleri de ekledik
 import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import  { useState, useEffect } from "react";
-import { calculateMetricsForModel } from '../lib/carbon';
+import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 
 // ==========================================
-// 1. PARSER MOTORU (Tarih Hesaplaması Eklendi)
-// ==========================================
-const COLORS = ['#16a34a', '#4ade80', '#86efac', '#22c55e', '#15803d'];
-
-function parseChatGPTExport(conversations: any[]) {
-  const modelCounts: Record<string, number> = {};
-  const timeSeriesData: Record<string, number> = {}; 
-
-  conversations.forEach((conv) => {
-    if (!conv.mapping) return;
-    
-    // Tarihi çevirme (Unix Timestamp -> Gün/Ay)
-    let dateStr = "Bilinmiyor";
-    if (conv.create_time) {
-      const dateObj = new Date(conv.create_time * 1000);
-      dateStr = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`; // Örn: "1/6"
-    }
-
-    let convCO2 = 0;
-
-    Object.values(conv.mapping).forEach((node: any) => {
-      if (node.message && node.message.metadata && node.message.metadata.model_slug) {
-        const modelSlug = node.message.metadata.model_slug;
-        modelCounts[modelSlug] = (modelCounts[modelSlug] || 0) + 1;
-        
-        // Sadece bu mesajın CO2'sini hesapla ve sohbete ekle
-        const msgMetrics = calculateMetricsForModel(1, modelSlug);
-        convCO2 += msgMetrics.co2;
-      }
-    });
-
-    // Bu sohbetin toplam CO2'sini o güne yaz
-    if (convCO2 > 0) {
-      timeSeriesData[dateStr] = (timeSeriesData[dateStr] || 0) + convCO2;
-    }
-  });
-
-  // Toplam metrikler ve Pasta Grafik datası
-  let totalTokens = 0;
-  let totalEnergyWh = 0;
-  let totalCO2 = 0;
-  let colorIndex = 0;
-
-  const modelDistribution = Object.keys(modelCounts).map((model) => {
-    const count = modelCounts[model];
-    const metrics = calculateMetricsForModel(count, model);
-    
-    totalTokens += metrics.tokens;
-    totalEnergyWh += metrics.energyWh;
-    totalCO2 += metrics.co2;
-
-    const result = {
-      name: model,
-      value: count, 
-      color: COLORS[colorIndex % COLORS.length]
-    };
-    colorIndex++;
-    return result;
-  });
-
-  // Çizgi grafik için datayı formatla
-  const timelineData = Object.keys(timeSeriesData).map(date => ({
-    date,
-    co2: Number(timeSeriesData[date].toFixed(2))
-  }));
-
-  return {
-    summaryData: {
-      totalTokens: totalTokens.toLocaleString('tr-TR'),
-      totalEnergy: (totalEnergyWh / 1000).toFixed(4),
-      totalCO2: totalCO2.toFixed(2),
-    },
-    modelDistribution,
-    timelineData // Yeni eklenen veri
-  };
-}
-
-// ==========================================
-// 2. ARAYÜZ (MAIN COMPONENT)
+// 1. ARAYÜZ (MAIN COMPONENT)
 // ==========================================
 
   export default function Dashboard() {
