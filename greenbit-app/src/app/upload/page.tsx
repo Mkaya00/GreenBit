@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { calculateMetricsForModel } from '../lib/carbon';
 
-// --- TİPLER VE SABİTLER ---
+// --- TİPLER ---
 type AnalysisResult = {
   totalConversations: number;
   totalMessages: number;
@@ -14,28 +15,15 @@ type AnalysisResult = {
   estimatedCo2: number;
 };
 
-const MODEL_ENERGY = {
-  "gpt-4": 30,
-  "gpt-4o": 15,
-  "gpt-4o-mini": 3,
-  "gpt-3.5-turbo": 5,
-  "claude-3-opus": 25,
-  "claude-3-sonnet": 10,
-  "default": 15,
-};
-
-const CO2_PER_WH = 0.4;
-const AVG_TOKENS_PER_MESSAGE = 200;
-
 export default function UploadPage() {
   // STATE'LER
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<AnalysisResult | null>(null); // Sonuçları tutacağımız state
+  const [result, setResult] = useState<AnalysisResult | null>(null);
   const router = useRouter();
 
-  // DOSYA İŞLEME VE MATEMATİKSEL HESAPLAMA
+  // DOSYA İŞLEME VE HESAPLAMA
   const processFile = (file: File) => {
     setError(null);
 
@@ -56,26 +44,26 @@ export default function UploadPage() {
       try {
         const content = e.target?.result as string;
         const data = JSON.parse(content);
-        
+
         if (!Array.isArray(data)) throw new Error("Geçerli bir ChatGPT dışa aktarma dosyası değil.");
 
         // Veriyi Dashboard için kaydediyoruz
         localStorage.setItem("greenbit_conversations", JSON.stringify(data));
-        
+
         // MATEMATİK İŞLEMLERİ
         const totalConversations = data.length;
         let totalMessages = 0;
-        const modelsSet = new Set<string>();
+        const modelCounts: Record<string, number> = {}; // Her modelin kaç mesajı var
         let earliestTime = Infinity;
         let latestTime = 0;
 
         data.forEach((conversation: any) => {
           if (conversation.mapping) {
-            const messages = Object.values(conversation.mapping);
-            totalMessages += messages.length;
-            messages.forEach((msg: any) => {
-              if (msg?.message?.metadata?.model_slug) {
-                modelsSet.add(msg.message.metadata.model_slug);
+            Object.values(conversation.mapping).forEach((node: any) => {
+              if (node?.message?.metadata?.model_slug) {
+                const slug = node.message.metadata.model_slug;
+                modelCounts[slug] = (modelCounts[slug] || 0) + 1;
+                totalMessages += 1;
               }
             });
           }
@@ -87,15 +75,16 @@ export default function UploadPage() {
 
         const formatDate = (timestamp: number) => new Date(timestamp * 1000).toLocaleDateString('tr-TR');
 
-        let totalEnergy = 0;
-        const modelsList = Array.from(modelsSet);
-        const messagesPerModel = Math.floor(totalMessages / (modelsList.length || 1));
+        // Her model için lib/carbon.ts'teki fonksiyonu kullanıp topluyoruz
+        let totalTokens = 0;
+        let totalEnergyWh = 0;
+        let totalCO2 = 0;
 
-        modelsList.forEach((model) => {
-          const energyPer1000Tokens = MODEL_ENERGY[model as keyof typeof MODEL_ENERGY] || MODEL_ENERGY.default;
-          const modelTokens = messagesPerModel * AVG_TOKENS_PER_MESSAGE;
-          const modelEnergy = (modelTokens / 1000) * energyPer1000Tokens;
-          totalEnergy += modelEnergy;
+        Object.keys(modelCounts).forEach((model) => {
+          const metrics = calculateMetricsForModel(modelCounts[model], model);
+          totalTokens += metrics.tokens;
+          totalEnergyWh += metrics.energyWh;
+          totalCO2 += metrics.co2;
         });
 
         // 1.5 saniyelik "Analiz ediliyor..." efekti
@@ -103,25 +92,24 @@ export default function UploadPage() {
           setResult({
             totalConversations,
             totalMessages,
-            models: Array.from(modelsSet),
+            models: Object.keys(modelCounts),
             dateRange: {
               start: formatDate(earliestTime),
               end: formatDate(latestTime),
             },
-            estimatedTokens: totalMessages * AVG_TOKENS_PER_MESSAGE,
-            estimatedKwh: totalEnergy / 1000,
-            estimatedCo2: totalEnergy * CO2_PER_WH,
+            estimatedTokens: totalTokens,
+            estimatedKwh: totalEnergyWh / 1000,
+            estimatedCo2: totalCO2,
           });
           setIsLoading(false);
-          // router.push'u KILDIRDIK! Sayfada kalıp sonuçları gösterecek.
         }, 1500);
-        
+
       } catch (err) {
         setError("Dosya ayrıştırılamadı. Geçerli bir JSON olduğundan emin olun.");
         setIsLoading(false);
       }
     };
-    
+
     reader.onerror = () => {
       setError("Dosya okunurken sistemsel bir hata oluştu.");
       setIsLoading(false);
@@ -147,8 +135,7 @@ export default function UploadPage() {
     <main className="min-h-screen flex flex-col bg-[#F8FAFC]">
       <section className="flex-grow py-12 px-8">
         <div className="max-w-7xl mx-auto">
-          
-          {/* DURUM 1: HENÜZ SONUÇ YOKSA SENİN HAVALI TASARIMINI GÖSTER */}
+
           {!result ? (
             <div className="grid lg:grid-cols-12 gap-12 items-start">
               {/* Sol Kolon: Bilgi ve Rehber */}
@@ -193,7 +180,7 @@ export default function UploadPage() {
               {/* Sağ Kolon: Sürükle Bırak Alanı */}
               <div className="lg:col-span-7">
                 <div className="bg-white rounded-[2rem] p-2 shadow-2xl shadow-green-900/5 border border-gray-100">
-                  <div 
+                  <div
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
@@ -202,14 +189,14 @@ export default function UploadPage() {
                       ${isDragging ? "border-green-500 bg-green-50/50 scale-[0.99]" : "border-gray-200 bg-gray-50 hover:border-green-400 hover:bg-green-50/20"}
                     `}
                   >
-                    <input 
-                      type="file" 
+                    <input
+                      type="file"
                       accept=".json,application/json"
                       onChange={handleFileChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                       disabled={isLoading}
                     />
-                    
+
                     <div className="relative z-0 flex flex-col items-center">
                       <div className={`
                         relative flex items-center justify-center w-24 h-24 mb-6 rounded-full transition-all duration-500
@@ -220,7 +207,7 @@ export default function UploadPage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                       </div>
-                      
+
                       {isLoading ? (
                         <div className="space-y-3">
                           <h3 className="text-xl font-bold text-green-600">Analiz Ediliyor...</h3>
@@ -250,8 +237,8 @@ export default function UploadPage() {
               </div>
             </div>
           ) : (
-            
-            /* DURUM 2: DOSYA YÜKLENDİ - SONUÇLARI VE KAHVE/AMPUL METRİKLERİNİ GÖSTER */
+
+            /* DURUM 2: SONUÇLAR */
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
               <div className="text-center mb-6">
                 <div className="text-6xl mb-4">✅</div>
@@ -273,7 +260,7 @@ export default function UploadPage() {
                 <h4 className="text-lg font-bold text-green-800 mb-4 text-center">
                   🌍 Tahmini Karbon Ayak İzin
                 </h4>
-                
+
                 <div className="grid grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded-lg text-center">
                     <div className="text-2xl font-bold text-green-700">
@@ -294,7 +281,7 @@ export default function UploadPage() {
                     <div className="text-xs text-gray-600">CO2 Salımı</div>
                   </div>
                 </div>
-                
+
                 {/* ANLAŞILIR KARŞILAŞTIRMALAR */}
                 <div className="mt-6 bg-white bg-opacity-70 rounded-lg p-4">
                   <p className="text-sm font-semibold text-green-800 mb-3 text-center">
@@ -353,7 +340,7 @@ export default function UploadPage() {
           <p className="text-sm text-gray-400 font-medium">Yapay Zeka Karbon Ayak İzi Platformu</p>
         </div>
       </footer>
-      
+
     </main>
   );
 }
