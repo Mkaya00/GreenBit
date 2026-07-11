@@ -22,6 +22,12 @@ export default function Navigation() {
             Ana Sayfa
           </Link>
           <Link 
+            href="/analyze-page" 
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg transition shadow"
+          >
+             AI Analiz
+          </Link>
+          <Link 
             href="/upload" 
             className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-lg transition shadow"
           >
