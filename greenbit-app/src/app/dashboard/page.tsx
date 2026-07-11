@@ -13,6 +13,9 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
     // State: analiz sonuçlarını tutacak
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    // AI Analiz State'leri
+    const [aiAnalysis, setAiAnalysis] = useState("");
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
   
     useEffect(() => {
       const savedData = localStorage.getItem("greenbit_conversations");
@@ -25,6 +28,44 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
       
       setLoading(false);
     }, []);
+
+    const handleAiAnalysis = async () => {
+      setIsAnalyzing(true);
+      setAiAnalysis("");
+      
+      try {
+        const savedData = localStorage.getItem("greenbit_conversations");
+        if (!savedData) return;
+        
+        const conversations = JSON.parse(savedData);
+        const userPrompts: string[] = [];
+  
+        conversations.forEach((conv: any) => {
+          if (!conv.mapping) return;
+          Object.values(conv.mapping).forEach((node: any) => {
+            if (node?.message?.author?.role === "user" && node?.message?.content?.parts) {
+              const text = node.message.content.parts.join(" ");
+              if (text.trim().length > 0) userPrompts.push(text);
+            }
+          });
+        });
+  
+        const samplePrompts = userPrompts.slice(0, 3);
+        const combinedPrompt = samplePrompts.map((p, i) => `${i + 1}. ${p}`).join("\n");
+  
+        const response = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: combinedPrompt }),
+        });
+  
+        const resData = await response.json();
+        setAiAnalysis(resData.answer || "Cevap alınamadı.");
+      } catch (error) {
+        setAiAnalysis("Hata: Llama'ya bağlanılamadı.");
+      }
+      setIsAnalyzing(false);
+    };
   
     // Yükleniyor durumu
     if (loading) {
@@ -57,10 +98,6 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
     <main className="p-8 min-h-screen bg-gray-50 text-gray-800">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        <div>
-          <h1 className="text-3xl font-bold text-green-700">GreenBit Dashboard</h1>
-          <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
@@ -129,6 +166,31 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
+
+      {/* YENİ: AI Analiz Bölümü */}
+      <div className="bg-white p-8 rounded-xl shadow-sm border border-green-200">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+              <h3 className="text-2xl font-bold text-green-800 flex items-center gap-2">
+                🤖 AI Prompt Analizi
+              </h3>
+              <p className="text-gray-500 text-sm mt-1">Geçmiş verileriniz taranarak token/enerji israfı analiz edilir.</p>
+            </div>
+            <button
+              onClick={handleAiAnalysis}
+              disabled={isAnalyzing}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50 whitespace-nowrap shadow-md"
+            >
+              {isAnalyzing ? "Analiz Ediliyor..." : "Verilerimi Analiz Et"}
+            </button>
+          </div>
+
+          {aiAnalysis && (
+            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">
+              <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis}</p>
+            </div>
+          )}
         </div>
 
       </div>
