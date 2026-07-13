@@ -6,11 +6,19 @@ export async function POST(request: Request) {
       // 1. Tarayıcıdan gelen veriyi al (kullanıcının prompt'u)
       const body = await request.json();
       const userPrompt = body.prompt;
-      const systemInstruction = `Sen bir yapay zeka prompt analiz uzmanısın. Görevin, sana verilen prompt'u değerlendirmek.
+
+// Basit token tahmini: ortalama 4 karakter ≈ 1 token
+const estimatedTokens = Math.ceil(userPrompt.length / 4);
+
+const systemInstruction = `Sen bir yapay zeka prompt analiz uzmanısın. Görevin, sana verilen prompt'u değerlendirmek.
+
+Bu prompt yaklaşık ${estimatedTokens} token uzunluğunda.
+
 Şunları analiz et:
 1. Prompt yeterince açık ve net mi?
-2. Gereksiz uzun mu, kısaltılabilir mi (token tasarrufu)?
+2. Gereksiz uzun mu, kısaltılabilir mi? Eğer kısaltılabilirse, kısaltılmış halini yaz ve yaklaşık kaç token'a ineceğini tahmin et.
 3. Nasıl daha iyi yazılabilir? Somut bir öneri ver.
+
 Cevabını TÜRKÇE, kısa ve madde madde ver. Analiz edilecek prompt:`;
 
 // Sistem talimatı + kullanıcı promptunu birleştir
