@@ -7,8 +7,6 @@
 ## To Do
 
 - **US-006:** Llama Fine-Tuning (özel model eğitimi) — ekstra hedef
-- **US-007:** Öneri Agent'ı (RAG ile bilgi tabanlı öneri sistemi) — ekstra hedef
-
 ---
 
 ## In Progress
@@ -27,6 +25,14 @@
   - Llama 3 (8B) lokal olarak bağlandı, sistem promptu ile "prompt analiz uzmanı" davranışı kazandırıldı.
   - Kullanıcının yüklediği gerçek verilerden prompt çıkarıp analiz eden panel Dashboard'a entegre edildi.
   - Token tasarrufu sayısal tahmini ve kısaltılmış prompt önerisi eklendi.
+
+  - **US-007:** Öneri Agent'ı (RAG)
+  - Basitleştirilmiş bir RAG mimarisi uygulandı: `lib/promptRules.ts` içinde yapılandırılmış bir prompt yazma kuralları deposu oluşturuldu (kural adı, açıklama, iyi/kötü örnek).
+  - `api/analyze/route.ts` içinde basit bir retrieval mantığı (`getRelevantRules`) kuruldu; kullanıcı promptuna göre ilgili kurallar seçilip modele bağlam (context) olarak veriliyor.
+  - Sistem promptuna "sadece verilen bağlama dayan, uydurma" kısıtlaması eklendi.
+  - Test edildi: model artık analizlerinde doğrudan kural adlarına ve örneklere atıfta bulunuyor (retrieval'in gerçekten kullanıldığının kanıtı).
+
+*Not: Tam vektör veritabanı (embedding, hibrit arama) kullanılmadı; anahtar kelime tabanlı basit bir retrieval mantığı tercih edildi. Bu, kapsam ve süreye uygun, RAG'ın temel prensiplerini doğru şekilde uygulayan bir yaklaşımdır.*
 
 ---
 

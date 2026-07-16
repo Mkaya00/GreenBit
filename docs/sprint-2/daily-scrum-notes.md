@@ -54,7 +54,8 @@
 - Notion board güncellendi: US-005 In Progress'ten Done'a taşındı, ekran görüntüsü alındı.
 - Sprint 2 Review ve Retrospective belgeleri dolduruldu.
 - US-008 (AI Agent Orkestrasyonu) Sprint 3 backlog'una aktarıldı.
+- RAG (US-007) denendi ve başarıyla tamamlandı: `lib/promptRules.ts` içinde yapılandırılmış bir prompt kuralları deposu oluşturuldu; `api/analyze/route.ts` içinde bu depodan ilgili kuralları getiren basit bir retrieval mantığı kuruldu. Test sonucunda model, analizlerinde doğrudan kural adlarına ve örneklere atıfta bulunarak cevap üretti.
 
-**Sıradaki:** RAG (US-007) denemesi ile devam edilecek, ardından zaman kalırsa fine-tuning (US-006) denenecek.
+**Sıradaki:** Zaman kalırsa fine-tuning (US-006) denenecek; aksi halde Sprint 2 kapanış hazırlıkları yapılacak.
 
 **Engeller:** Yok.
