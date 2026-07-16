@@ -88,6 +88,11 @@ Uygulama çalışırken Ollama'nın arka planda açık olması gerekir (`localho
 
 ---
 
+## Katkı ve Kullanım Notu
+
+Bu proje, Sakarya Üniversitesi Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp kapsamında bireysel olarak geliştirilmiştir. MIT lisansı ile açık kaynaktır; kod incelemesi, öğrenme ve katkı amacıyla serbestçe kullanılabilir. Geliştirme sürecinin özgün kaydı commit geçmişinde saklanmaktadır.
+
 ## Lisans
 
 MIT License
+
