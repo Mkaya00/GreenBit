@@ -81,7 +81,7 @@ Analiz edilecek prompt:`;
 
   } catch (error) {
     return Response.json(
-      { error: "Llama'ya bağlanılamadı. Ollama çalışıyor mu?" },
+      { error: "Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir." },
       { status: 500 }
     );
   }

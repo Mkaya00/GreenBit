@@ -24,7 +24,7 @@ export default function AnalyzePage() {
       const data = await response.json();
       setAnswer(data.answer || "Cevap alınamadı.");
     } catch (error) {
-      setAnswer("Hata: Llama'ya bağlanılamadı. Ollama çalışıyor mu?");
+      setAnswer("Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir.Diğer özellikler (dosya yükleme, grafikler) normal çalışmaya devam eder.");
     }
 
     setLoading(false);

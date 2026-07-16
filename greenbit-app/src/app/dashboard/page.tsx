@@ -62,7 +62,7 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
         const resData = await response.json();
         setAiAnalysis(resData.answer || "Cevap alınamadı.");
       } catch (error) {
-        setAiAnalysis("Hata: Llama'ya bağlanılamadı.");
+        setAiAnalysis("Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir. Diğer özellikler (grafikler, hesaplamalar) normal çalışmaya devam eder.");
       }
       setIsAnalyzing(false);
     };
