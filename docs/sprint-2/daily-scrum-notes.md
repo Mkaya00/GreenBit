@@ -55,6 +55,7 @@
 - Sprint 2 Review ve Retrospective belgeleri dolduruldu.
 - US-008 (AI Agent Orkestrasyonu) Sprint 3 backlog'una aktarıldı.
 - RAG (US-007) denendi ve başarıyla tamamlandı: `lib/promptRules.ts` içinde yapılandırılmış bir prompt kuralları deposu oluşturuldu; `api/analyze/route.ts` içinde bu depodan ilgili kuralları getiren basit bir retrieval mantığı kuruldu. Test sonucunda model, analizlerinde doğrudan kural adlarına ve örneklere atıfta bulunarak cevap üretti.
+- Fine-tuning (US-006) araştırıldı: gerekli adımlar (veri hazırlama, ortam kurulumu, LoRA eğitimi, Ollama entegrasyonu) ve gerçekçi süre tahmini (10-16 gün) belgelendi. Süre kısıtı nedeniyle bu sprint'te uygulanmaması, bilinçli bir kapsam kararı olarak kaydedildi.
 
 **Sıradaki:** Zaman kalırsa fine-tuning (US-006) denenecek; aksi halde Sprint 2 kapanış hazırlıkları yapılacak.
 

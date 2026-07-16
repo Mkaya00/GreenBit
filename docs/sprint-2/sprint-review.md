@@ -29,7 +29,7 @@ Dashboard, upload ve parser modüllerindeki kod tekrarı giderildi. Tüm karbon 
 ## Tamamlanmayan / Ertelenen İşler
 
 ### US-006 — Llama Fine-Tuning
-Sprint planlamasında "iddialı hedef" olarak işaretlenmişti. Değerlendirme sürecinde final sunumunun yalnızca ilk 10 projeye yapılacağı öğrenildi; bu nedenle öncelik, mevcut özelliklerin sağlamlaştırılması ve dokümantasyona kaydırıldı. Fine-tuning, kalan sprint süresinde zaman elverdiğince denenecek bir öğrenme hedefi olarak planlanıyor.
+Sprint planlamasında "iddialı hedef" olarak işaretlenmişti. Süreç detaylı şekilde araştırıldı: gerekli adımlar, araçlar (Python, Hugging Face, LoRA, Unsloth) ve gerçekçi süre tahmini (10-16 gün, bkz. `fine-tuning-arastirmasi.md`) belgelendi. Bu süre bir sprint'in neredeyse tamamına denk geldiğinden ve final sunumunun yalnızca ilk 10 projeye yapılacağı öğrenildiğinden, risk/fayda dengesi değerlendirilerek bu sprint kapsamı dışında bırakılmasına karar verildi. Bağımsız bir öğrenme hedefi olarak ileride ele alınabilir.
 
 ### US-007 — Öneri Agent'ı (RAG)
 Aynı gerekçeyle ertelendi; zorunlu teslimat kapsamından çıkarıldı.

@@ -6,7 +6,10 @@
 
 ## To Do
 
-- **US-006:** Llama Fine-Tuning (özel model eğitimi) — ekstra hedef
+- **US-006:** Llama Fine-Tuning (özel model eğitimi)
+  - Araştırıldı ve detaylı bir plan çıkarıldı (bkz. [fine-tuning araştırması](fine-tuning-arastirmasi.md)).
+  - Gerçekçi süre tahmini 10-16 gün olarak belirlendi; bu, bir sprint'in neredeyse tamamına denk gelmektedir.
+  - Risk/fayda değerlendirmesi sonucu bu sprint kapsamı dışında bırakıldı, bağımsız bir öğrenme hedefi olarak planlanmaktadır.
 ---
 
 ## In Progress
