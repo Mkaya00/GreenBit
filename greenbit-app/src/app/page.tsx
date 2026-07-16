@@ -86,7 +86,7 @@ export default function Home() {
       <footer className="bg-green-800 text-white py-8 px-8">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-sm">
-            © 2026 GreenBit — Sakarya Üniversitesi YBS
+            © 2026 GreenBit 
           </p>
           <p className="text-xs text-green-200 mt-2">
             Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi
