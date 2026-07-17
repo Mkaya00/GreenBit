@@ -4,6 +4,7 @@
 import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import  { useState, useEffect } from "react";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
+import { loadingMessages } from '../lib/loadingMessages';
 
 // ==========================================
 // 1. ARAYÜZ (MAIN COMPONENT)
@@ -16,18 +17,39 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
     // AI Analiz State'leri
     const [aiAnalysis, setAiAnalysis] = useState("");
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+
+// Veri yükleme
+useEffect(() => {
+  const savedData = localStorage.getItem("greenbit_conversations");
   
-    useEffect(() => {
-      const savedData = localStorage.getItem("greenbit_conversations");
-      
-      if (savedData) {
-        const conversations = JSON.parse(savedData);
-        const result = parseChatGPTExport(conversations);
-        setData(result);
+  if (savedData) {
+    const conversations = JSON.parse(savedData);
+    const result = parseChatGPTExport(conversations);
+    setData(result);
+  }
+  
+  setLoading(false);
+}, []);
+
+// Loading mesajlarını döndürür
+useEffect(() => {
+  if (!isAnalyzing) {
+    setLoadingMessageIndex(0);
+    return;
+  }
+  const interval = setInterval(() => {
+    setLoadingMessageIndex((prev) => {
+      let next = Math.floor(Math.random() * loadingMessages.length);
+      while (next === prev) {
+        next = Math.floor(Math.random() * loadingMessages.length);
       }
-      
-      setLoading(false);
-    }, []);
+      return next;
+    });
+  }, 3500);
+
+  return () => clearInterval(interval);
+}, [isAnalyzing]);
 
     const handleAiAnalysis = async () => {
       setIsAnalyzing(true);
@@ -175,7 +197,7 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
               <h3 className="text-2xl font-bold text-green-800 flex items-center gap-2">
                 🤖 AI Prompt Analizi
               </h3>
-              <p className="text-gray-500 text-sm mt-1">Geçmiş verileriniz taranarak token/enerji israfı analiz edilir.</p>
+              <p className="text-gray-500 text-sm mt-1">Geçmiş verileriniz taranarak token/enerji israfı analiz edilir. Lokal yapay zeka modeli kullanıldığından analiz birkaç saniye sürebilir.</p>
             </div>
             <button
               onClick={handleAiAnalysis}
@@ -185,6 +207,15 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
               {isAnalyzing ? "Analiz Ediliyor..." : "Verilerimi Analiz Et"}
             </button>
           </div>
+
+
+            {isAnalyzing && (
+              <div className="mt-4 flex items-center gap-3 text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+                <span className="text-sm">{loadingMessages[loadingMessageIndex]}</span>
+              </div>
+            )}
+          
 
           {aiAnalysis && (
             <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">

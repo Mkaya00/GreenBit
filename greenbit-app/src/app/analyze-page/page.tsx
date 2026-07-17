@@ -1,15 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { loadingMessages } from '../lib/loadingMessages';
+import { useState, useEffect } from "react";
+
 
 export default function AnalyzePage() {
-  const [prompt, setPrompt] = useState("");        // kullanıcının yazdığı
-  const [answer, setAnswer] = useState("");        // Llama'nın cevabı
-  const [loading, setLoading] = useState(false);   // bekleniyor mu?
+  const [prompt, setPrompt] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
-  // Butona basınca çalışır
+  // Loading mesajlarını döndür
+  useEffect(() => {
+    if (!loading) {
+      setLoadingMessageIndex(0);
+      return;
+    }
+    const interval = setInterval(() => {
+      setLoadingMessageIndex((prev) => {
+        let next = Math.floor(Math.random() * loadingMessages.length);
+        // Aynı mesajın art arda tekrar etmemesi için
+        while (next === prev) {
+          next = Math.floor(Math.random() * loadingMessages.length);
+        }
+        return next;
+      });
+    }, 3500);
+  
+    return () => clearInterval(interval);
+  }, [loading]);
+
   const handleAnalyze = async () => {
-    if (!prompt.trim()) return; // boşsa bir şey yapma
+    if (!prompt.trim()) return;
 
     setLoading(true);
     setAnswer("");
@@ -24,7 +46,7 @@ export default function AnalyzePage() {
       const data = await response.json();
       setAnswer(data.answer || "Cevap alınamadı.");
     } catch (error) {
-      setAnswer("Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir.Diğer özellikler (dosya yükleme, grafikler) normal çalışmaya devam eder.");
+      setAnswer("Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir. Diğer özellikler (dosya yükleme, grafikler) normal çalışmaya devam eder.");
     }
 
     setLoading(false);
@@ -54,8 +76,16 @@ export default function AnalyzePage() {
           disabled={loading}
           className="mt-4 bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50"
         >
-          {loading ? "Analiz ediliyor..." : "🤖 Analiz Et"}
+          {loading ? "Analiz Ediliyor..." : "🤖 Analiz Et"}
         </button>
+
+        {/* Loading göstergesi */}
+        {loading && (
+          <div className="mt-4 flex items-center gap-3 text-gray-600 bg-white p-4 rounded-lg border border-gray-200">
+            <div className="w-5 h-5 border-2 border-green-600 border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            <span className="text-sm">{loadingMessages[loadingMessageIndex]}</span>
+          </div>
+        )}
 
         {/* Cevap */}
         {answer && (
