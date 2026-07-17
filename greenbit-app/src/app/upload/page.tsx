@@ -261,7 +261,7 @@ export default function UploadPage() {
                   🌍 Tahmini Karbon Ayak İzin
                 </h4>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4"> 
                   <div className="bg-white p-4 rounded-lg text-center">
                     <div className="text-2xl font-bold text-green-700">
                       {result.estimatedTokens.toLocaleString('tr-TR')}
