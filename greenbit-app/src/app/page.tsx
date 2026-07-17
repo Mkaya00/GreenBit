@@ -95,7 +95,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-sm">© 2026 GreenBit</p>
           <p className="text-xs text-white/60 mt-2">
-            Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi
+            Yapay Zeka Kullanımınızın Çevresel Etkisini Ölçün
           </p>
         </div>
       </footer>

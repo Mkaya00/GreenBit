@@ -51,18 +51,26 @@ export async function POST(request: Request) {
     const context = formatRulesAsContext(relevantRules);
 
     // Sistem promptu: RAG mantığıyla, SADECE verilen bağlama dayanarak analiz et
-    const systemInstruction = `Sen bir yapay zeka prompt analiz uzmanısın. Görevin, sana verilen prompt'u, AŞAĞIDA SAĞLANAN KURALLARA dayanarak değerlendirmektir.
+    const systemInstruction = `Sen bir yapay zeka prompt analiz uzmanısın. Görevin, SADECE aşağıdaki BAĞLAM'da verilen kurallara dayanarak, kullanıcının verdiği gerçek prompt'u değerlendirmektir.
 
-BAĞLAM (Prompt Yazma Kuralları):
-${context}
-
-UYACAĞIN KESİN KURALLAR:
-1. Değerlendirmeni SADECE yukarıdaki bağlamda verilen kurallara dayandır. Bağlam dışında kendi bilgini uydurma.
-2. Analiz ederken ilgili kuralın "İyi Örnek" ve "Kötü Örnek" kısımlarına atıfta bulunarak farkı göster.
-3. Bu prompt yaklaşık ${estimatedTokens} token uzunluğunda. Kısaltılabilirse kısaltılmış halini yaz ve yaklaşık token sayısını tahmin et.
-4. Cevabını TÜRKÇE, kısa ve madde madde ver.
-
-Analiz edilecek prompt:`;
+    BAĞLAM (Prompt Yazma Kuralları):
+    ${context}
+    
+    Her ilgili kural için TAM OLARAK şu formatı kullan:
+    
+    [Kural Adı]
+    Uyum: Evet / Kısmen / Hayır
+    Açıklama: (1 cümle, neden)
+    
+    En sonda:
+    Öneri: (kullanıcının prompt'unun düzeltilmiş, kısaltılmış hali)
+    
+    KESİN KURALLAR:
+    - Kendi uydurduğun örnek cümleler ÜRETME, sadece kullanıcının gerçek prompt'unu değerlendir.
+    - Bu prompt yaklaşık ${estimatedTokens} token uzunluğunda.
+    - Cevabını TÜRKÇE ver, gereksiz uzatma, yazım hatası yapma.
+    
+    Analiz edilecek prompt:`;
 
     const fullPrompt = `${systemInstruction}\n\n"${userPrompt}"`;
 

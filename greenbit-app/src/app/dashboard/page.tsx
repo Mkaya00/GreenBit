@@ -121,6 +121,8 @@ export default function Dashboard() {
   }
 
   const { summaryData, modelDistribution, timelineData } = data;
+  const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
+const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
 
   return (
     <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
@@ -225,11 +227,28 @@ export default function Dashboard() {
             </div>
           )}
 
-          {aiAnalysis && (
-            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 mt-4">
-              <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis}</p>
-            </div>
-          )}
+{aiAnalysis && (
+  <div className="mt-4 space-y-4">
+    <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+      <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "")}</p>
+    </div>
+
+    {lastSuggestion.length > 0 && (
+      <div className="bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-xl p-6">
+        <div className="flex items-center justify-between mb-2">
+          <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
+          <button
+            onClick={() => navigator.clipboard.writeText(lastSuggestion)}
+            className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
+          >
+            Kopyala
+          </button>
+        </div>
+        <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
+      </div>
+    )}
+  </div>
+)}
         </div>
 
       </div>

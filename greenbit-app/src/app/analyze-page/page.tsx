@@ -50,6 +50,12 @@ export default function AnalyzePage() {
     setLoading(false);
   };
 
+  // Cevap içinden son "Öneri:" kısmını çıkar
+  const suggestionMatches = answer.match(/Öneri:\s*([^\n*]*)/g);
+  const lastSuggestion = suggestionMatches
+    ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim()
+    : "";
+
   return (
     <main className="min-h-screen bg-[#FAFAF8] p-8">
       <div className="max-w-3xl mx-auto">
@@ -86,9 +92,26 @@ export default function AnalyzePage() {
         )}
 
         {answer && (
-          <div className="mt-8 bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-            <h3 className="text-lg font-medium text-gray-700 mb-3">Yapay zeka cevabı</h3>
-            <p className="text-gray-800 whitespace-pre-wrap">{answer}</p>
+          <div className="mt-8 space-y-4">
+            <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+              <h3 className="text-lg font-medium text-gray-700 mb-3">Yapay zeka cevabı</h3>
+              <p className="text-gray-800 whitespace-pre-wrap">{answer}</p>
+            </div>
+
+            {lastSuggestion.length > 0 && (
+              <div className="bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
+                  <button
+                    onClick={() => navigator.clipboard.writeText(lastSuggestion)}
+                    className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
+                  >
+                    Kopyala
+                  </button>
+                </div>
+                <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
+              </div>
+            )}
           </div>
         )}
 
