@@ -2,19 +2,18 @@
 
 import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
+import { BarChart3, Bot, Upload } from "lucide-react";
 
 export default function Dashboard() {
-  // State: analiz sonuçlarını tutacak
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  // AI Analiz State'leri
   const [aiAnalysis, setAiAnalysis] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
-  // Veri yükleme (localStorage'dan)
   useEffect(() => {
     const savedData = localStorage.getItem("greenbit_conversations");
 
@@ -27,7 +26,6 @@ export default function Dashboard() {
     setLoading(false);
   }, []);
 
-  // Loading mesajlarını döndürür (AI analiz sırasında)
   useEffect(() => {
     if (!isAnalyzing) {
       setLoadingMessageIndex(0);
@@ -95,60 +93,64 @@ export default function Dashboard() {
     }
   };
 
-  // Yükleniyor durumu
   if (loading) {
     return (
-      <main className="p-8 min-h-screen bg-gray-50 flex items-center justify-center">
+      <main className="p-8 min-h-screen bg-[#FAFAF8] flex items-center justify-center">
         <p className="text-gray-500 text-lg">Yükleniyor...</p>
       </main>
     );
   }
 
-  // Veri yoksa uyarı göster
   if (!data) {
     return (
-      <main className="p-8 min-h-screen bg-gray-50 flex flex-col items-center justify-center">
-        <div className="text-6xl mb-4">📊</div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Henüz veri yok</h2>
+      <main className="p-8 min-h-screen bg-[#FAFAF8] flex flex-col items-center justify-center">
+        <div className="w-16 h-16 rounded-full bg-[#1B4332]/10 flex items-center justify-center mb-4">
+          <BarChart3 className="w-8 h-8 text-[#1B4332]" strokeWidth={1.5} />
+        </div>
+        <h2 className="text-2xl font-medium text-gray-800 mb-2">Henüz veri yok</h2>
         <p className="text-gray-500 mb-6">Dashboard'ı görmek için önce bir dosya yüklemelisin.</p>
-        <a href="/upload" className="bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-8 rounded-full transition"></a>
-        📤 Dosya Yükle
-        </main>
+        <Link
+          href="/upload"
+          className="inline-flex items-center gap-2 bg-[#1B4332] hover:bg-[#14332A] text-white font-medium py-3 px-8 rounded-full transition"
+        >
+          <Upload className="w-4 h-4" strokeWidth={2} />
+          Dosya yükle
+        </Link>
+      </main>
     );
   }
 
-  // Veri var: grafikleri göster
   const { summaryData, modelDistribution, timelineData } = data;
 
   return (
-    <main className="p-8 min-h-screen bg-gray-50 text-gray-800">
+    <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
       <div className="max-w-6xl mx-auto space-y-8">
 
         <div>
-          <h1 className="text-3xl font-bold text-green-700">GreenBit Dashboard</h1>
+          <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit dashboard</h1>
           <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Toplam İşlenen Token</h3>
-            <p className="text-4xl font-bold text-gray-800">{summaryData.totalTokens}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">Toplam işlenen token</h3>
+            <p className="text-4xl font-medium text-gray-800">{summaryData.totalTokens}</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Harcanan Enerji (kWh)</h3>
-            <p className="text-4xl font-bold text-yellow-500">{summaryData.totalEnergy}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">Harcanan enerji (kWh)</h3>
+            <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalEnergy}</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Karbon Ayak İzi (g CO2)</h3>
-            <p className="text-4xl font-bold text-green-600">{summaryData.totalCO2}</p>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">Karbon ayak izi (g CO2)</h3>
+            <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalCO2}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-700 mb-6 text-center">Model Kullanım Dağılımı (Mesaj Sayısı)</h3>
+            <h3 className="text-lg font-medium text-gray-700 mb-6 text-center">Model kullanım dağılımı (mesaj sayısı)</h3>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -173,7 +175,7 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center h-full min-h-[300px]">
-            <h3 className="text-lg font-semibold text-gray-700 mb-6">Zaman İçinde Karbon Salınımı (g CO2)</h3>
+            <h3 className="text-lg font-medium text-gray-700 mb-6">Zaman içinde karbon salınımı (g CO2)</h3>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={timelineData}>
@@ -186,9 +188,9 @@ export default function Dashboard() {
                   <Line
                     type="monotone"
                     dataKey="co2"
-                    stroke="#16a34a"
+                    stroke="#1B4332"
                     strokeWidth={3}
-                    dot={{ fill: '#16a34a', strokeWidth: 2, r: 4 }}
+                    dot={{ fill: '#1B4332', strokeWidth: 2, r: 4 }}
                     activeDot={{ r: 6 }}
                   />
                 </LineChart>
@@ -198,32 +200,33 @@ export default function Dashboard() {
         </div>
 
         {/* AI Analiz Bölümü */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-green-200">
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
-              <h3 className="text-2xl font-bold text-green-800 flex items-center gap-2">
-                🤖 AI Prompt Analizi
+              <h3 className="text-2xl font-medium text-[#1B4332] flex items-center gap-2">
+                <Bot className="w-6 h-6" strokeWidth={1.5} />
+                AI prompt analizi
               </h3>
               <p className="text-gray-500 text-sm mt-1">Geçmiş verileriniz taranarak token/enerji israfı analiz edilir. Lokal yapay zeka modeli kullanıldığından analiz birkaç saniye sürebilir.</p>
             </div>
             <button
               onClick={handleAiAnalysis}
               disabled={isAnalyzing}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition disabled:opacity-50 whitespace-nowrap shadow-md"
+              className="bg-[#1B4332] hover:bg-[#14332A] text-white font-medium py-3 px-8 rounded-full transition disabled:opacity-50 whitespace-nowrap"
             >
-              {isAnalyzing ? "Analiz Ediliyor..." : "Verilerimi Analiz Et"}
+              {isAnalyzing ? "Analiz ediliyor..." : "Verilerimi analiz et"}
             </button>
           </div>
 
           {isAnalyzing && (
-            <div className="mt-4 flex items-center gap-3 text-gray-600 bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            <div className="mt-4 flex items-center gap-3 text-gray-600 bg-[#FAFAF8] p-4 rounded-lg border border-gray-100">
+              <div className="w-5 h-5 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
               <span className="text-sm">{loadingMessages[loadingMessageIndex]}</span>
             </div>
           )}
 
           {aiAnalysis && (
-            <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-4">
+            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 mt-4">
               <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis}</p>
             </div>
           )}
