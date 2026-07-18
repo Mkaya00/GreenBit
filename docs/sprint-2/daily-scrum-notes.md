@@ -60,3 +60,33 @@
 **Sıradaki:** Zaman kalırsa fine-tuning (US-006) denenecek; aksi halde Sprint 2 kapanış hazırlıkları yapılacak.
 
 **Engeller:** Yok.
+
+---
+
+## 17 Temmuz 2026 (Cuma)
+
+**Son çalışılan gün (16 Temmuz):** RAG (US-007) tamamlandı, fine-tuning araştırması yapıldı.
+
+**Bugün ne yapıldı:**
+- Dashboard'da kritik bir bug tespit edilip düzeltildi: eksik bir `useEffect` nedeniyle sayfa sonsuza kadar "Yükleniyor..." durumunda kalıyordu.
+- `handleAiAnalysis` fonksiyonundaki hatalı `return` kullanımı nedeniyle oluşabilecek sonsuz loading riski giderildi.
+- AI analizi için animasyonlu loading ekranı eklendi (dönen spinner + rastgele eğitici mesajlar).
+- Responsive/mobil tasarım testi yapıldı; navigation menüsünün taştığı, dashboard başlığının kayıp olduğu, özet kartlarının sıkıştığı tespit edilip düzeltildi.
+- İki edge case testi yapıldı (geçersiz dosya formatı, uyumsuz JSON), ikisi de beklenen hata mesajlarını doğru gösterdi.
+- Proje genelinde kapsamlı bir tasarım yenilemesi yapıldı: Inter font, özel renk paleti (#1B4332), lucide-react ikon kütüphanesi (emoji yerine) tüm sayfalarda (Navigation, Ana Sayfa, Upload, Dashboard, Analyze-Page) uygulandı.
+- AI analiz sisteminin çıktı kalitesi iyileştirildi: sistem promptuna sabit bir yanıt formatı ("Uyum / Açıklama / Öneri") eklendi, modelin uydurma örnek üretmesi engellendi.
+- AI analiz sonucundan otomatik "önerilen prompt" çıkarıp ayrı, kopyalanabilir bir kutuda gösteren özellik eklendi.
+
+**Engeller:** Kod düzenleme sırasında tekrarlayan bir kopyala-yapıştır sorunu (`<a>` etiketinin kaybolması) yaşandı; kalıcı çözüm olarak projede `<a>` yerine Next.js `<Link>` bileşeni kullanılması standart hale getirildi.
+
+---
+
+## 18 Temmuz 2026 (Cumartesi)
+
+**Son çalışılan gün (17 Temmuz):** Kritik bug düzeltmeleri, responsive düzeltmeler, edge case testleri ve kapsamlı UI/UX yenilemesi tamamlandı.
+
+**Bugün ne yapıldı:**
+- Sprint 2 dokümantasyonu 17 Temmuz'daki gelişmelerle güncellendi.
+- Sprint 2'nin genel son kontrolü için hazırlık yapılıyor (sprint bitişi: 19 Temmuz).
+
+**Engeller:** Yok.

@@ -28,7 +28,9 @@
   - Llama 3 (8B) lokal olarak bağlandı, sistem promptu ile "prompt analiz uzmanı" davranışı kazandırıldı.
   - Kullanıcının yüklediği gerçek verilerden prompt çıkarıp analiz eden panel Dashboard'a entegre edildi.
   - Token tasarrufu sayısal tahmini ve kısaltılmış prompt önerisi eklendi.
-
+  - Sistem promptuna sabit yanıt formatı eklenerek çıktı kalitesi ve tutarlılığı artırıldı.
+  - AI cevabından "önerilen prompt" otomatik çıkarılıp kopyalanabilir ayrı bir kutuda gösterilmeye başlandı
+ 
   - **US-007:** Öneri Agent'ı (RAG)
   - Basitleştirilmiş bir RAG mimarisi uygulandı: `lib/promptRules.ts` içinde yapılandırılmış bir prompt yazma kuralları deposu oluşturuldu (kural adı, açıklama, iyi/kötü örnek).
   - `api/analyze/route.ts` içinde basit bir retrieval mantığı (`getRelevantRules`) kuruldu; kullanıcı promptuna göre ilgili kurallar seçilip modele bağlam (context) olarak veriliyor.
@@ -36,6 +38,17 @@
   - Test edildi: model artık analizlerinde doğrudan kural adlarına ve örneklere atıfta bulunuyor (retrieval'in gerçekten kullanıldığının kanıtı).
 
 *Not: Tam vektör veritabanı (embedding, hibrit arama) kullanılmadı; anahtar kelime tabanlı basit bir retrieval mantığı tercih edildi. Bu, kapsam ve süreye uygun, RAG'ın temel prensiplerini doğru şekilde uygulayan bir yaklaşımdır.*
+
+---
+
+## Ek: Kalite ve Tasarım İyileştirmeleri (17 Temmuz)
+
+Zorunlu User Story'lerin dışında, ürün kalitesini artıran şu çalışmalar tamamlandı:
+
+- Kritik bug düzeltmeleri (sonsuz loading durumu, eksik JSX etiketleri)
+- Responsive/mobil tasarım düzeltmeleri
+- Edge case testleri (geçersiz dosya formatları)
+- Baştan sona tutarlı bir tasarım dili: özel renk paleti, Inter font, lucide-react ikon kütüphanesi
 
 ---
 
