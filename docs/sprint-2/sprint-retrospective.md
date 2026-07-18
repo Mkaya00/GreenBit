@@ -28,6 +28,9 @@
 - Sistem promptu ile bir LLM'in davranışının nasıl yönlendirilebileceği.
 - RAG ve fine-tuning arasındaki temel fark ve her birinin ne zaman tercih edilmesi gerektiği.
 - Kod tekrarının (duplication) neden risk taşıdığı ve merkezi mimarinin (Single Source of Truth) pratik faydası.
+- Kod düzenlerken tekrarlayan bir kopyala-yapıştır sorunu (`<a>` etiketinin kaybolması) yaşandı; bu, projede `<a>` yerine Next.js `<Link>` bileşeninin standart olarak kullanılmasıyla kalıcı şekilde çözüldü.
+- Bir AI özelliğinin gerçek değerinin, kullanılan modelin kendisinden çok, o modelin etrafına kurulan sistemde (prompt mühendisliği, RAG, yapılandırılmış format) olduğu netleşti.
+- Kullanıcı arayüzünün "şablon/AI üretimi" hissi vermemesi için tutarlı bir tasarım dilinin (renk, tipografi, ikonografi) önemi deneyimlendi.
 
 ---
 
@@ -36,3 +39,7 @@
 - Tek bir çalışma ortamında (tek oturum/tek makine) ilerlemeye özen gösterilecek; birden fazla ortamda paralel değişiklik yapılmayacak.
 - Yeni bir AI özelliği eklenmeden önce, mevcut olanın küçük ölçekte test edilip doğrulanması standart hale getirilecek.
 - Sprint 3'te ertelenen AI Agent Orkestrasyonu (US-008) ele alınacak.
+
+---
+
+**Sprint Kapanışı:** 18 Temmuz 2026 — Sprint 2 başarıyla tamamlandı.

@@ -24,6 +24,13 @@ Dashboard, upload ve parser modüllerindeki kod tekrarı giderildi. Tüm karbon 
 - Analiz sonucuna somut token tasarrufu tahmini ve kısaltılmış prompt önerisi eklendi.
 - UX kararı: Analiz, ayrı bir sayfa yerine doğrudan Dashboard'a gömülü bir panel olarak sunuluyor (kullanıcı akışının bölünmemesi için); ayrı `/analyze-page` ise manuel prompt test aracı olarak korunuyor.
 
+### Ek: Kalite ve Tasarım Çalışması (17 Temmuz)
+- Kritik bug'lar tespit edilip düzeltildi (dashboard'da sonsuz yükleme durumu, eksik JSX etiketleri).
+- Responsive/mobil tasarım sorunları giderildi.
+- İki edge case testi (geçersiz dosya formatı, uyumsuz JSON) başarıyla geçildi.
+- Proje genelinde tutarlı bir tasarım dili uygulandı: özel renk paleti, Inter font, lucide-react ikon kütüphanesi; tüm sayfalar (Navigation, Ana Sayfa, Upload, Dashboard, Analyze-Page) yeniden tasarlandı.
+- AI analiz çıktısının kalitesi ve tutarlılığı, sistem promptuna sabit bir yanıt formatı eklenerek artırıldı; kullanıcıya kopyalanabilir "önerilen prompt" gösteren bir özellik eklendi.
+
 ---
 
 ## Tamamlanmayan / Ertelenen İşler
@@ -50,3 +57,11 @@ Henüz başlanmadı. Sprint 2'nin kalan süresi RAG ve fine-tuning denemelerine 
 ## Notlar
 
 Sprint hedefinin temel ve orta katmanları (Katman 1 ve 2) tam olarak tamamlandı. İleri katman (Katman 3 — fine-tuning/RAG) stratejik bir kararla ekstra hedefe alındı; bu değişiklik `sprint-board.md` içinde de belgelenmiştir.
+
+---
+
+## Sprint Kapanışı
+
+**Kapanış Tarihi:** 18 Temmuz 2026
+
+Sprint 2 hedeflerinin temel ve orta katmanları (lib refactor, Llama entegrasyonu, prompt analizi, RAG) eksiksiz tamamlanmış; ayrıca planlanmamış ama değerli bir kalite/tasarım iyileştirme çalışması yürütülmüştür. İleri katman (fine-tuning, agent orkestrasyonu) bilinçli bir kapsam kararıyla ertelenmiş ve gerekçesi belgelenmiştir. Sprint, hedeflenenin üzerinde bir teslimatla kapatılmaktadır.
