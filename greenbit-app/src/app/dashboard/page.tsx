@@ -121,6 +121,12 @@ export default function Dashboard() {
   }
 
   const { summaryData, modelDistribution, timelineData } = data;
+
+  // En çok kullanılan modeli bul (mevcut veriden, yeni hesaplama yok)
+const mostUsedModel = modelDistribution.reduce((max: any, model: any) =>
+  model.value > (max?.value || 0) ? model : max
+, null);
+
   const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
 const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
 
@@ -128,10 +134,18 @@ const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.l
     <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
       <div className="max-w-6xl mx-auto space-y-8">
 
-        <div>
-          <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit dashboard</h1>
-          <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
-        </div>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+  <div>
+    <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit Dashboard</h1>
+    <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
+  </div>
+  <button
+    onClick={() => window.print()}
+    className="text-sm text-[#1B4332] border border-[#1B4332] hover:bg-[#1B4332]/5 px-4 py-2 rounded-full transition whitespace-nowrap"
+  >
+    Raporu yazdır
+  </button>
+</div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
@@ -153,6 +167,12 @@ const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.l
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-700 mb-6 text-center">Model kullanım dağılımı (mesaj sayısı)</h3>
+            {mostUsedModel && (
+  <p className="text-center text-sm text-[#1B4332] mb-4">
+    En çok kullanılan: <span className="font-medium">{mostUsedModel.name}</span>
+  </p>
+)}
+
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
