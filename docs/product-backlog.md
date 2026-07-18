@@ -66,6 +66,26 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **Kullanıcı olarak** AI kullanımımın özetini görsel olarak görmek istiyorum,  
 **çünkü** durumumu hızlıca anlamak istiyorum.
 
+### US-005: Prompt Verimlilik Analizi
+**Kullanıcı olarak** hangi prompt'larımın verimsiz olduğunu öğrenmek istiyorum,  
+**çünkü** daha iyi yazmayı öğrenmek istiyorum.
+**Sprint 2 gerçekleşme:** Llama 3 (8B) lokal olarak entegre edildi. Kullanıcının yüklediği gerçek verilerden prompt'lar çıkarılıp analiz ediliyor; açıklık, token verimliliği ve rol tanımlama gibi kriterlere göre yapılandırılmış geri bildirim veriliyor. Somut, kopyalanabilir bir "önerilen prompt" de üretiliyor.
+
+### US-006: Llama Fine-Tuning
+**Sistem olarak** prompt verimliliği için özel bir model eğitmek istiyorum,  
+**çünkü** ince ayarlı, alana özel öneriler vermem gerekiyor.
+**Sprint 2 gerçekleşme:** Süreç detaylı araştırıldı (veri hazırlama, LoRA, Hugging Face); gerçekçi süre tahmini 10-16 gün olarak belirlendi. Bu süre tek sprint'e sığmadığından, bilinçli bir kapsam kararıyla ertelendi; ayrı bir öğrenme hedefi olarak planlanmaktadır.
+
+### US-007: Öneri Agent'ı (RAG)
+**Kullanıcı olarak** kişiselleştirilmiş optimizasyon önerileri almak istiyorum,  
+**çünkü** karbonumu azaltacak somut adımlar lazım.
+**Sprint 2 gerçekleşme:** Basitleştirilmiş bir RAG mimarisi kuruldu: yapılandırılmış bir prompt kuralları deposu, kullanıcı sorgusuna göre ilgili kuralları getiren bir retrieval mekanizması ve modelin yalnızca sağlanan bağlama dayanmasını sağlayan bir kısıtlama. Test edildi ve doğrulandı.
+
+### US-008: AI Agent Orkestrasyonu
+**Sistem olarak** birden fazla agent'ı koordine edebilmek istiyorum,  
+**çünkü** karmaşık görevleri verimli bölmem gerekiyor.
+**Sprint 2 gerçekleşme:** Sprint 2 kapsamında ele alınmadı; Sprint 3 backlog'una aktarıldı.
+
 **Kabul kriterleri:**
 - Toplam token, kWh, CO2 kartları
 - Zaman serisi grafiği (Recharts)
