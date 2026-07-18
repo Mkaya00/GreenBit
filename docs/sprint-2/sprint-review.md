@@ -31,6 +31,11 @@ Dashboard, upload ve parser modüllerindeki kod tekrarı giderildi. Tüm karbon 
 - Proje genelinde tutarlı bir tasarım dili uygulandı: özel renk paleti, Inter font, lucide-react ikon kütüphanesi; tüm sayfalar (Navigation, Ana Sayfa, Upload, Dashboard, Analyze-Page) yeniden tasarlandı.
 - AI analiz çıktısının kalitesi ve tutarlılığı, sistem promptuna sabit bir yanıt formatı eklenerek artırıldı; kullanıcıya kopyalanabilir "önerilen prompt" gösteren bir özellik eklendi.
 
+### Ek: Son Dokunuşlar (18 Temmuz)
+- Dashboard'a rapor yazdırma/PDF olarak kaydetme özelliği eklendi.
+- En çok kullanılan modeli gösteren bir rozet eklendi.
+- Sprint 2 dokümantasyonu son haliyle güncellendi ve sprint resmen kapatıldı.
+
 ---
 
 ## Tamamlanmayan / Ertelenen İşler
