@@ -6,9 +6,6 @@
 
 ## To Do
 
-- **US-008:** AI Agent Orkestrasyonu
-- **Yeni:** Verimlilik Skoru
-- **US-009:** Sohbet Arayüzü
 - **US-010:** PDF Rapor
 - **US-011:** Canlıya Alma (Deploy)
 - **US-012:** Demo Video
@@ -23,4 +20,5 @@
 
 ## Done
 
-*(Sprint 2'den devreden işler, henüz Sprint 3'e özgü tamamlanan yok)*
+- **US-008:** AI Agent Orkestrasyonu — Prompt analiz, model önerisi ve verimlilik skorunu koordine eden sistem tamamlandı.
+- **US-009:** Sohbet Arayüzü — Kullanıcı verisiyle ilgili doğal dilde soru-cevap özelliği tamamlandı.
