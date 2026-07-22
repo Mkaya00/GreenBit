@@ -28,23 +28,23 @@ export default function Dashboard() {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    if (!isAnalyzing) {
-      setLoadingMessageIndex(0);
-      return;
-    }
-    const interval = setInterval(() => {
-      setLoadingMessageIndex((prev) => {
-        let next = Math.floor(Math.random() * loadingMessages.length);
-        while (next === prev) {
-          next = Math.floor(Math.random() * loadingMessages.length);
-        }
-        return next;
-      });
-    }, 3500);
+   useEffect(() => {
+  if (!isAnalyzing && !isAgentAnalyzing) {
+    setLoadingMessageIndex(0);
+    return;
+  }
+  const interval = setInterval(() => {
+    setLoadingMessageIndex((prev) => {
+      let next = Math.floor(Math.random() * loadingMessages.length);
+      while (next === prev) {
+        next = Math.floor(Math.random() * loadingMessages.length);
+      }
+      return next;
+    });
+  }, 3500);
 
-    return () => clearInterval(interval);
-  }, [isAnalyzing]);
+  return () => clearInterval(interval);
+}, [isAnalyzing, isAgentAnalyzing]);
 
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
