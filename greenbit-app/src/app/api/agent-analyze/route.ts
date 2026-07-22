@@ -1,6 +1,8 @@
 // src/app/api/agent-analyze/route.ts
 // Agent Orkestrasyonu:
 
+import { calculateMetricsForModel } from '../../lib/carbon';
+
 export async function POST(request: Request) {
     try {
       const body = await request.json();
@@ -39,16 +41,26 @@ export async function POST(request: Request) {
       const modelAdviceData = await modelAdviceResponse.json();
   
       // ==========================================
-      // AGENT 3: Verimlilik Skoru (Kod ile Hesaplama)
-      // ==========================================
-      const totalMessages: number = Object.values(modelCounts).reduce((a: any, b: any) => a + b, 0);
-      const expensiveModels = ["gpt-4", "claude-3-opus"];
-      const expensiveCount: number = Object.entries(modelCounts)
-        .filter(([model]) => expensiveModels.includes(model))
-        .reduce((sum: number, [, count]) => sum + (count as number), 0);
-  
-      const expensiveRatio = totalMessages > 0 ? expensiveCount / totalMessages : 0;
-      const efficiencyScore = Math.round(100 - expensiveRatio * 60);
+    // AGENT 3: Verimlilik Skoru (carbon.ts verisiyle, gerçek enerji hesabı)
+    // ==========================================
+    let totalEnergyWh = 0;
+    let totalMsgsForEnergy = 0;
+
+    Object.entries(modelCounts).forEach(([model, count]) => {
+      const metrics = calculateMetricsForModel(count as number, model);
+      totalEnergyWh += metrics.energyWh;
+      totalMsgsForEnergy += count as number;
+    });
+
+    const avgEnergyPerMessage = totalMsgsForEnergy > 0 ? totalEnergyWh / totalMsgsForEnergy : 0;
+
+    const bestPerMessage = 0.6;
+    const worstPerMessage = 6;
+
+    let efficiencyScore = Math.round(
+      100 - ((avgEnergyPerMessage - bestPerMessage) / (worstPerMessage - bestPerMessage)) * 100
+    );
+    efficiencyScore = Math.max(0, Math.min(100, efficiencyScore));
   
       // ==========================================
       // SENTEZ: Hepsini Birleştir

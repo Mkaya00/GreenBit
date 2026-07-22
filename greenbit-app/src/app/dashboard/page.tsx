@@ -12,6 +12,8 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [aiAnalysis, setAiAnalysis] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [agentResult, setAgentResult] = useState<any>(null);
+  const [isAgentAnalyzing, setIsAgentAnalyzing] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
   useEffect(() => {
@@ -93,6 +95,44 @@ export default function Dashboard() {
     }
   };
 
+  const handleAgentAnalysis = async () => {
+    setIsAgentAnalyzing(true);
+    setAgentResult(null);
+    try {
+      const savedData = localStorage.getItem("greenbit_conversations");
+      if (!savedData) {
+        setIsAgentAnalyzing(false);
+        return;
+      }
+      const conversations = JSON.parse(savedData);
+      const userPrompts: string[] = [];
+      const modelCounts: Record<string, number> = {};
+      conversations.forEach((conv: any) => {
+        if (!conv.mapping) return;
+        Object.values(conv.mapping).forEach((node: any) => {
+          if (node?.message?.metadata?.model_slug) {
+            const slug = node.message.metadata.model_slug;
+            modelCounts[slug] = (modelCounts[slug] || 0) + 1;
+          }
+          if (node?.message?.author?.role === "user" && node?.message?.content?.parts) {
+            const text = node.message.content.parts.join(" ");
+            if (text.trim().length > 0) userPrompts.push(text);
+          }
+        });
+      });
+      const response = await fetch("/api/agent-analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userPrompts, modelCounts }),
+      });
+      const data = await response.json();
+      setAgentResult(data);
+    } catch (error) {
+      setAgentResult({ error: "Agent analizi başarısız oldu." });
+    }
+    setIsAgentAnalyzing(false);
+  };
+
   if (loading) {
     return (
       <main className="p-8 min-h-screen bg-[#FAFAF8] flex items-center justify-center">
@@ -122,30 +162,29 @@ export default function Dashboard() {
 
   const { summaryData, modelDistribution, timelineData } = data;
 
-  // En çok kullanılan modeli bul (mevcut veriden, yeni hesaplama yok)
-const mostUsedModel = modelDistribution.reduce((max: any, model: any) =>
-  model.value > (max?.value || 0) ? model : max
-, null);
+  const mostUsedModel = modelDistribution.reduce((max: any, model: any) =>
+    model.value > (max?.value || 0) ? model : max
+  , null);
 
   const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
-const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
+  const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
 
   return (
     <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
       <div className="max-w-6xl mx-auto space-y-8">
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-  <div>
-    <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit Dashboard</h1>
-    <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
-  </div>
-  <button
-    onClick={() => window.print()}
-    className="text-sm text-[#1B4332] border border-[#1B4332] hover:bg-[#1B4332]/5 px-4 py-2 rounded-full transition whitespace-nowrap"
-  >
-    Raporu yazdır
-  </button>
-</div>
+          <div>
+            <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit Dashboard</h1>
+            <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
+          </div>
+          <button
+            onClick={() => window.print()}
+            className="text-sm text-[#1B4332] border border-[#1B4332] hover:bg-[#1B4332]/5 px-4 py-2 rounded-full transition whitespace-nowrap"
+          >
+            Raporu yazdır
+          </button>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
@@ -168,11 +207,10 @@ const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.l
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-700 mb-6 text-center">Model kullanım dağılımı (mesaj sayısı)</h3>
             {mostUsedModel && (
-  <p className="text-center text-sm text-[#1B4332] mb-4">
-    En çok kullanılan: <span className="font-medium">{mostUsedModel.name}</span>
-  </p>
-)}
-
+              <p className="text-center text-sm text-[#1B4332] mb-4">
+                En çok kullanılan: <span className="font-medium">{mostUsedModel.name}</span>
+              </p>
+            )}
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -247,28 +285,75 @@ const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.l
             </div>
           )}
 
-{aiAnalysis && (
-  <div className="mt-4 space-y-4">
-    <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-      <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "")}</p>
-    </div>
+          {aiAnalysis && (
+            <div className="mt-4 space-y-4">
+              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+                <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "")}</p>
+              </div>
 
-    {lastSuggestion.length > 0 && (
-      <div className="bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-xl p-6">
-        <div className="flex items-center justify-between mb-2">
-          <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
-          <button
-            onClick={() => navigator.clipboard.writeText(lastSuggestion)}
-            className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
-          >
-            Kopyala
-          </button>
+              {lastSuggestion.length > 0 && (
+                <div className="bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-xl p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
+                    <button
+                      onClick={() => navigator.clipboard.writeText(lastSuggestion)}
+                      className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
+                    >
+                      Kopyala
+                    </button>
+                  </div>
+                  <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-        <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
-      </div>
-    )}
-  </div>
-)}
+
+        {/* Agent Orkestrasyonu Bölümü */}
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div>
+              <h3 className="text-2xl font-medium text-[#1B4332]">
+                Agent Orkestrasyonu
+              </h3>
+              <p className="text-gray-500 text-sm mt-1">Birden fazla uzman agent koordine edilerek kapsamlı bir rapor oluşturulur.</p>
+            </div>
+            <button
+              onClick={handleAgentAnalysis}
+              disabled={isAgentAnalyzing}
+              className="bg-[#1B4332] hover:bg-[#14332A] text-white font-medium py-3 px-8 rounded-full transition disabled:opacity-50 whitespace-nowrap"
+            >
+              {isAgentAnalyzing ? "Analiz ediliyor..." : "Kapsamlı Analiz Yap"}
+            </button>
+          </div>
+
+          {isAgentAnalyzing && (
+            <div className="mt-4 flex items-center gap-3 text-gray-600 bg-[#FAFAF8] p-4 rounded-lg border border-gray-100">
+              <div className="w-5 h-5 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+              <span className="text-sm">Agent'lar çalışıyor...</span>
+            </div>
+          )}
+
+          {agentResult && !agentResult.error && (
+            <div className="mt-4 space-y-4">
+              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Verimlilik Skoru</h4>
+                <p className="text-3xl font-medium text-[#1B4332]">{agentResult.efficiencyScore}/100</p>
+              </div>
+              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
+                <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis}</p>
+              </div>
+              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Model Önerisi</h4>
+                <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice}</p>
+              </div>
+            </div>
+          )}
+
+          {agentResult?.error && (
+            <p className="mt-4 text-red-600 text-sm">{agentResult.error}</p>
+          )}
         </div>
 
       </div>
