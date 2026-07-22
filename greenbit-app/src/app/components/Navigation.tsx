@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Leaf, Bot, Upload } from "lucide-react";
+import { Leaf, Bot, Upload, MessageCircle } from "lucide-react";
 
 export default function Navigation() {
   return (
@@ -28,6 +28,13 @@ export default function Navigation() {
             <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2} />
             AI Analiz
           </Link>
+          <Link 
+            href="/chat" 
+            className="hidden md:flex items-center gap-1.5 border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-full transition whitespace-nowrap text-xs sm:text-base"
+          >
+  <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2} />
+  Sohbet
+</Link>
           <Link 
             href="/upload" 
             className="flex items-center gap-1.5 bg-[#1B4332] hover:bg-[#14332A] text-white font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-full transition whitespace-nowrap text-xs sm:text-base"
