@@ -11,21 +11,20 @@ const MODEL_ENERGY_RATES: Record<string, number> = {
     "default": 15 // Bilinmeyen modeller için
   };
   
-  export function calculateMetricsForModel(messageCount: number, modelSlug: string) {
-    // Adım 1: Token Tahmini (Ortalama 200 token/mesaj)
-    const tokens = messageCount * 200;
-  
-    // Adım 2: Enerji Hesabı
-    const energyRate = MODEL_ENERGY_RATES[modelSlug] || MODEL_ENERGY_RATES["default"];
-    const energyWh = (tokens / 1000) * energyRate;
-  
-    // Adım 3: CO2 Hesabı (0.4 çarpanı)
-    const co2 = energyWh * 0.4;
-  
-    return {
-      tokens,
-      energyWh,
-      energyKWh: energyWh / 1000,
-      co2
-    };
-  }
+  // Bilinmeyen modeller için, isimdeki ipuçlarına göre tahmini oran belirler
+function estimateEnergyRate(modelSlug: string): number {
+  const slug = modelSlug.toLowerCase();
+  if (slug.includes("mini") || slug.includes("nano")) return 4;
+  if (slug.includes("opus") || slug.includes("gpt-5") || slug.includes("gpt-4")) return 28;
+  if (slug.includes("claude")) return 20;
+  return 15; // gerçekten tahmin edilemiyorsa
+}
+
+export function calculateMetricsForModel(messageCount: number, modelSlug: string) {
+  const tokens = messageCount * 200;
+  // Önce kesin tabloya bak, yoksa tahmin mantığına düş
+  const energyRate = MODEL_ENERGY_RATES[modelSlug] || estimateEnergyRate(modelSlug);
+  const energyWh = (tokens / 1000) * energyRate;
+  const co2 = energyWh * 0.4;
+  return { tokens, energyWh, energyKWh: energyWh / 1000, co2 };
+}
