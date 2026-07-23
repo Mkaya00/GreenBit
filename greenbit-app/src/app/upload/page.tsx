@@ -14,6 +14,7 @@ type AnalysisResult = {
   estimatedTokens: number;
   estimatedKwh: number;
   estimatedCo2: number;
+  estimatedWater: number;
 };
 
 export default function UploadPage() {
@@ -77,13 +78,16 @@ export default function UploadPage() {
         let totalTokens = 0;
         let totalEnergyWh = 0;
         let totalCO2 = 0;
+        let totalWaterLiters = 0;
 
         Object.keys(modelCounts).forEach((model) => {
           const metrics = calculateMetricsForModel(modelCounts[model], model);
           totalTokens += metrics.tokens;
           totalEnergyWh += metrics.energyWh;
           totalCO2 += metrics.co2;
+          totalWaterLiters += metrics.waterLiters;
         });
+
 
         setTimeout(() => {
           setResult({
@@ -97,6 +101,7 @@ export default function UploadPage() {
             estimatedTokens: totalTokens,
             estimatedKwh: totalEnergyWh / 1000,
             estimatedCo2: totalCO2,
+            estimatedWater: totalWaterLiters,
           });
           setIsLoading(false);
         }, 1500);
@@ -257,26 +262,32 @@ export default function UploadPage() {
                   Tahmini karbon ayak izin
                 </h4>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
-                    <div className="text-2xl font-medium text-[#1B4332]">
-                      {result.estimatedTokens.toLocaleString('tr-TR')}
-                    </div>
-                    <div className="text-xs text-gray-600">Toplam token</div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
+                  <div className="text-2xl font-medium text-[#1B4332]">
+                    {result.estimatedTokens.toLocaleString('tr-TR')}
                   </div>
-                  <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
-                    <div className="text-2xl font-medium text-[#1B4332]">
-                      {result.estimatedKwh.toFixed(3)}
-                    </div>
-                    <div className="text-xs text-gray-600">kWh enerji</div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
-                    <div className="text-2xl font-medium text-[#1B4332]">
-                      {result.estimatedCo2.toFixed(2)}g
-                    </div>
-                    <div className="text-xs text-gray-600">CO2 salımı</div>
-                  </div>
+                  <div className="text-xs text-gray-600">Toplam token</div>
                 </div>
+                <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
+                  <div className="text-2xl font-medium text-[#1B4332]">
+                    {result.estimatedKwh.toFixed(3)}
+                  </div>
+                  <div className="text-xs text-gray-600">kWh enerji</div>
+                </div>
+                <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
+                  <div className="text-2xl font-medium text-[#1B4332]">
+                    {result.estimatedCo2.toFixed(2)}g
+                  </div>
+                  <div className="text-xs text-gray-600">CO2 salımı</div>
+                </div>
+                <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
+                  <div className="text-2xl font-medium text-[#1B4332]">
+                    {result.estimatedWater.toFixed(2)}L
+                  </div>
+                  <div className="text-xs text-gray-600">Su tüketimi</div>
+                </div>
+              </div>
 
                 {/* ANLAŞILIR KARŞILAŞTIRMALAR */}
                 <div className="mt-6 bg-white rounded-lg p-4 border border-gray-100">

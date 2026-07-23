@@ -192,23 +192,27 @@ export default function Dashboard() {
             Raporu yazdır
           </button>
         </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+    <h3 className="text-gray-500 text-sm font-medium mb-2">Toplam işlenen token</h3>
+    <p className="text-4xl font-medium text-gray-800">{summaryData.totalTokens}</p>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Toplam işlenen token</h3>
-            <p className="text-4xl font-medium text-gray-800">{summaryData.totalTokens}</p>
-          </div>
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+    <h3 className="text-gray-500 text-sm font-medium mb-2">Harcanan enerji (kWh)</h3>
+    <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalEnergy}</p>
+  </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Harcanan enerji (kWh)</h3>
-            <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalEnergy}</p>
-          </div>
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+    <h3 className="text-gray-500 text-sm font-medium mb-2">Karbon ayak izi (g CO2)</h3>
+    <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalCO2}</p>
+  </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">Karbon ayak izi (g CO2)</h3>
-            <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalCO2}</p>
-          </div>
-        </div>
+  <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+    <h3 className="text-gray-500 text-sm font-medium mb-2">Su tüketimi (litre)</h3>
+    <p className="text-4xl font-medium text-[#1B4332]">{summaryData.totalWater}</p>
+  </div>
+</div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">

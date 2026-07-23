@@ -20,11 +20,14 @@ function estimateEnergyRate(modelSlug: string): number {
   return 15; // gerçekten tahmin edilemiyorsa
 }
 
+const WATER_LITERS_PER_KWH = 1.8; // Veri merkezi soğutma için ortalama su tüketimi
+
 export function calculateMetricsForModel(messageCount: number, modelSlug: string) {
   const tokens = messageCount * 200;
-  // Önce kesin tabloya bak, yoksa tahmin mantığına düş
   const energyRate = MODEL_ENERGY_RATES[modelSlug] || estimateEnergyRate(modelSlug);
   const energyWh = (tokens / 1000) * energyRate;
   const co2 = energyWh * 0.4;
-  return { tokens, energyWh, energyKWh: energyWh / 1000, co2 };
+  const energyKWh = energyWh / 1000;
+  const waterLiters = energyKWh * WATER_LITERS_PER_KWH;
+  return { tokens, energyWh, energyKWh, co2, waterLiters };
 }

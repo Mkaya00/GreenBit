@@ -39,6 +39,7 @@ export function parseChatGPTExport(conversations: any[]) {
   let totalTokens = 0;
   let totalEnergyWh = 0;
   let totalCO2 = 0;
+  let totalWaterLiters = 0;
   let colorIndex = 0;
 
   const modelDistribution = Object.keys(modelCounts).map((model) => {
@@ -48,6 +49,7 @@ export function parseChatGPTExport(conversations: any[]) {
     totalTokens += metrics.tokens;
     totalEnergyWh += metrics.energyWh;
     totalCO2 += metrics.co2;
+    totalWaterLiters += metrics.waterLiters;
 
     const result = {
       name: model,
@@ -69,6 +71,7 @@ export function parseChatGPTExport(conversations: any[]) {
       totalTokens: totalTokens.toLocaleString('tr-TR'),
       totalEnergy: (totalEnergyWh / 1000).toFixed(4),
       totalCO2: totalCO2.toFixed(2),
+      totalWater: totalWaterLiters.toFixed(2),
     },
     modelDistribution,
     timelineData
