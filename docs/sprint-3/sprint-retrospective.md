@@ -9,3 +9,7 @@
 
 ## Aksiyon Maddeleri
 - Sprint 3'ün kalan işlerine (PDF Rapor, Deploy, Demo Video) odaklanmak.
+
+## 23 Temmuz Notu
+
+**İyi giden:** Performans ve şeffaflık konusundaki geri bildirimler (kullanıcının kendi gözlemleri) hızlıca değerlendirilip aksiyona dönüştürüldü — bu, çevik/agile çalışmanın iyi bir örneği.

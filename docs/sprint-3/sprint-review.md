@@ -11,3 +11,10 @@
 - US-010: PDF Rapor
 - US-011: Canlıya Alma (Deploy) — Oracle Cloud denemesi sürüyor, Groq/VPS yedek planları belirlendi.
 - US-012: Demo Video
+
+## 23 Temmuz Güncellemesi
+
+- US-010 (PDF Rapor) tamamlandı.
+- Performans iyileştirmesi: Agent Orkestrasyonu paralel çağrılarla hızlandırıldı.
+- Analiz kapsamı şeffaflaştırıldı (temsili örnekleme + açıklayıcı not).
+- Bonus özellikler eklendi: Su Ayak İzi Hesaplayıcı, Agent görsel durum göstergeleri.

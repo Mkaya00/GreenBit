@@ -22,3 +22,10 @@
 1. **Öncelik:** Oracle Cloud Always Free (ücretsiz, lokal Ollama ile tam gizlilik)
 2. **Yedek 1:** Groq API (ücretsiz, açık kaynak model barındırma)
 3. **Yedek 2:** Ücretli VPS (Hetzner/Contabo, ~4-6 Euro/ay)
+
+
+---
+
+## Not: Sprint Sırasında Eklenen Ekstra İşler
+
+Plan dışında, sprint ilerledikçe şu bonus özellikler eklendi: Su Ayak İzi Hesaplayıcı, Agent Orkestrasyonu görsel durum göstergeleri, performans iyileştirmeleri. Detaylar için daily-scrum-notes ve sprint-review dosyalarına bakınız.
