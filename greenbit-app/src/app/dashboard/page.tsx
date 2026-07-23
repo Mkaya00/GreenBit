@@ -77,7 +77,14 @@ export default function Dashboard() {
         return;
       }
 
-      const samplePrompts = userPrompts.slice(0, 3);
+        // Baştan, ortadan ve sondan birer örnek al (daha temsili)
+      const samplePrompts = userPrompts.length <= 3
+      ? userPrompts
+      : [
+          userPrompts[0],
+          userPrompts[Math.floor(userPrompts.length / 2)],
+          userPrompts[userPrompts.length - 1],
+      ];
       const combinedPrompt = samplePrompts.map((p, i) => `${i + 1}. ${p}`).join("\n");
 
       const response = await fetch("/api/analyze", {
@@ -267,7 +274,7 @@ export default function Dashboard() {
                 <Bot className="w-6 h-6" strokeWidth={1.5} />
                 AI prompt analizi
               </h3>
-              <p className="text-gray-500 text-sm mt-1">Geçmiş verileriniz taranarak token/enerji israfı analiz edilir. Lokal yapay zeka modeli kullanıldığından analiz birkaç saniye sürebilir.</p>
+              <p className="text-gray-500 text-sm mt-1">Sayısal metrikler (token, CO2, enerji) tüm verinizi kapsar. Performans nedeniyle, promptlarınızdan temsili bir örnek (baş, orta, son) derinlemesine analiz edilmektedir.</p>
             </div>
             <button
               onClick={handleAiAnalysis}
