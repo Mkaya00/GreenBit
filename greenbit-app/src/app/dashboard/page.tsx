@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
-import { BarChart3, Bot, Upload } from "lucide-react";
+import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2 } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
@@ -338,29 +338,60 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {isAgentAnalyzing && (
-            <div className="mt-4 flex items-center gap-3 text-gray-600 bg-[#FAFAF8] p-4 rounded-lg border border-gray-100">
-              <div className="w-5 h-5 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
-              <span className="text-sm">Agent'lar çalışıyor...</span>
-            </div>
-          )}
+          {(isAgentAnalyzing || agentResult) && (
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Agent 1: Prompt Analiz */}
+          <div className="bg-[#FAFAF8] p-4 rounded-lg border border-gray-100 flex items-center gap-2">
+            {isAgentAnalyzing ? (
+              <div className="w-4 h-4 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            ) : (
+              <CheckCircle2 className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            )}
+            <MessageSquare className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            <span className="text-xs font-medium text-gray-700">Prompt Analiz Uzmanı</span>
+          </div>
 
-          {agentResult && !agentResult.error && (
-            <div className="mt-4 space-y-4">
-              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Verimlilik Skoru</h4>
-                <p className="text-3xl font-medium text-[#1B4332]">{agentResult.efficiencyScore}/100</p>
-              </div>
-              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
-                <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis}</p>
-              </div>
-              <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-                <h4 className="text-sm font-medium text-[#1B4332] mb-2">Model Önerisi</h4>
-                <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice}</p>
-              </div>
-            </div>
-          )}
+          {/* Agent 2: Model Önerisi */}
+          <div className="bg-[#FAFAF8] p-4 rounded-lg border border-gray-100 flex items-center gap-2">
+            {isAgentAnalyzing ? (
+              <div className="w-4 h-4 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            ) : (
+              <CheckCircle2 className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            )}
+            <Cpu className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            <span className="text-xs font-medium text-gray-700">Model Öneri Uzmanı</span>
+          </div>
+
+          {/* Agent 3: Verimlilik Skoru */}
+          <div className="bg-[#FAFAF8] p-4 rounded-lg border border-gray-100 flex items-center gap-2">
+            {isAgentAnalyzing ? (
+              <div className="w-4 h-4 border-2 border-[#1B4332] border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+            ) : (
+              <CheckCircle2 className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            )}
+            <Gauge className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+            <span className="text-xs font-medium text-gray-700">Verimlilik Hesaplayıcı</span>
+          </div>
+        </div>
+      )}
+
+      {agentResult && !agentResult.error && (
+        <div className="mt-4 space-y-4">
+          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+            <h4 className="text-sm font-medium text-[#1B4332] mb-2">Verimlilik Skoru</h4>
+            <p className="text-3xl font-medium text-[#1B4332]">{agentResult.efficiencyScore}/100</p>
+          </div>
+          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+            <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
+            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis}</p>
+          </div>
+          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
+            <h4 className="text-sm font-medium text-[#1B4332] mb-2">Model Önerisi</h4>
+            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice}</p>
+          </div>
+        </div>
+      )}
+
 
           {agentResult?.error && (
             <p className="mt-4 text-red-600 text-sm">{agentResult.error}</p>
