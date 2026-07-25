@@ -13,3 +13,7 @@
 ## 23 Temmuz Notu
 
 **İyi giden:** Performans ve şeffaflık konusundaki geri bildirimler (kullanıcının kendi gözlemleri) hızlıca değerlendirilip aksiyona dönüştürüldü — bu, çevik/agile çalışmanın iyi bir örneği.
+
+## 25 Temmuz Notu
+
+**İyi giden:** Planlanan 5 bonus özelliğin hepsi tek günde tamamlandı — net bir liste yapıp önceliklendirmenin faydası görüldü.

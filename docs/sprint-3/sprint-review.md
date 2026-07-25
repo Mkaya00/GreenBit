@@ -18,3 +18,8 @@
 - Performans iyileştirmesi: Agent Orkestrasyonu paralel çağrılarla hızlandırıldı.
 - Analiz kapsamı şeffaflaştırıldı (temsili örnekleme + açıklayıcı not).
 - Bonus özellikler eklendi: Su Ayak İzi Hesaplayıcı, Agent görsel durum göstergeleri.
+
+## 25 Temmuz Güncellemesi
+
+- 5 bonus özellik daha eklendi: "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Sohbet Hafızası, Su Karşılaştırmaları, Başarı Rozetleri.
+- Verimlilik Skoru artık anında (buton beklemeden) gösteriliyor.
