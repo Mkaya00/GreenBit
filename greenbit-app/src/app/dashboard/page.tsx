@@ -193,6 +193,28 @@ const percentSaved = actualTotalCO2 > 0 ? (co2Saved / actualTotalCO2) * 100 : 0;
 const dailyAverageCO2 = actualTotalCO2 / (summaryData.daySpan || 1);
 const yearlyProjection = dailyAverageCO2 * 365;
 
+const badges: { icon: any; title: string; desc: string }[] = [];
+if (mostUsedModel?.name?.toLowerCase().includes("mini")) {
+  badges.push({ icon: Sprout, title: "Akıllı Seçim", desc: "Verimli bir model kullanıyorsun" });
+}
+if (totalMessagesAll > 100) {
+  badges.push({ icon: TrendingUp, title: "Üretken Kullanıcı", desc: "100'den fazla mesaj gönderdin" });
+}
+if (modelDistribution.length > 1) {
+  badges.push({ icon: Shuffle, title: "Çeşitlilik Ustası", desc: "Birden fazla model deniyorsun" });
+}
+if (percentSaved < 10) {
+  badges.push({ icon: Trophy, title: "Verimlilik Şampiyonu", desc: "Zaten çok verimli çalışıyorsun" });
+}
+
+const avgEnergyPerMessage = totalMessagesAll > 0 ? (actualTotalCO2 / 0.4) / totalMessagesAll : 0;
+const bestPerMessage = 0.6;
+const worstPerMessage = 6;
+let instantEfficiencyScore = Math.round(
+  100 - ((avgEnergyPerMessage - bestPerMessage) / (worstPerMessage - bestPerMessage)) * 100
+);
+instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
+
   const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
   const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
 
@@ -398,10 +420,6 @@ const yearlyProjection = dailyAverageCO2 * 365;
       {agentResult && !agentResult.error && (
         <div className="mt-4 space-y-4">
           <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-            <h4 className="text-sm font-medium text-[#1B4332] mb-2">Verimlilik Skoru</h4>
-            <p className="text-3xl font-medium text-[#1B4332]">{agentResult.efficiencyScore}/100</p>
-          </div>
-          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
             <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
             <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis}</p>
           </div>
@@ -434,7 +452,7 @@ const yearlyProjection = dailyAverageCO2 * 365;
             </div>
           </div>
         </div>
-          
+            
          {/* Yıllık Projeksiyon */}
         <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
           <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Yıllık projeksiyon</h3>
@@ -446,6 +464,33 @@ const yearlyProjection = dailyAverageCO2 * 365;
             <p className="text-sm text-gray-600 mt-1">Tahmini yıllık CO2</p>
           </div>
         </div>
+        
+        {/* Verimlilik Skoru (anında) */}
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Verimlilik Skorun</h3>
+          <p className="text-5xl font-medium text-[#1B4332]">{instantEfficiencyScore}<span className="text-2xl text-gray-400">/100</span></p>
+        </div>
+
+        {/* Başarı Rozetleri */}
+        {badges.length > 0 && (
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <h3 className="text-2xl font-medium text-[#1B4332] mb-6">Başarı rozetlerin</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {badges.map((badge, i) => {
+                const Icon = badge.icon;
+                return (
+                  <div key={i} className="bg-[#FAFAF8] p-4 rounded-lg border border-gray-100 text-center">
+                    <div className="w-10 h-10 rounded-full bg-[#1B4332]/10 flex items-center justify-center mx-auto mb-2">
+                      <Icon className="w-5 h-5 text-[#1B4332]" strokeWidth={2} />
+                    </div>
+                    <p className="text-sm font-medium text-gray-800">{badge.title}</p>
+                    <p className="text-xs text-gray-500 mt-1">{badge.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
       </div>
     </main>
