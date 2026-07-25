@@ -6,6 +6,7 @@ import Link from "next/link";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
 import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2 } from "lucide-react";
+import { calculateMetricsForModel } from '../lib/carbon';
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
@@ -172,6 +173,22 @@ export default function Dashboard() {
   const mostUsedModel = modelDistribution.reduce((max: any, model: any) =>
     model.value > (max?.value || 0) ? model : max
   , null);
+
+  // "Ne Olurdu?" Simülatörü hesaplaması
+const totalMessagesAll = modelDistribution.reduce((sum: number, m: any) => sum + m.value, 0);
+
+let actualTotalCO2 = 0;
+let actualTotalWater = 0;
+modelDistribution.forEach((m: any) => {
+  const metrics = calculateMetricsForModel(m.value, m.name);
+  actualTotalCO2 += metrics.co2;
+  actualTotalWater += metrics.waterLiters;
+});
+
+const hypotheticalMetrics = calculateMetricsForModel(totalMessagesAll, "gpt-4o-mini");
+const co2Saved = Math.max(0, actualTotalCO2 - hypotheticalMetrics.co2);
+const waterSaved = Math.max(0, actualTotalWater - hypotheticalMetrics.waterLiters);
+const percentSaved = actualTotalCO2 > 0 ? (co2Saved / actualTotalCO2) * 100 : 0;
 
   const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
   const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
@@ -396,6 +413,23 @@ export default function Dashboard() {
           {agentResult?.error && (
             <p className="mt-4 text-red-600 text-sm">{agentResult.error}</p>
           )}
+        </div>
+        {/* Ne Olurdu? Simülatörü */}
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Ne olurdu?</h3>
+          <p className="text-gray-500 text-sm mb-6">
+            Eğer tüm mesajlarınız en verimli model (gpt-4o-mini) ile işlenseydi:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
+              <p className="text-3xl font-medium text-[#1B4332]">{co2Saved.toFixed(2)}g</p>
+              <p className="text-sm text-gray-600 mt-1">CO2 tasarrufu</p>
+            </div>
+            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
+              <p className="text-3xl font-medium text-[#1B4332]">{percentSaved.toFixed(0)}%</p>
+              <p className="text-sm text-gray-600 mt-1">azalma potansiyeli</p>
+            </div>
+          </div>
         </div>
 
       </div>
