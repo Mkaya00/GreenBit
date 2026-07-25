@@ -6,7 +6,7 @@ import Link from "next/link";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
 import { calculateMetricsForModel } from '../lib/carbon';
-import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2, Sprout, TrendingUp, Shuffle, Trophy } from "lucide-react";
+import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2, Sprout, TrendingUp, Shuffle, Trophy, ArrowUp } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
@@ -16,6 +16,8 @@ export default function Dashboard() {
   const [agentResult, setAgentResult] = useState<any>(null);
   const [isAgentAnalyzing, setIsAgentAnalyzing] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  
 
   useEffect(() => {
     const savedData = localStorage.getItem("greenbit_conversations");
@@ -27,6 +29,14 @@ export default function Dashboard() {
     }
 
     setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
    useEffect(() => {
@@ -220,6 +230,15 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
   return (
     <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
+      {showScrollTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-6 right-6 bg-[#1B4332] hover:bg-[#14332A] text-white p-3 rounded-full shadow-lg transition z-50"
+        >
+          <ArrowUp className="w-5 h-5" strokeWidth={2} />
+        </button>
+      )}
+
       <div className="max-w-6xl mx-auto space-y-8">
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
