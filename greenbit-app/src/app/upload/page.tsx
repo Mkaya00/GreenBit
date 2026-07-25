@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { calculateMetricsForModel } from '../lib/carbon';
-import { CheckCircle2, Globe, Coffee, Lightbulb, Smartphone, TreePine, BarChart3, Upload } from "lucide-react";
+import { CheckCircle2, Globe, Coffee, Lightbulb, Smartphone, TreePine, BarChart3, Upload, GlassWater, ShowerHead } from "lucide-react";
 
 // --- TİPLER ---
 type AnalysisResult = {
@@ -289,32 +289,39 @@ export default function UploadPage() {
                 </div>
               </div>
 
-                {/* ANLAŞILIR KARŞILAŞTIRMALAR */}
-                <div className="mt-6 bg-white rounded-lg p-4 border border-gray-100">
-                  <p className="text-sm font-medium text-[#1B4332] mb-3 text-center flex items-center justify-center gap-2">
-                    <Lightbulb className="w-4 h-4" strokeWidth={2} />
-                    Bu ne kadar?
-                  </p>
-                  <div className="space-y-2 text-sm text-gray-700">
-                    <div className="flex items-center gap-2">
-                      <Coffee className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
-                      <span><strong>{(result.estimatedCo2 / 50).toFixed(1)}</strong> bardak kahve üretimine eşit</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Lightbulb className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
-                      <span><strong>{Math.round(result.estimatedKwh * 1000 / 60)}</strong> dakika 60W ampul yakmakla aynı</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Smartphone className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
-                      <span><strong>{Math.round(result.estimatedKwh * 1000 / 5)}</strong> kez telefon şarj etmeye eşit</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <TreePine className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
-                      <span>Bir ağacın <strong>{(result.estimatedCo2 / 22000 * 365).toFixed(1)}</strong> günlük emişine eşit</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div className="mt-6 bg-white rounded-lg p-4 border border-gray-100">
+          <p className="text-sm font-medium text-[#1B4332] mb-3 text-center flex items-center justify-center gap-2">
+            <Lightbulb className="w-4 h-4" strokeWidth={2} />
+            Bu ne kadar?
+          </p>
+          <div className="space-y-2 text-sm text-gray-700">
+            <div className="flex items-center gap-2">
+              <Coffee className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span><strong>{(result.estimatedCo2 / 50).toFixed(1)}</strong> bardak kahve üretimine eşit</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lightbulb className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span><strong>{Math.round(result.estimatedKwh * 1000 / 60)}</strong> dakika 60W ampul yakmakla aynı</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Smartphone className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span><strong>{Math.round(result.estimatedKwh * 1000 / 5)}</strong> kez telefon şarj etmeye eşit</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <TreePine className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span>Bir ağacın <strong>{(result.estimatedCo2 / 22000 * 365).toFixed(1)}</strong> günlük emişine eşit</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <GlassWater className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span><strong>{(result.estimatedWater / 0.25).toFixed(0)}</strong> bardak suya eşit</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShowerHead className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
+              <span><strong>{(result.estimatedWater / 65).toFixed(3)}</strong> duş almaya eşit</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
               {/* DASHBOARD'A GEÇİŞ BUTONU */}
               <div className="mt-8 text-center border-t border-gray-100 pt-6">
