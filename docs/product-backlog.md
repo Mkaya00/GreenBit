@@ -135,6 +135,31 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **çünkü** kullanıcı deneyimi bekleme süresinden olumsuz etkileniyor.
 **Sprint 3 gerçekleşme:** Planlanmamış, kullanıcı geri bildirimiyle fark edilen bir iyileştirme. İki agent çağrısı `Promise.all` ile paralelleştirilerek toplam süre yaklaşık yarıya indirildi.
 
+### US-016: "Ne Olurdu?" Simülatörü
+**Kullanıcı olarak** daha verimli bir model kullansaydım ne kadar tasarruf ederdim görmek istiyorum,  
+**çünkü** somut bir karşılaştırma motive edici olur.
+**Sprint 3 gerçekleşme:** Mevcut model kullanımı ile en verimli model (gpt-4o-mini) senaryosu karşılaştırılıp CO2 tasarruf potansiyeli gösteriliyor.
+
+### US-017: Yıllık Projeksiyon
+**Kullanıcı olarak** mevcut hızımla gidersem yıllık etkimi görmek istiyorum,  
+**çünkü** uzun vadeli düşünmek istiyorum.
+**Sprint 3 gerçekleşme:** Verideki gün aralığından yola çıkarak, günlük ortalama CO2 hesaplanıp 365 güne projeksiyon yapılıyor.
+
+### US-018: Sohbet Hafızası
+**Kullanıcı olarak** sohbetin önceki mesajlarımı hatırlamasını istiyorum,  
+**çünkü** doğal bir konuşma deneyimi istiyorum.
+**Sprint 3 gerçekleşme:** Sohbet geçmişi API'ye gönderilip, yapay zekanın önceki bağlamı dikkate alması sağlandı.
+
+### US-019: Su Tüketimi Karşılaştırmaları
+**Kullanıcı olarak** su tüketimimin somut karşılıklarını görmek istiyorum,  
+**çünkü** sayılar tek başına anlam ifade etmiyor.
+**Sprint 3 gerçekleşme:** Su tüketimi, bardak ve duş eşdeğerlerine çevrilerek gösteriliyor.
+
+### US-020: Başarı Rozetleri ve Anında Verimlilik Skoru
+**Kullanıcı olarak** kullanım alışkanlıklarıma göre rozet kazanmak istiyorum,  
+**çünkü** bu beni daha verimli olmaya teşvik eder.
+**Sprint 3 gerçekleşme:** Kullanım desenine göre otomatik rozetler (Akıllı Seçim, Üretken Kullanıcı, Çeşitlilik Ustası, Verimlilik Şampiyonu) eklendi. Ayrıca Verimlilik Skoru, Agent Orkestrasyonu beklenmeden anında hesaplanıp gösterilmeye başlandı.
+
 ---
 
 ## Sprint Hedefleri Özeti

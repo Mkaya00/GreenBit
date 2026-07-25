@@ -26,3 +26,17 @@
 - Bonus: Agent Orkestrasyonu için görsel durum göstergeleri eklendi (3 agent'ın çalışma durumunu gösteren ikonlu kutular).
 
 **Engeller:** Yok.
+
+## 25 Temmuz 2026 (Cumartesi)
+
+**Son çalışılan gün (23 Temmuz):** PDF Rapor, hız iyileştirmesi, Su Ayak İzi ve Agent Görselleştirme tamamlandı.
+
+**Bugün ne yapıldı:**
+- "Ne Olurdu?" Simülatörü eklendi: kullanıcının mevcut kullanımını en verimli model senaryosuyla karşılaştırıyor.
+- Yıllık Projeksiyon eklendi: mevcut kullanım hızına göre 1 yıllık CO2 tahmini.
+- Sohbet Arayüzüne hafıza eklendi: önceki mesajlar artık dikkate alınıyor.
+- Su tüketimi için somut karşılaştırmalar eklendi (bardak, duş).
+- Başarı Rozetleri eklendi: kullanım desenine göre otomatik kazanılan rozetler.
+- Bonus: Verimlilik Skoru artık Agent Orkestrasyonu çalıştırılmadan, anında dashboard'da gösteriliyor.
+
+**Engeller:** Kod ekleme sırasında birkaç kopyala-yapıştır karışıklığı yaşandı (hesaplama/görsel kodlarının yanlış yere yerleşmesi); adım adım kontrol ederek düzeltildi.
