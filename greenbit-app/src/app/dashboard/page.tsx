@@ -157,8 +157,20 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <main className="p-8 min-h-screen bg-[#FAFAF8] flex items-center justify-center">
-        <p className="text-gray-500 text-lg">Yükleniyor...</p>
+      <main className="p-8 min-h-screen bg-[#FAFAF8]">
+        <div className="max-w-6xl mx-auto space-y-8 animate-pulse">
+          <div className="h-10 bg-gray-200 rounded-lg w-64"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="h-32 bg-gray-200 rounded-xl"></div>
+            <div className="h-32 bg-gray-200 rounded-xl"></div>
+            <div className="h-32 bg-gray-200 rounded-xl"></div>
+            <div className="h-32 bg-gray-200 rounded-xl"></div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="h-80 bg-gray-200 rounded-xl"></div>
+            <div className="h-80 bg-gray-200 rounded-xl"></div>
+          </div>
+        </div>
       </main>
     );
   }
