@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
-import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2 } from "lucide-react";
 import { calculateMetricsForModel } from '../lib/carbon';
+import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2, Sprout, TrendingUp, Shuffle, Trophy } from "lucide-react";
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
@@ -435,8 +435,8 @@ const yearlyProjection = dailyAverageCO2 * 365;
           </div>
         </div>
           
-        {/* Yıllık Projeksiyon */}
-          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+         {/* Yıllık Projeksiyon */}
+        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
           <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Yıllık projeksiyon</h3>
           <p className="text-gray-500 text-sm mb-6">
             Mevcut kullanım hızınızla giderseniz, 1 yıl sonunda tahmini karbon ayak iziniz:
@@ -445,8 +445,7 @@ const yearlyProjection = dailyAverageCO2 * 365;
             <p className="text-3xl font-medium text-[#1B4332]">{(yearlyProjection / 1000).toFixed(2)} kg</p>
             <p className="text-sm text-gray-600 mt-1">Tahmini yıllık CO2</p>
           </div>
-        </div>  
-
+        </div>
 
       </div>
     </main>
