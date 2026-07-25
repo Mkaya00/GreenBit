@@ -6,7 +6,9 @@ const COLORS = ['#16a34a', '#4ade80', '#86efac', '#22c55e', '#15803d'];
 
 export function parseChatGPTExport(conversations: any[]) {
   const modelCounts: Record<string, number> = {};
-  const timeSeriesData: Record<string, number> = {}; // Gün bazlı CO2
+  const timeSeriesData: Record<string, number> = {};
+  let earliestTime = Infinity;
+  let latestTime = 0;
 
   conversations.forEach((conv) => {
     if (!conv.mapping) return;
@@ -17,6 +19,12 @@ export function parseChatGPTExport(conversations: any[]) {
       const dateObj = new Date(conv.create_time * 1000);
       dateStr = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
     }
+    
+    if (conv.create_time) {
+      earliestTime = Math.min(earliestTime, conv.create_time);
+      latestTime = Math.max(latestTime, conv.create_time);
+    }
+
 
     let convCO2 = 0;
 
@@ -66,14 +74,19 @@ export function parseChatGPTExport(conversations: any[]) {
     co2: Number(timeSeriesData[date].toFixed(2))
   }));
 
-  return {
-    summaryData: {
-      totalTokens: totalTokens.toLocaleString('tr-TR'),
-      totalEnergy: (totalEnergyWh / 1000).toFixed(4),
-      totalCO2: totalCO2.toFixed(2),
-      totalWater: totalWaterLiters.toFixed(2),
-    },
-    modelDistribution,
-    timelineData
-  };
+  const daySpan = latestTime > earliestTime
+  ? Math.max(1, Math.ceil((latestTime - earliestTime) / 86400))
+  : 1;
+
+return {
+  summaryData: {
+    totalTokens: totalTokens.toLocaleString('tr-TR'),
+    totalEnergy: (totalEnergyWh / 1000).toFixed(4),
+    totalCO2: totalCO2.toFixed(2),
+    totalWater: totalWaterLiters.toFixed(2),
+    daySpan,
+  },
+  modelDistribution,
+  timelineData
+};
 }

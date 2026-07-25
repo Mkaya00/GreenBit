@@ -190,6 +190,9 @@ const co2Saved = Math.max(0, actualTotalCO2 - hypotheticalMetrics.co2);
 const waterSaved = Math.max(0, actualTotalWater - hypotheticalMetrics.waterLiters);
 const percentSaved = actualTotalCO2 > 0 ? (co2Saved / actualTotalCO2) * 100 : 0;
 
+const dailyAverageCO2 = actualTotalCO2 / (summaryData.daySpan || 1);
+const yearlyProjection = dailyAverageCO2 * 365;
+
   const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
   const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
 
@@ -431,6 +434,19 @@ const percentSaved = actualTotalCO2 > 0 ? (co2Saved / actualTotalCO2) * 100 : 0;
             </div>
           </div>
         </div>
+          
+        {/* Yıllık Projeksiyon */}
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Yıllık projeksiyon</h3>
+          <p className="text-gray-500 text-sm mb-6">
+            Mevcut kullanım hızınızla giderseniz, 1 yıl sonunda tahmini karbon ayak iziniz:
+          </p>
+          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
+            <p className="text-3xl font-medium text-[#1B4332]">{(yearlyProjection / 1000).toFixed(2)} kg</p>
+            <p className="text-sm text-gray-600 mt-1">Tahmini yıllık CO2</p>
+          </div>
+        </div>  
+
 
       </div>
     </main>
