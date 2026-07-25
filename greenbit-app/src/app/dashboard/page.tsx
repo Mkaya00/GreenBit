@@ -114,6 +114,7 @@ export default function Dashboard() {
   };
 
   const handleAgentAnalysis = async () => {
+
     setIsAgentAnalyzing(true);
     setAgentResult(null);
     try {
@@ -149,6 +150,9 @@ export default function Dashboard() {
       setAgentResult({ error: "Agent analizi başarısız oldu." });
     }
     setIsAgentAnalyzing(false);
+  };
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   if (loading) {
@@ -252,7 +256,13 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
             Raporu yazdır
           </button>
         </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          <button onClick={() => scrollToSection('ozet')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">Özet</button>
+          <button onClick={() => scrollToSection('grafikler')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">Grafikler</button>
+          <button onClick={() => scrollToSection('ai-analiz')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">AI Analiz</button>
+          <button onClick={() => scrollToSection('ekstra')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">Ekstra Analizler</button>
+        </div>
+      <div id="ozet" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-mt-24">
   <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
     <h3 className="text-gray-500 text-sm font-medium mb-2">Toplam işlenen token</h3>
     <p className="text-4xl font-medium text-gray-800">{summaryData.totalTokens}</p>
@@ -274,7 +284,7 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
   </div>
 </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div id="grafikler" className="grid grid-cols-1 lg:grid-cols-2 gap-6 scroll-mt-24">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-700 mb-6 text-center">Model kullanım dağılımı (mesaj sayısı)</h3>
             {mostUsedModel && (
@@ -331,7 +341,7 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
         </div>
 
         {/* AI Analiz Bölümü */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+        <div id="ai-analiz" className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 scroll-mt-24">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
               <h3 className="text-2xl font-medium text-[#1B4332] flex items-center gap-2">
@@ -381,7 +391,7 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
         </div>
 
         {/* Agent Orkestrasyonu Bölümü */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+        <div  className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
               <h3 className="text-2xl font-medium text-[#1B4332]">
@@ -454,7 +464,7 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
           )}
         </div>
         {/* Ne Olurdu? Simülatörü */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+        <div id="ekstra" className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 scroll-mt-24">
           <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Ne olurdu?</h3>
           <p className="text-gray-500 text-sm mb-6">
             Eğer tüm mesajlarınız en verimli model (gpt-4o-mini) ile işlenseydi:
