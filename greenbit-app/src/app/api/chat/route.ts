@@ -4,7 +4,7 @@
 export async function POST(request: Request) {
     try {
       const body = await request.json();
-      const { message, dataSummary } = body as {
+      const { message, dataSummary, history } = body as {
         message: string;
         dataSummary: {
           totalTokens: string;
@@ -12,7 +12,12 @@ export async function POST(request: Request) {
           totalCO2: string;
           modelDistribution: { name: string; value: number }[];
         };
+        history?: { role: string; text: string }[];
       };
+      
+      const historyText = (history || [])
+        .map((h) => `${h.role === "user" ? "Kullanıcı" : "Asistan"}: ${h.text}`)
+        .join("\n");
   
       const modelInfo = dataSummary.modelDistribution
         .map((m) => `${m.name}: ${m.value} mesaj`)
@@ -24,9 +29,12 @@ export async function POST(request: Request) {
   - Toplam CO2: ${dataSummary.totalCO2} g
   - Model kullanımı: ${modelInfo}
   
-  Kullanıcının sorusunu, YUKARIDAKİ VERİLERE dayanarak, kısa ve net şekilde cevapla. Veride olmayan bir şey sorulursa, "Bu bilgi elimde yok" de. Türkçe cevap ver.
-  
-  Kullanıcının sorusu: ${message}`;
+  Kullanıcının sorusunu, YUKARIDAKİ VERİLERE dayanarak, kısa ve net şekilde cevapla. Veride olmayan bir şey sorulursa, "Bu bilgi elimde yok" de. Önceki konuşmayı da dikkate al. Türkçe cevap ver.
+
+Önceki konuşma:
+${historyText}
+
+Kullanıcının yeni sorusu: ${message}`;
   
       const response = await fetch("http://localhost:11434/api/generate", {
         method: "POST",
