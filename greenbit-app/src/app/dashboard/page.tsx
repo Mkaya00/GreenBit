@@ -242,6 +242,12 @@ let instantEfficiencyScore = Math.round(
 );
 instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
+const scoreMessage = instantEfficiencyScore >= 80
+  ? "Harika! Zaten çok verimli çalışıyorsun 🎉"
+  : instantEfficiencyScore >= 50
+  ? "Fena değil, ama gelişim alanın var. 'Ne Olurdu?' bölümüne göz at."
+  : "Verimliliğini artırabilirsin! Daha verimli modeller ve kısa promptlar dene.";
+
 const suggestionMatch = aiAnalysis.match(/Öneri:\s*([\s\S]*?)(?:\n\n|$)/);
 const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "").trim() : "";
 
@@ -514,8 +520,8 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
           <h3 className="text-sm font-medium text-gray-500 mb-2">Verimlilik Skorun</h3>
           <p className="text-5xl font-medium text-[#1B4332]">{instantEfficiencyScore}<span className="text-2xl text-gray-400">/100</span></p>
+          <p className="text-sm text-gray-600 mt-3">{scoreMessage}</p>
         </div>
-
         {/* Başarı Rozetleri */}
         {badges.length > 0 && (
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
