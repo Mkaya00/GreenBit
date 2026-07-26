@@ -38,5 +38,11 @@
 - Su tüketimi için somut karşılaştırmalar eklendi (bardak, duş).
 - Başarı Rozetleri eklendi: kullanım desenine göre otomatik kazanılan rozetler.
 - Bonus: Verimlilik Skoru artık Agent Orkestrasyonu çalıştırılmadan, anında dashboard'da gösteriliyor.
+**Ayrıca aynı gün eklenen 5 UI/UX iyileştirmesi:**
+- Scroll-to-top butonu (uzun sayfada hızlı üste dönüş)
+- Kartlara fade-in giriş animasyonu
+- Hamburger mobil menü (küçük ekranlarda)
+- Dashboard'a hızlı gezinme menüsü (Özet/Grafikler/AI Analiz/Ekstra)
+- İskelet (skeleton) yükleme ekranı
 
 **Engeller:** Kod ekleme sırasında birkaç kopyala-yapıştır karışıklığı yaşandı (hesaplama/görsel kodlarının yanlış yere yerleşmesi); adım adım kontrol ederek düzeltildi.

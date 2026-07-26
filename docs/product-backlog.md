@@ -160,6 +160,10 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **çünkü** bu beni daha verimli olmaya teşvik eder.
 **Sprint 3 gerçekleşme:** Kullanım desenine göre otomatik rozetler (Akıllı Seçim, Üretken Kullanıcı, Çeşitlilik Ustası, Verimlilik Şampiyonu) eklendi. Ayrıca Verimlilik Skoru, Agent Orkestrasyonu beklenmeden anında hesaplanıp gösterilmeye başlandı.
 
+### US-021: UI/UX İyileştirme Paketi
+**Kullanıcı olarak** siteyi kullanırken daha akıcı ve modern bir deneyim istiyorum,  
+**çünkü** uzun sayfalarda gezinmek ve yüklenme anları kullanışlı olmalı.
+**Sprint 3 gerçekleşme:** Scroll-to-top butonu, fade-in animasyonu, hamburger mobil menü, dashboard hızlı gezinme menüsü ve iskelet yükleme ekranı eklendi.
 ---
 
 ## Sprint Hedefleri Özeti
