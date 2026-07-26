@@ -46,3 +46,22 @@
 - İskelet (skeleton) yükleme ekranı
 
 **Engeller:** Kod ekleme sırasında birkaç kopyala-yapıştır karışıklığı yaşandı (hesaplama/görsel kodlarının yanlış yere yerleşmesi); adım adım kontrol ederek düzeltildi.
+
+## 26 Temmuz 2026 (Pazar)
+
+**Son çalışılan gün (25 Temmuz):** 6 yeni özellik + 5 UI iyileştirmesi tamamlandı.
+
+**Bugün ne yapıldı:**
+- Kapsamlı test günü: tüm sayfalar, tüm özellikler tek tek test edildi.
+- Test dosyalarıyla (düşük verimlilik + yüksek verimlilik senaryoları) tüm hesaplamalar elle doğrulandı — token, enerji, CO2, su tüketimi, verimlilik skoru, "Ne Olurdu?" simülatörü, yıllık projeksiyon, rozetler; hepsi matematiksel olarak doğru bulundu.
+- Bulunan ve düzeltilen hatalar:
+  - Ana sayfa metni güncellendi (su tüketimi eklendiği belirtildi).
+  - Sitede yumuşak kaydırma (smooth scroll) davranışı eklendi.
+  - Kopyala butonlarına görsel geri bildirim eklendi (Dashboard ve Analyze-page).
+  - Sohbet gönder butonunun şekli düzeltildi (tam yuvarlak).
+  - Önerilen prompt çıkarma mantığı (regex), çok satırlı cevaplarda çalışmadığı fark edilip daha esnek hale getirildi.
+  - AI cevaplarındaki markdown yıldızları ve madde işaretleri, dört farklı gösterim noktasında (AI Analiz, Agent Orkestrasyonu'nun iki kartı, Analyze-page) temizlendi.
+  - Verimlilik Skoru'na, skor seviyesine göre teşvik edici/yönlendirici bir mesaj eklendi.
+- Mobil görünüm (Navigation, Upload sonuç ekranı, Dashboard) kontrol edildi, sorunsuz bulundu.
+
+**Engeller:** Yok.

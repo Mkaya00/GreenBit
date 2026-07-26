@@ -31,3 +31,4 @@
 Plan dışında, sprint ilerledikçe şu bonus özellikler eklendi: Su Ayak İzi Hesaplayıcı, Agent Orkestrasyonu görsel durum göstergeleri, performans iyileştirmeleri. Detaylar için daily-scrum-notes ve sprint-review dosyalarına bakınız.
 
 25 Temmuz'da ayrıca: "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Sohbet Hafızası, Su Karşılaştırmaları, Başarı Rozetleri eklendi.
+26 Temmuz'da: Kapsamlı test ve kalite kontrolü günü yapıldı — yeni özellik eklenmedi, mevcut özellikler sistematik olarak doğrulandı ve küçük hatalar düzeltildi.

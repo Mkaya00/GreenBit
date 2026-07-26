@@ -78,6 +78,8 @@ Bölgesel farklar:
 
 **Kaynak:** IEA (Uluslararası Enerji Ajansı) 2023 raporu.
 
+
+
 ## Hesaplama Formülü
 Adım 1: Token Tahmini
 Token = Mesaj Sayısı × Ortalama Token/Mesaj (200)
@@ -94,6 +96,14 @@ Kullanıcı **5,000 mesaj** göndermiş, hepsi **GPT-4**:
 - Token = 5000 × 200 = **1,000,000 token**
 - Enerji = (1,000,000 / 1000) × 30 = ** 30,000 Wh = 30 kWh**
 - CO2 = 30,000 × 0.4 = **12,000g = 12 kg CO2**
+
+## Su Tüketimi Katsayısı
+
+**~1.8 litre su / kWh**
+
+Veri merkezlerinin soğutma sistemleri için tükettiği tahmini su miktarı. Bu değer, halka açık su verimliliği (WUE - Water Usage Effectiveness) çalışmalarına dayanan **yaklaşık bir tahmindir**; gerçek değer, veri merkezinin soğutma teknolojisine ve bölgesine göre önemli ölçüde değişir.
+
+**Not:** Bu, projenin "Sınırlamalar" bölümünde belirtilen tahminlerden biridir; gelecek sürümlerde daha kesin, kaynak bazlı verilerle güncellenebilir.
 
 ##  Karşılaştırma Referansları
 
@@ -131,5 +141,5 @@ Gelecek sürümlerde bu sınırlamalar giderilecek:
 
 ---
 
-**Son güncelleme:** 4 Temmuz 2026  
+**Son güncelleme:** 26 Temmuz 2026  
 **Yazar:** Mkaya00 (Ege Mert Kaya)

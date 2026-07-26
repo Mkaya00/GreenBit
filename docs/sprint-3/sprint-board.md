@@ -6,7 +6,6 @@
 
 ## To Do
 
-- **US-010:** PDF Rapor
 - **US-011:** Canlıya Alma (Deploy)
 - **US-012:** Demo Video
 
@@ -20,8 +19,16 @@
 
 ## Done
 
-- **US-008:** AI Agent Orkestrasyonu — Prompt analiz, model önerisi ve verimlilik skorunu koordine eden sistem tamamlandı.
-- **US-009:** Sohbet Arayüzü — Kullanıcı verisiyle ilgili doğal dilde soru-cevap özelliği tamamlandı.
-- **US-010:** PDF Rapor — Print-özel CSS ile temiz rapor çıktısı sağlandı.
-- **Bonus:** Su Ayak İzi Hesaplayıcı
-- **Bonus:** Agent Orkestrasyonu görsel durum göstergeleri
+- **US-008:** AI Agent Orkestrasyonu
+- **US-009:** Sohbet Arayüzü
+- **US-010:** PDF Rapor
+- **US-013:** Su Ayak İzi Hesaplayıcı
+- **US-014:** Agent Orkestrasyonu Görsel Durum Göstergeleri
+- **US-015:** Performans İyileştirmesi (Paralelleştirme)
+- **US-016:** "Ne Olurdu?" Simülatörü
+- **US-017:** Yıllık Projeksiyon
+- **US-018:** Sohbet Hafızası
+- **US-019:** Su Tüketimi Karşılaştırmaları
+- **US-020:** Başarı Rozetleri ve Anında Verimlilik Skoru
+- **US-021:** UI/UX İyileştirme Paketi
+- **US-022:** Kapsamlı Test ve Kalite Düzeltmeleri

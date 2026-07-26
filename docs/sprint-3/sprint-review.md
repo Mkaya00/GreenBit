@@ -23,3 +23,10 @@
 
 - 5 bonus özellik daha eklendi: "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Sohbet Hafızası, Su Karşılaştırmaları, Başarı Rozetleri.
 - Verimlilik Skoru artık anında (buton beklemeden) gösteriliyor.
+
+## 26 Temmuz Güncellemesi
+
+- Kapsamlı test günü: tüm sayfalar ve özellikler sistematik olarak test edildi, iki farklı senaryoyla (düşük/yüksek verimlilik) hesaplamalar doğrulandı.
+- 9'dan fazla küçük hata (metin, regex, görsel tutarlılık) bulunup düzeltildi.
+- Verimlilik Skoru'na teşvik edici mesaj eklendi.
+- Hesaplama Metodolojisi belgesine su tüketimi bölümü eklendi.

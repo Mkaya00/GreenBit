@@ -17,3 +17,7 @@
 ## 25 Temmuz Notu
 
 **İyi giden:** Planlanan 5 bonus özelliğin hepsi tek günde tamamlandı — net bir liste yapıp önceliklendirmenin faydası görüldü.
+
+## 26 Temmuz Notu
+
+**İyi giden:** Yeni özellik eklemek yerine bir gün tamamen kaliteye ayrıldı — bu, "hızlı ilerleme" ile "sağlamlık" arasında bilinçli bir denge kurma örneği oldu. Testler sırasında elle hesaplama yapıp siteyle karşılaştırmak, güvenilir bir doğrulama yöntemi olarak işe yaradı.
