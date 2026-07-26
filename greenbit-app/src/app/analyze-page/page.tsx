@@ -9,6 +9,7 @@ export default function AnalyzePage() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -51,10 +52,8 @@ export default function AnalyzePage() {
   };
 
   // Cevap içinden son "Öneri:" kısmını çıkar
-  const suggestionMatches = answer.match(/Öneri:\s*([^\n*]*)/g);
-  const lastSuggestion = suggestionMatches
-    ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim()
-    : "";
+  const suggestionMatch = answer.match(/Öneri:\s*([\s\S]*?)(?:\n\n|$)/);
+  const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "").trim() : "";
 
   return (
     <main className="min-h-screen bg-[#FAFAF8] p-8">
@@ -95,7 +94,7 @@ export default function AnalyzePage() {
           <div className="mt-8 space-y-4">
             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
               <h3 className="text-lg font-medium text-gray-700 mb-3">Yapay zeka cevabı</h3>
-              <p className="text-gray-800 whitespace-pre-wrap">{answer}</p>
+              <p className="text-gray-800 whitespace-pre-wrap">{answer.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
             </div>
 
             {lastSuggestion.length > 0 && (
@@ -103,11 +102,15 @@ export default function AnalyzePage() {
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
                   <button
-                    onClick={() => navigator.clipboard.writeText(lastSuggestion)}
-                    className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
-                  >
-                    Kopyala
-                  </button>
+                  onClick={() => {
+                    navigator.clipboard.writeText(lastSuggestion);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
+                >
+                  {copied ? "Kopyalandı! ✓" : "Kopyala"}
+                </button>
                 </div>
                 <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
               </div>

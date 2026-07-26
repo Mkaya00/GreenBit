@@ -242,8 +242,8 @@ let instantEfficiencyScore = Math.round(
 );
 instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
-  const suggestionMatches = aiAnalysis.match(/Öneri:\s*([^\n*]*)/g);
-  const lastSuggestion = suggestionMatches ? suggestionMatches[suggestionMatches.length - 1].replace(/^Öneri:\s*/, "").trim() : "";
+const suggestionMatch = aiAnalysis.match(/Öneri:\s*([\s\S]*?)(?:\n\n|$)/);
+const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "").trim() : "";
 
   return (
     <main className="p-8 min-h-screen bg-[#FAFAF8] text-gray-800">
@@ -382,7 +382,7 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
           {aiAnalysis && (
             <div className="mt-4 space-y-4">
               <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-                <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "")}</p>
+              <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
               </div>
 
               {lastSuggestion.length > 0 && (
@@ -466,11 +466,11 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
         <div className="mt-4 space-y-4">
           <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
             <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
-            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis}</p>
+            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis?.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
           </div>
           <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
             <h4 className="text-sm font-medium text-[#1B4332] mb-2">Model Önerisi</h4>
-            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice}</p>
+            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice?.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
           </div>
         </div>
       )}
