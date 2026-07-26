@@ -58,8 +58,8 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-medium text-[#1B4332] mb-3">Ölçüm</h3>
               <p className="text-gray-600 leading-relaxed text-sm">
-                ChatGPT ve Claude kullanımınızın token, kWh ve CO2 salımlarını
-                gerçek zamanlı takip edin.
+                ChatGPT ve Claude kullanımınızın token, kWh CO2 ve su
+                tüketimini gerçek zamanlı takip edin.
               </p>
             </div>
 

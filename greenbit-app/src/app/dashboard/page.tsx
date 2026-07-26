@@ -17,6 +17,7 @@ export default function Dashboard() {
   const [isAgentAnalyzing, setIsAgentAnalyzing] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [copied, setCopied] = useState(false);
   
 
   useEffect(() => {
@@ -389,11 +390,15 @@ instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="text-sm font-medium text-[#1B4332]">Önerilen prompt</h4>
                     <button
-                      onClick={() => navigator.clipboard.writeText(lastSuggestion)}
-                      className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
-                    >
-                      Kopyala
-                    </button>
+                    onClick={() => {
+                      navigator.clipboard.writeText(lastSuggestion);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    className="text-xs text-[#1B4332] hover:text-[#14332A] font-medium underline"
+                  >
+                    {copied ? "Kopyalandı! ✓" : "Kopyala"}
+                  </button>
                   </div>
                   <p className="text-gray-800 text-sm whitespace-pre-wrap">{lastSuggestion}</p>
                 </div>

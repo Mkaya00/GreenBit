@@ -108,12 +108,12 @@ export default function ChatPage() {
             className="flex-1 p-3 border border-gray-200 rounded-full focus:outline-none focus:border-[#1B4332] text-gray-900"
           />
           <button
-            onClick={handleSend}
-            disabled={loading}
-            className="bg-[#1B4332] hover:bg-[#14332A] text-white p-3 rounded-full transition disabled:opacity-50"
-          >
-            <Send className="w-5 h-5" strokeWidth={2} />
-          </button>
+          onClick={handleSend}
+          disabled={loading}
+          className="bg-[#1B4332] hover:bg-[#14332A] text-white w-12 h-12 flex items-center justify-center rounded-full transition disabled:opacity-50 flex-shrink-0"
+        >
+          <Send className="w-5 h-5" strokeWidth={2} />
+        </button>
         </div>
       </div>
     </main>
