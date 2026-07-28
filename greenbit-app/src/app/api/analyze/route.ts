@@ -44,7 +44,7 @@ export async function POST(request: Request) {
   const origin = request.headers.get("origin") || "";
   const host = request.headers.get("host") || "";
 
-  if (origin && !origin.includes(host)) {
+  if (!origin || !origin.includes(host)) {
     return Response.json({ error: "Yetkisiz istek." }, { status: 403 });
   }
   try {
