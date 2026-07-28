@@ -5,6 +5,12 @@ import { calculateMetricsForModel } from '../../lib/carbon';
 import { callLLM } from '../../lib/llm';
 
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin") || "";
+  const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  if (origin && !origin.includes(allowedOrigin.replace(/https?:\/\//, ""))) {
+    return Response.json({ error: "Yetkisiz istek." }, { status: 403 });
+  }
   try {
     const body = await request.json();
     const { userPrompts, modelCounts } = body as { userPrompts: string[]; modelCounts: Record<string, number> };
