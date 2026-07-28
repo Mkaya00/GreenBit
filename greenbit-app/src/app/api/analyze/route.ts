@@ -42,9 +42,9 @@ Kötü Örnek: ${rule.kotuOrnek}
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin") || "";
-  const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const host = request.headers.get("host") || "";
 
-  if (origin && !origin.includes(allowedOrigin.replace(/https?:\/\//, ""))) {
+  if (origin && !origin.includes(host)) {
     return Response.json({ error: "Yetkisiz istek." }, { status: 403 });
   }
   try {
