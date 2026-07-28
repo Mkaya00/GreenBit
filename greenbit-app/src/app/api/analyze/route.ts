@@ -1,5 +1,7 @@
 // src/app/api/analyze/route.ts
 import { promptRules, PromptRule } from '../../lib/promptRules';
+import { callLLM } from '../../lib/llm';
+
 
 // RAG: Basit "getirme" (retrieval) mantığı — prompt'a göre ilgili kuralları seç
 function getRelevantRules(prompt: string): PromptRule[] {
@@ -74,18 +76,8 @@ export async function POST(request: Request) {
 
     const fullPrompt = `${systemInstruction}\n\n"${userPrompt}"`;
 
-    const ollamaResponse = await fetch("http://localhost:11434/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3.1",
-        prompt: fullPrompt,
-        stream: false,
-      }),
-    });
-
-    const data = await ollamaResponse.json();
-    return Response.json({ answer: data.response });
+    const answer = await callLLM(fullPrompt);
+    return Response.json({ answer });
 
   } catch (error) {
     return Response.json(

@@ -2,6 +2,7 @@
 // Agent Orkestrasyonu: birden fazla "uzman" agent'ı koordine eder
 
 import { calculateMetricsForModel } from '../../lib/carbon';
+import { callLLM } from '../../lib/llm';
 
 export async function POST(request: Request) {
   try {
@@ -27,22 +28,9 @@ Eğer güçlü/pahalı modeller (gpt-4 gibi) çok kullanılıyorsa, daha ucuz/ve
     // ==========================================
     // AGENT 1 + AGENT 2: PARALEL Çalıştır (hız için)
     // ==========================================
-    const [promptAnalysisResponse, modelAdviceResponse] = await Promise.all([
-      fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "llama3.1", prompt: promptAnalysisInstruction, stream: false }),
-      }),
-      fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "llama3.1", prompt: modelAdviceInstruction, stream: false }),
-      }),
-    ]);
-
-    const [promptAnalysisData, modelAdviceData] = await Promise.all([
-      promptAnalysisResponse.json(),
-      modelAdviceResponse.json(),
+    const [promptAnalysis, modelAdvice] = await Promise.all([
+      callLLM(promptAnalysisInstruction),
+      callLLM(modelAdviceInstruction),
     ]);
 
     // ==========================================
@@ -71,8 +59,8 @@ Eğer güçlü/pahalı modeller (gpt-4 gibi) çok kullanılıyorsa, daha ucuz/ve
     // SENTEZ: Hepsini Birleştir
     // ==========================================
     return Response.json({
-      promptAnalysis: promptAnalysisData.response,
-      modelAdvice: modelAdviceData.response,
+      promptAnalysis,
+      modelAdvice,
       efficiencyScore: efficiencyScore,
     });
 

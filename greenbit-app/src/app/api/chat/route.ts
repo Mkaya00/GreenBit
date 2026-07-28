@@ -1,6 +1,8 @@
 // src/app/api/chat/route.ts
 // Kullanıcının verisiyle ilgili doğal dilde soru-cevap
 
+import { callLLM } from '../../lib/llm';
+
 export async function POST(request: Request) {
     try {
       const body = await request.json();
@@ -36,14 +38,8 @@ ${historyText}
 
 Kullanıcının yeni sorusu: ${message}`;
   
-      const response = await fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "llama3.1", prompt: systemInstruction, stream: false }),
-      });
-  
-      const data = await response.json();
-      return Response.json({ answer: data.response });
+const answer = await callLLM(systemInstruction);
+return Response.json({ answer });
   
     } catch (error) {
       return Response.json(
