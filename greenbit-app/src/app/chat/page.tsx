@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Bot, Send } from "lucide-react";
 import { calculateMetricsForModel } from '../lib/carbon';
+import Link from "next/link";
 
 type Message = {
   role: "user" | "assistant";
@@ -40,6 +41,7 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [dataInfo, setDataInfo] = useState<{ conversations: number; messages: number; fileName: string } | null>(null);
   const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
+  const [needsData, setNeedsData] = useState(false);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("greenbit_chat_history");
@@ -49,6 +51,22 @@ export default function ChatPage() {
   useEffect(() => {
     sessionStorage.setItem("greenbit_chat_history", JSON.stringify(messages));
   }, [messages]);
+
+
+  useEffect(() => {
+    const savedData = localStorage.getItem("greenbit_conversations");
+    if (!savedData) {
+      setNeedsData(true);
+      setMessages((prev) => {
+        if (prev.length === 0) {
+          return [{ role: "assistant" as const, text: "Henüz bir veri göremiyorum. İşlemlere başlamak için önce bir dosya yüklemelisin." }];
+        }
+        return prev;
+      });
+    }
+  }, []);
+
+
 
   useEffect(() => {
     const savedData = localStorage.getItem("greenbit_conversations");
@@ -190,8 +208,10 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
         )}
 
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-4 min-h-[300px] space-y-4">
-        {messages.length === 0 && (
+        {messages.length === 0 && !needsData && (
+            <div className="space-y-2">
             <p className="text-gray-400 text-sm">Henüz bir mesaj yok. Bir soru yazarak başla, ya da aşağıdaki örneklerden birine tıkla.</p>
+          </div>
           )}
 
           {messages.map((msg, i) => (
@@ -209,6 +229,16 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
               <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
               <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
               <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+            </div>
+          )}
+          {needsData && (
+            <div className="flex justify-start mt-2">
+              <Link href="/upload" className="inline-flex items-center gap-1.5 px-4 py-2 text-sm text-[#1B4332] bg-[#1B4332]/10 rounded-lg font-medium hover:bg-[#1B4332]/20 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+                Hemen Bir Dosya Yükle
+              </Link>
             </div>
           )}
         </div>
