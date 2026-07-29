@@ -30,6 +30,12 @@ export default function Dashboard() {
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [analysisHistory, setAnalysisHistory] = useState<any[]>([]);
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem("greenbit_analysis_history");
+    if (saved) setAnalysisHistory(JSON.parse(saved));
+  }, []);
   
 
   useEffect(() => {
@@ -77,6 +83,15 @@ export default function Dashboard() {
 
   return () => clearInterval(interval);
 }, [isAnalyzing, isAgentAnalyzing]);
+
+const addToHistory = (type: string, content: string) => {
+  const entry = { type, content, timestamp: new Date().toLocaleString('tr-TR') };
+  setAnalysisHistory((prev) => {
+    const updated = [entry, ...prev].slice(0, 10);
+    sessionStorage.setItem("greenbit_analysis_history", JSON.stringify(updated));
+    return updated;
+  });
+};
 
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
@@ -126,7 +141,9 @@ export default function Dashboard() {
       });
 
       const resData = await response.json();
-      setAiAnalysis(resData.answer || "Cevap alınamadı.");
+      const finalAnswer = resData.answer || "Cevap alınamadı.";
+      setAiAnalysis(finalAnswer);
+      if (resData.answer) addToHistory("AI Analiz", finalAnswer);
       setIsAnalyzing(false);
     } catch (error) {
       setAiAnalysis("Yapay zeka analizi şu anda kullanılamıyor. Bu özellik lokal bir AI modeli (Ollama) gerektirir. Diğer özellikler (grafikler, hesaplamalar) normal çalışmaya devam eder.");
@@ -167,6 +184,9 @@ export default function Dashboard() {
       });
       const data = await response.json();
       setAgentResult(data);
+      if (data && !data.error) {
+  addToHistory("Agent Orkestrasyonu", `Prompt Analizi: ${data.promptAnalysis}\n\nModel Önerisi: ${data.modelAdvice}`);
+}
     } catch (error) {
       setAgentResult({ error: "Agent analizi başarısız oldu." });
     }
@@ -567,6 +587,25 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {/* Geçmiş Analizler */}
+        {analysisHistory.length > 0 && (
+          <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <h3 className="text-2xl font-medium text-[#1B4332] mb-6">Geçmiş analizler</h3>
+            <div className="space-y-3">
+              {analysisHistory.map((entry, i) => (
+                <details key={i} className="border border-gray-100 rounded-lg overflow-hidden">
+                  <summary className="cursor-pointer px-4 py-3 bg-[#FAFAF8] hover:bg-gray-100 transition text-sm font-medium text-gray-700">
+                    {entry.type} — {entry.timestamp}
+                  </summary>
+                  <div className="px-4 py-3 text-sm text-gray-800 whitespace-pre-wrap border-t border-gray-100">
+                    {entry.content}
+                  </div>
+                </details>
+              ))}
             </div>
           </div>
         )}
