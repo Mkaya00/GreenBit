@@ -211,8 +211,8 @@ export default function UploadPage() {
                     Verilerinizi analiz edin
                   </h1>
                   <p className="text-lg text-gray-600 leading-relaxed">
-                    GreenBit, gizliliğinizi ön planda tutar. Yüklediğiniz dosyalar sunucularımızda saklanmaz, sadece tarayıcınızda anlık olarak işlenir ve karbon ayak iziniz hesaplanır.
-                  </p>
+                  GreenBit, gizliliğinizi ön planda tutar. Sayısal hesaplamalar (token, enerji, CO2, su) tamamen tarayıcınızda yapılır ve sunucuya gönderilmez. Yapay zeka analizi için yalnızca birkaç örnek prompt, Groq API'ye iletilir; hiçbir veri saklanmaz.
+                </p>
                 </div>
 
                 <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
