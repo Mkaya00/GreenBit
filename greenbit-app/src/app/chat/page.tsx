@@ -9,6 +9,18 @@ type Message = {
   text: string;
 };
 
+// Metin içindeki **kalın** kısımları algılayıp HTML'e çeviren fonksiyon
+const formatText = (text: string) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+};
+
 const SUGGESTED_QUESTIONS = [
   "En çok hangi model kullanılmış?",
   "Su tüketimim ne kadar?",
@@ -189,7 +201,7 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
                 msg.role === "user" ? "bg-[#1B4332]/5 ml-auto max-w-[80%]" : "bg-[#FAFAF8] max-w-[80%]"
               }`}
             >
-              {msg.text}
+              {formatText(msg.text)}
             </div>
           ))}
           {loading && <p className="text-gray-400 text-sm">Yazıyor...</p>}
