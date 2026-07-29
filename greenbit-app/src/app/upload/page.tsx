@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { calculateMetricsForModel } from '../lib/carbon';
 import { CheckCircle2, Globe, Coffee, Lightbulb, Smartphone, TreePine, BarChart3, Upload, GlassWater, ShowerHead } from "lucide-react";
@@ -25,6 +25,72 @@ export default function UploadPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    const savedData = localStorage.getItem("greenbit_conversations");
+    if (savedData) {
+      try {
+        const data = JSON.parse(savedData);
+        setResult(computeResult(data));
+      } catch (e) {
+        // sessiz geç, kullanıcı yeni dosya yükleyebilir
+      }
+    }
+  }, []);
+
+
+  const computeResult = (data: any[]): AnalysisResult => {
+    const totalConversations = data.length;
+    let totalMessages = 0;
+    const modelCounts: Record<string, number> = {};
+    let earliestTime = Infinity;
+    let latestTime = 0;
+  
+    data.forEach((conversation: any) => {
+      if (conversation.mapping) {
+        Object.values(conversation.mapping).forEach((node: any) => {
+          if (node?.message?.metadata?.model_slug) {
+            const slug = node.message.metadata.model_slug;
+            modelCounts[slug] = (modelCounts[slug] || 0) + 1;
+            totalMessages += 1;
+          }
+        });
+      }
+      if (conversation.create_time) {
+        earliestTime = Math.min(earliestTime, conversation.create_time);
+        latestTime = Math.max(latestTime, conversation.create_time);
+      }
+    });
+  
+    const formatDate = (timestamp: number) => new Date(timestamp * 1000).toLocaleDateString('tr-TR');
+  
+    let totalTokens = 0;
+    let totalEnergyWh = 0;
+    let totalCO2 = 0;
+    let totalWaterLiters = 0;
+  
+    Object.keys(modelCounts).forEach((model) => {
+      const metrics = calculateMetricsForModel(modelCounts[model], model);
+      totalTokens += metrics.tokens;
+      totalEnergyWh += metrics.energyWh;
+      totalCO2 += metrics.co2;
+      totalWaterLiters += metrics.waterLiters;
+    });
+  
+    return {
+      totalConversations,
+      totalMessages,
+      models: Object.keys(modelCounts),
+      dateRange: {
+        start: formatDate(earliestTime),
+        end: formatDate(latestTime),
+      },
+      estimatedTokens: totalTokens,
+      estimatedKwh: totalEnergyWh / 1000,
+      estimatedCo2: totalCO2,
+      estimatedWater: totalWaterLiters,
+    };
+  };
+ 
   // DOSYA İŞLEME VE HESAPLAMA
   const processFile = (file: File) => {
     setError(null);
@@ -51,58 +117,8 @@ export default function UploadPage() {
 
         localStorage.setItem("greenbit_conversations", JSON.stringify(data));
 
-        const totalConversations = data.length;
-        let totalMessages = 0;
-        const modelCounts: Record<string, number> = {};
-        let earliestTime = Infinity;
-        let latestTime = 0;
-
-        data.forEach((conversation: any) => {
-          if (conversation.mapping) {
-            Object.values(conversation.mapping).forEach((node: any) => {
-              if (node?.message?.metadata?.model_slug) {
-                const slug = node.message.metadata.model_slug;
-                modelCounts[slug] = (modelCounts[slug] || 0) + 1;
-                totalMessages += 1;
-              }
-            });
-          }
-          if (conversation.create_time) {
-            earliestTime = Math.min(earliestTime, conversation.create_time);
-            latestTime = Math.max(latestTime, conversation.create_time);
-          }
-        });
-
-        const formatDate = (timestamp: number) => new Date(timestamp * 1000).toLocaleDateString('tr-TR');
-
-        let totalTokens = 0;
-        let totalEnergyWh = 0;
-        let totalCO2 = 0;
-        let totalWaterLiters = 0;
-
-        Object.keys(modelCounts).forEach((model) => {
-          const metrics = calculateMetricsForModel(modelCounts[model], model);
-          totalTokens += metrics.tokens;
-          totalEnergyWh += metrics.energyWh;
-          totalCO2 += metrics.co2;
-          totalWaterLiters += metrics.waterLiters;
-        });
-
-
         setTimeout(() => {
-          setResult({
-            totalConversations,
-            totalMessages,
-            models: Object.keys(modelCounts),
-            dateRange: {
-              start: formatDate(earliestTime),
-              end: formatDate(latestTime),
-            },
-            estimatedTokens: totalTokens,
-            estimatedKwh: totalEnergyWh / 1000,
-            estimatedCo2: totalCO2,
-            estimatedWater: totalWaterLiters,
-          });
+          setResult(computeResult(data));
           setIsLoading(false);
         }, 1500);
 

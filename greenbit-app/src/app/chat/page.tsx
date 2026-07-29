@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bot, Send } from "lucide-react";
 
 type Message = {
@@ -9,9 +9,19 @@ type Message = {
 };
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<any[]>(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("greenbit_chat_history");
+      if (saved) return JSON.parse(saved);
+    }
+    return [];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    sessionStorage.setItem("greenbit_chat_history", JSON.stringify(messages));
+  }, [messages]);
+
 
   const handleSend = async () => {
     if (!input.trim()) return;
