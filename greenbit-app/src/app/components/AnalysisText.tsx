@@ -1,5 +1,7 @@
 "use client";
 
+import { CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+
 export default function AnalysisText({ text }: { text: string }) {
   if (!text) return null;
   const lines = text.split("\n");
@@ -17,11 +19,12 @@ export default function AnalysisText({ text }: { text: string }) {
             : isPartial
             ? "bg-yellow-100 text-yellow-800"
             : "bg-red-100 text-red-800";
-          const icon = isPositive ? "✅" : isPartial ? "⚠️" : "❌";
+            const Icon = isPositive ? CheckCircle2 : isPartial ? AlertTriangle : XCircle;
           const label = isPositive ? "Uyumlu" : isPartial ? "Kısmen Uyumlu" : "Uyumsuz";
           return (
-            <span key={i} className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${colorClass}`}>
-              {icon} {label}
+            <span key={i} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${colorClass}`}>
+              <Icon className="w-3.5 h-3.5" strokeWidth={2} />
+              {label}
             </span>
           );
         }
