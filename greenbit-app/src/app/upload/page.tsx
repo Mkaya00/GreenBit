@@ -116,6 +116,7 @@ export default function UploadPage() {
         if (!Array.isArray(data)) throw new Error("Geçerli bir ChatGPT dışa aktarma dosyası değil.");
 
         localStorage.setItem("greenbit_conversations", JSON.stringify(data));
+        localStorage.setItem("greenbit_filename", file.name);
 
         setTimeout(() => {
           setResult(computeResult(data));

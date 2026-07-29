@@ -45,7 +45,7 @@ export default function Navigation() {
             className="flex items-center gap-1.5 bg-[#1B4332] hover:bg-[#14332A] text-white font-medium px-3 sm:px-5 py-1.5 sm:py-2 rounded-full transition whitespace-nowrap text-xs sm:text-base"
           >
             <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2} />
-            Dosya Yükle
+            Sohbet Geçmişini Yükle
           </Link>
         </div>
 

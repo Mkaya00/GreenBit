@@ -8,8 +8,15 @@ type Message = {
   text: string;
 };
 
+const SUGGESTED_QUESTIONS = [
+  "En çok hangi model kullanılmış?",
+  "Su tüketimim ne kadar?",
+  "Nasıl daha verimli olabilirim?",
+  "Toplam kaç mesaj gönderdim?",
+];
+
 export default function ChatPage() {
-  const [messages, setMessages] = useState<any[]>(() => {
+  const [messages, setMessages] = useState<Message[]>(() => {
     if (typeof window !== "undefined") {
       const saved = sessionStorage.getItem("greenbit_chat_history");
       if (saved) return JSON.parse(saved);
@@ -18,15 +25,37 @@ export default function ChatPage() {
   });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [dataInfo, setDataInfo] = useState<{ conversations: number; messages: number; fileName: string } | null>(null);
+
   useEffect(() => {
     sessionStorage.setItem("greenbit_chat_history", JSON.stringify(messages));
   }, [messages]);
 
+  useEffect(() => {
+    const savedData = localStorage.getItem("greenbit_conversations");
+    if (savedData) {
+      try {
+        const conversations = JSON.parse(savedData);
+        let totalMessages = 0;
+        conversations.forEach((conv: any) => {
+          if (!conv.mapping) return;
+          Object.values(conv.mapping).forEach((node: any) => {
+            if (node?.message?.metadata?.model_slug) totalMessages += 1;
+          });
+        });
+        const fileName = localStorage.getItem("greenbit_filename") || "yüklediğin dosya";
+setDataInfo({ conversations: conversations.length, messages: totalMessages, fileName });
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+      } catch (e) {
+        // sessiz geç
+      }
+    }
+  }, []);
 
-    const userMessage: Message = { role: "user", text: input };
+  const sendMessage = async (text: string) => {
+    if (!text.trim()) return;
+
+    const userMessage: Message = { role: "user", text };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
@@ -36,13 +65,12 @@ export default function ChatPage() {
       if (!savedData) {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", text: "Henüz bir veri göremiyorum,Önce Dosya Yükle sayfasından bir dosya yükler misin? Sonra seninle verilerin hakkında rahatça konuşabiliriz!" },
+          { role: "assistant", text: "Henüz bir veri göremiyorum, Önce Dosya Yükle sayfasından bir dosya yükler misin? Sonra seninle verilerin hakkında rahatça konuşabiliriz!" },
         ]);
         setLoading(false);
         return;
       }
 
-      // Basit özet çıkar (dashboard'daki parseChatGPTExport'un basitleştirilmişi)
       const conversations = JSON.parse(savedData);
       const modelCounts: Record<string, number> = {};
       let totalMessages = 0;
@@ -68,7 +96,7 @@ export default function ChatPage() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input, dataSummary, history: messages }),
+        body: JSON.stringify({ message: text, dataSummary, history: messages }),
       });
 
       const data = await response.json();
@@ -76,12 +104,14 @@ export default function ChatPage() {
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", text: "Sohbet şu anda kullanılamıyor. Ollama çalışıyor mu?" },
+        { role: "assistant", text: "Sohbet şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin." },
       ]);
     }
 
     setLoading(false);
   };
+
+  const handleSend = () => sendMessage(input);
 
   return (
     <main className="min-h-screen bg-[#FAFAF8] p-8">
@@ -90,16 +120,35 @@ export default function ChatPage() {
           <Bot className="w-7 h-7" strokeWidth={1.5} />
           Sohbet
         </h1>
-        <p className="text-gray-500 mb-8">Verilerin hakkında doğal dilde soru sor.</p>
+        <p className="text-gray-500 mb-4">Verilerin hakkında doğal dilde soru sor.</p>
+
+        {dataInfo && (
+          <div className="mb-4 bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-lg px-4 py-2 text-sm text-[#1B4332]">
+              <strong>{dataInfo.fileName}</strong> dosyandaki {dataInfo.conversations} konuşma, {dataInfo.messages} mesaj hakkında soru sorabilirsin
+          </div>
+        )}
 
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-4 min-h-[300px] space-y-4">
           {messages.length === 0 && (
-            <p className="text-gray-400 text-sm">Henüz bir mesaj yok. Bir soru yazarak başla.</p>
+            <div className="space-y-4">
+              <p className="text-gray-400 text-sm">Henüz bir mesaj yok. Bir soru yazarak başla, ya da aşağıdaki örneklerden birine tıkla.</p>
+              <div className="flex flex-wrap gap-2">
+                {SUGGESTED_QUESTIONS.map((q, i) => (
+                  <button
+                    key={i}
+                    onClick={() => sendMessage(q)}
+                    className="text-xs bg-[#FAFAF8] hover:bg-[#1B4332]/5 border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition"
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
           {messages.map((msg, i) => (
             <div
               key={i}
-              className={`p-3 rounded-lg text-sm ${
+              className={`p-3 rounded-lg text-sm text-gray-800 ${
                 msg.role === "user" ? "bg-[#1B4332]/5 ml-auto max-w-[80%]" : "bg-[#FAFAF8] max-w-[80%]"
               }`}
             >
@@ -115,15 +164,15 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
             placeholder="Bir soru yaz..."
-            className="flex-1 p-3 border border-gray-200 rounded-full focus:outline-none focus:border-[#1B4332] text-gray-900"
+            className="flex-1 p-3 border border-gray-200 rounded-full focus:outline-none focus:border-[#1B4332] text-gray-900 bg-white"
           />
           <button
-          onClick={handleSend}
-          disabled={loading}
-          className="bg-[#1B4332] hover:bg-[#14332A] text-white w-12 h-12 flex items-center justify-center rounded-full transition disabled:opacity-50 flex-shrink-0"
-        >
-          <Send className="w-5 h-5" strokeWidth={2} />
-        </button>
+            onClick={handleSend}
+            disabled={loading}
+            className="bg-[#1B4332] hover:bg-[#14332A] text-white w-12 h-12 flex items-center justify-center rounded-full transition disabled:opacity-50 flex-shrink-0"
+          >
+            <Send className="w-5 h-5" strokeWidth={2} />
+          </button>
         </div>
       </div>
     </main>
