@@ -47,7 +47,7 @@ export default function Dashboard() {
       setData(result);
     }
 
-    setLoading(false);
+    setTimeout(() => setLoading(false), 300);
   }, []);
 
   useEffect(() => {
