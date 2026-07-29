@@ -81,9 +81,9 @@ export function parseChatGPTExport(conversations: any[]) {
 return {
   summaryData: {
     totalTokens: totalTokens.toLocaleString('tr-TR'),
-    totalEnergy: (totalEnergyWh / 1000).toFixed(4),
-    totalCO2: totalCO2.toFixed(2),
-    totalWater: totalWaterLiters.toFixed(2),
+    totalEnergy: (totalEnergyWh / 1000).toFixed(2),
+    totalCO2: Math.round(totalCO2) + "",
+    totalWater: totalWaterLiters.toFixed(1),
     daySpan,
   },
   modelDistribution,

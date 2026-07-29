@@ -336,19 +336,19 @@ export default function UploadPage() {
                 </div>
                 <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
                   <div className="text-2xl font-medium text-[#1B4332]">
-                    {result.estimatedKwh.toFixed(3)}
+                    {result.estimatedKwh.toFixed(2)}
                   </div>
                   <div className="text-xs text-gray-600">kWh enerji</div>
                 </div>
                 <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
                   <div className="text-2xl font-medium text-[#1B4332]">
-                    {result.estimatedCo2.toFixed(2)}g
+                  {Math.round(result.estimatedCo2)}g
                   </div>
                   <div className="text-xs text-gray-600">CO2 salımı</div>
                 </div>
                 <div className="bg-white p-4 rounded-lg text-center border border-gray-100">
                   <div className="text-2xl font-medium text-[#1B4332]">
-                    {result.estimatedWater.toFixed(2)}L
+                  {result.estimatedWater.toFixed(1)}L
                   </div>
                   <div className="text-xs text-gray-600">Su tüketimi</div>
                 </div>
