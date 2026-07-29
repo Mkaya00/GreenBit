@@ -18,8 +18,11 @@ export async function POST(request: Request) {
           totalTokens: string;
           totalEnergy: string;
           totalCO2: string;
+          totalWater: string;
+          daySpan: string;
+          yearlyProjection: string;
           modelDistribution: { name: string; value: number }[];
-        };
+                  };
         history?: { role: string; text: string }[];
       };
       
@@ -31,11 +34,15 @@ export async function POST(request: Request) {
         .map((m) => `${m.name}: ${m.value} mesaj`)
         .join(", ");
   
-      const systemInstruction = `Sen GreenBit adlı bir karbon ayak izi platformunun yapay zeka asistanısın. Kullanıcının verileri şöyle:
-  - Toplam token: ${dataSummary.totalTokens}
-  - Toplam enerji: ${dataSummary.totalEnergy} kWh
-  - Toplam CO2: ${dataSummary.totalCO2} g
-  - Model kullanımı: ${modelInfo}
+        const systemInstruction = `Sen GreenBit adlı bir karbon ayak izi platformunun yapay zeka asistanısın. Kullanıcının verileri şöyle:
+        - Toplam token: ${dataSummary.totalTokens}
+        - Toplam enerji: ${dataSummary.totalEnergy}
+        - Toplam CO2: ${dataSummary.totalCO2}
+        - Toplam su tüketimi: ${dataSummary.totalWater}
+        - Toplam su tüketimi: ${dataSummary.totalWater}
+        - Veri toplama süresi: ${dataSummary.daySpan}
+        - Tahmini yıllık CO2 projeksiyonu: ${dataSummary.yearlyProjection}
+        - Model kullanımı: ${modelInfo}
   
   Kullanıcının sorusunu, YUKARIDAKİ VERİLERE dayanarak, kısa ve net şekilde cevapla. Veride olmayan bir şey sorulursa, "Bu bilgi elimde yok" de. Önceki konuşmayı da dikkate al. Türkçe cevap ver.
 

@@ -281,6 +281,14 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         </button>
       )}
 
+      <Link
+        href="/chat"
+        className="fixed bottom-6 left-6 bg-[#1B4332] hover:bg-[#14332A] text-white pl-4 pr-5 py-3 rounded-full shadow-lg transition z-50 flex items-center gap-2"
+      >
+        <MessageSquare className="w-5 h-5" strokeWidth={2} />
+        <span className="text-sm font-medium">Sohbete Git</span>
+      </Link>
+      
 <        div className="max-w-6xl mx-auto space-y-8 fade-in">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Bot, Send } from "lucide-react";
+import { calculateMetricsForModel } from '../lib/carbon';
 
 type Message = {
   role: "user" | "assistant";
@@ -13,6 +14,12 @@ const SUGGESTED_QUESTIONS = [
   "Su tüketimim ne kadar?",
   "Nasıl daha verimli olabilirim?",
   "Toplam kaç mesaj gönderdim?",
+  "Karbon ayak izim ne kadar?",
+  "Hangi model daha az enerji harcar?",
+  "Verilerim kaç günü kapsıyor?",
+  "En çok hangi konularda soru sormuşum?",
+  "Yıllık projeksiyonum ne kadar?",
+  "En çevre dostu kullanıcı sayılır mıyım?",
 ];
 
 export default function ChatPage() {
@@ -20,6 +27,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [dataInfo, setDataInfo] = useState<{ conversations: number; messages: number; fileName: string } | null>(null);
+  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
     const saved = sessionStorage.getItem("greenbit_chat_history");
@@ -51,8 +59,17 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
     }
   }, []);
 
+
+  const clearChat = () => {
+    setMessages([]);
+    setAskedQuestions([]);
+    sessionStorage.removeItem("greenbit_chat_history");
+  };
+
   const sendMessage = async (text: string) => {
     if (!text.trim()) return;
+    setAskedQuestions((prev) => [...prev, text]);
+
 
     const userMessage: Message = { role: "user", text };
     setMessages((prev) => [...prev, userMessage]);
@@ -74,6 +91,9 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
       const modelCounts: Record<string, number> = {};
       let totalMessages = 0;
 
+      let earliestTime = Infinity;
+      let latestTime = 0;
+
       conversations.forEach((conv: any) => {
         if (!conv.mapping) return;
         Object.values(conv.mapping).forEach((node: any) => {
@@ -83,12 +103,32 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
             totalMessages += 1;
           }
         });
+        if (conv.create_time) {
+          earliestTime = Math.min(earliestTime, conv.create_time);
+          latestTime = Math.max(latestTime, conv.create_time);
+        }
+      });
+
+      const daySpan = Math.max(1, Math.ceil((latestTime - earliestTime) / 86400));
+
+      let totalEnergyWh = 0;
+      let totalCO2 = 0;
+      let totalWaterLiters = 0;
+
+      Object.keys(modelCounts).forEach((model) => {
+        const metrics = calculateMetricsForModel(modelCounts[model], model);
+        totalEnergyWh += metrics.energyWh;
+        totalCO2 += metrics.co2;
+        totalWaterLiters += metrics.waterLiters;
       });
 
       const dataSummary = {
         totalTokens: (totalMessages * 200).toLocaleString("tr-TR"),
-        totalEnergy: "hesaplanıyor",
-        totalCO2: "hesaplanıyor",
+        totalEnergy: (totalEnergyWh / 1000).toFixed(3) + " kWh",
+        totalCO2: totalCO2.toFixed(2) + " gram",
+        totalWater: totalWaterLiters.toFixed(2) + " litre",
+        daySpan: daySpan + " gün",
+        yearlyProjection: ((totalCO2 / daySpan * 365) / 1000).toFixed(2) + " kg",
         modelDistribution: Object.entries(modelCounts).map(([name, value]) => ({ name, value })),
       };
 
@@ -115,11 +155,21 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
   return (
     <main className="min-h-screen bg-[#FAFAF8] p-8">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-medium text-[#1B4332] mb-2 flex items-center gap-2">
-          <Bot className="w-7 h-7" strokeWidth={1.5} />
-          Sohbet
-        </h1>
-        <p className="text-gray-500 mb-4">Verilerin hakkında doğal dilde soru sor.</p>
+      <div className="flex justify-between items-start mb-2">
+      <h1 className="text-3xl font-medium text-[#1B4332] flex items-center gap-2">
+        <Bot className="w-7 h-7" strokeWidth={1.5} />
+        Sohbet
+      </h1>
+      {messages.length > 0 && (
+        <button
+          onClick={clearChat}
+          className="text-xs text-gray-500 hover:text-gray-700 underline"
+        >
+          Sohbeti Temizle
+        </button>
+      )}
+    </div>
+    <p className="text-gray-500 mb-4">Verilerin hakkında doğal dilde soru sor.</p>
 
         {dataInfo && (
           <div className="mb-4 bg-[#1B4332]/5 border border-[#1B4332]/20 rounded-lg px-4 py-2 text-sm text-[#1B4332]">
@@ -128,22 +178,10 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
         )}
 
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 mb-4 min-h-[300px] space-y-4">
-          {messages.length === 0 && (
-            <div className="space-y-4">
-              <p className="text-gray-400 text-sm">Henüz bir mesaj yok. Bir soru yazarak başla, ya da aşağıdaki örneklerden birine tıkla.</p>
-              <div className="flex flex-wrap gap-2">
-                {SUGGESTED_QUESTIONS.map((q, i) => (
-                  <button
-                    key={i}
-                    onClick={() => sendMessage(q)}
-                    className="text-xs bg-[#FAFAF8] hover:bg-[#1B4332]/5 border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
+        {messages.length === 0 && (
+            <p className="text-gray-400 text-sm">Henüz bir mesaj yok. Bir soru yazarak başla, ya da aşağıdaki örneklerden birine tıkla.</p>
           )}
+
           {messages.map((msg, i) => (
             <div
               key={i}
@@ -155,6 +193,18 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
             </div>
           ))}
           {loading && <p className="text-gray-400 text-sm">Yazıyor...</p>}
+        </div>
+          
+        <div className="flex flex-wrap gap-2 mb-3">
+        {SUGGESTED_QUESTIONS.filter((q) => !askedQuestions.includes(q)).map((q, i) => (
+            <button
+              key={i}
+              onClick={() => sendMessage(q)}
+              className="text-xs bg-white hover:bg-[#1B4332]/5 border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full transition"
+            >
+              {q}
+            </button>
+          ))}
         </div>
 
         <div className="flex gap-2">
