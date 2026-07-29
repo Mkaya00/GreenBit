@@ -93,6 +93,21 @@ const addToHistory = (type: string, content: string) => {
   });
 };
 
+const clearAllData = () => {
+  if (window.confirm("Yüklediğin tüm veriler silinecek. Emin misin?")) {
+    // Tüm tarayıcı verilerini temizliyoruz
+    localStorage.removeItem("greenbit_conversations");
+    localStorage.removeItem("greenbit_filename");
+    sessionStorage.removeItem("greenbit_chat_history");
+    sessionStorage.removeItem("greenbit_ai_analysis");
+    sessionStorage.removeItem("greenbit_agent_result");
+    sessionStorage.removeItem("greenbit_analysis_history");
+    
+    // Ana sayfaya (upload) yönlendiriyoruz
+    window.location.href = "/upload";
+  }
+};
+
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
     setAiAnalysis("");
@@ -310,12 +325,20 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         <span className="text-sm font-medium">Sohbete Git</span>
       </Link>
 
-<        div className="max-w-6xl mx-auto space-y-8 fade-in">
+
+      <div className="max-w-6xl mx-auto space-y-8 fade-in">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-medium text-[#1B4332]">GreenBit Dashboard</h1>
             <p className="text-gray-500 mt-1">Yapay zeka kullanımının çevresel etkisi</p>
           </div>
+          <div className="flex gap-2">
+            <button
+              onClick={clearAllData}
+              className="text-sm text-red-600 border border-red-200 hover:bg-red-50 hover:border-red-300 px-4 py-2 rounded-full transition whitespace-nowrap"
+            >
+              Verileri Sil
+            </button>
           <button
             onClick={() => window.print()}
             className="text-sm text-[#1B4332] border border-[#1B4332] hover:bg-[#1B4332]/5 px-4 py-2 rounded-full transition whitespace-nowrap"
@@ -323,7 +346,8 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
             Raporu yazdır
           </button>
         </div>
-        <div className="flex gap-2 overflow-x-auto pb-2">
+        </div>
+          <div className="flex gap-2 overflow-x-auto pb-2">
           <button onClick={() => scrollToSection('ozet')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">Özet</button>
           <button onClick={() => scrollToSection('grafikler')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">Grafikler</button>
           <button onClick={() => scrollToSection('ai-analiz')} className="text-xs whitespace-nowrap px-3 py-1.5 rounded-full border border-[#1B4332] text-[#1B4332] hover:bg-[#1B4332]/5 transition">AI Analiz</button>
