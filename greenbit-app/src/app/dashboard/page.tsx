@@ -275,7 +275,7 @@ if (percentSaved < 10) {
 }
 const avgEnergyPerMessage = totalMessagesAll > 0 ? (actualTotalCO2 / 0.4) / totalMessagesAll : 0;
 const bestPerMessage = 2;
-const worstPerMessage = 30;
+const worstPerMessage = 18;
 let instantEfficiencyScore = Math.round(
   100 - ((avgEnergyPerMessage - bestPerMessage) / (worstPerMessage - bestPerMessage)) * 100
 );
@@ -283,10 +283,10 @@ let instantEfficiencyScore = Math.round(
 instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
 const scoreMessage = instantEfficiencyScore >= 80
-  ? "Harika! Zaten çok verimli çalışıyorsun"
+  ? "Harika! Kaynakları çok verimli kullanıyorsun. Doğru model seçimiyle bu oranı daha da artırabilirsin."
   : instantEfficiencyScore >= 50
-  ? "Fena değil, ama gelişim alanın var. 'Ne Olurdu?' bölümüne göz at."
-  : "Verimliliğini artırabilirsin! Daha verimli modeller ve kısa promptlar dene.";
+  ? "Fena değil, ancak doğru model seçimi ve daha kısa promptlarla verimliliğini artırabilirsin."
+  : "Verimlilik skorun düşük. Daha uygun modeller seçmek ve promptlarını kısa tutmak skorunu hızla yükseltecektir.";
 
 const suggestionMatch = aiAnalysis.match(/Öneri:\s*([\s\S]*?)(?:\n\n|$)/);
 const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "").trim() : "";

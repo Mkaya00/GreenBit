@@ -14,7 +14,7 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 
 - **Ölçüm:** Token, kWh, CO2 takibi ve zaman içindeki değişimin görselleştirilmesi
 - **Prompt Koçluğu:** Lokal Llama 3 modeli ile prompt'ların açıklık, uzunluk ve verimlilik açısından analiz edilmesi (RAG destekli)
-- **Gizlilik Odaklı Mimari:** Dosyalar sunucuya gönderilmez, hesaplamalar ve yapay zeka analizi tarayıcı/lokal ortamda yapılır
+- **Gizlilik Odaklı Mimari:** Sayısal hesaplamalar tarayıcıda yapılır; AI analizi için yalnızca örnek promptlar API'ye iletilir, hiçbir veri saklanmaz
 
 ## Takım
 

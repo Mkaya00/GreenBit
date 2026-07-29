@@ -382,7 +382,7 @@ export default function UploadPage() {
             </div>
             <div className="flex items-center gap-2">
               <ShowerHead className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
-              <span><strong>{(result.estimatedWater / 65).toFixed(3)}</strong> duş almaya eşit</span>
+              <span>Bir duşun <strong>%{(result.estimatedWater / 65 * 100).toFixed(0)}</strong> kadarı</span>
             </div>
           </div>
         </div>
