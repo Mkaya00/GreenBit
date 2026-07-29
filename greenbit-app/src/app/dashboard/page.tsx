@@ -7,6 +7,7 @@ import { parseChatGPTExport } from '../lib/parsers/chatgpt';
 import { loadingMessages } from '../lib/loadingMessages';
 import { calculateMetricsForModel } from '../lib/carbon';
 import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2, Sprout, TrendingUp, Shuffle, Trophy, ArrowUp } from "lucide-react";
+import AnalysisText from '../components/AnalysisText';
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
@@ -288,7 +289,7 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         <MessageSquare className="w-5 h-5" strokeWidth={2} />
         <span className="text-sm font-medium">Sohbete Git</span>
       </Link>
-      
+
 <        div className="max-w-6xl mx-auto space-y-8 fade-in">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
@@ -415,7 +416,7 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
           {aiAnalysis && (
             <div className="mt-4 space-y-4">
               <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
-              <p className="text-gray-800 whitespace-pre-wrap leading-relaxed">{aiAnalysis.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
+              <AnalysisText text={aiAnalysis.replace(/\*\*/g, "").replace(/^\* /gm, "• ")} />
               </div>
 
               {lastSuggestion.length > 0 && (
@@ -499,11 +500,11 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         <div className="mt-4 space-y-4">
           <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
             <h4 className="text-sm font-medium text-[#1B4332] mb-2">Prompt Analizi</h4>
-            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.promptAnalysis?.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
+            <AnalysisText text={agentResult.promptAnalysis?.replace(/\*\*/g, "").replace(/^\* /gm, "• ") || ""} />
           </div>
           <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100">
             <h4 className="text-sm font-medium text-[#1B4332] mb-2">Model Önerisi</h4>
-            <p className="text-gray-800 text-sm whitespace-pre-wrap">{agentResult.modelAdvice?.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
+            <AnalysisText text={agentResult.modelAdvice?.replace(/\*\*/g, "").replace(/^\* /gm, "• ") || ""} />
           </div>
         </div>
       )}

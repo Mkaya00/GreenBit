@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Bot } from "lucide-react";
 import { loadingMessages } from '../lib/loadingMessages';
+import AnalysisText from '../components/AnalysisText';
 
 export default function AnalyzePage() {
   const [prompt, setPrompt] = useState("");
@@ -94,7 +95,7 @@ export default function AnalyzePage() {
           <div className="mt-8 space-y-4">
             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
               <h3 className="text-lg font-medium text-gray-700 mb-3">Yapay zeka cevabı</h3>
-              <p className="text-gray-800 whitespace-pre-wrap">{answer.replace(/\*\*/g, "").replace(/^\* /gm, "• ")}</p>
+              <AnalysisText text={answer.replace(/\*\*/g, "").replace(/^\* /gm, "• ")} />
             </div>
 
             {lastSuggestion.length > 0 && (
