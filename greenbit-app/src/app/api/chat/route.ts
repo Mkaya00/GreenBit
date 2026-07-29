@@ -26,9 +26,10 @@ export async function POST(request: Request) {
         history?: { role: string; text: string }[];
       };
       
-      const historyText = (history || [])
-        .map((h) => `${h.role === "user" ? "Kullanıcı" : "Asistan"}: ${h.text}`)
-        .join("\n");
+      const limitedHistory = (history || []).slice(-5);
+const historyText = limitedHistory
+  .map((h) => `${h.role === "user" ? "Kullanıcı" : "Asistan"}: ${h.text}`)
+  .join("\n");
   
       const modelInfo = dataSummary.modelDistribution
         .map((m) => `${m.name}: ${m.value} mesaj`)
