@@ -64,8 +64,8 @@ export default function AnalyzePage() {
           AI prompt test
         </h1>
         <p className="text-gray-500 mb-8">
-          Bir prompt yaz, yapay zeka verimliliğini analiz etsin.
-          Yüklediğin dosyanın otomatik analizi için Dashboard'u kullan.
+        Bu sayfada, kendi yazdığın herhangi bir prompt'u test edebilirsin. 
+        Yüklediğin dosyandaki gerçek promptların otomatik analizini görmek için Dashboard sayfasına gidebilirsin.
         </p>
 
         <textarea
