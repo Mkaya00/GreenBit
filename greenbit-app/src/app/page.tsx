@@ -17,10 +17,9 @@ export default function Home() {
             Yapay Zeka Karbon Ayak İzi Platformu
           </h2>
           <p className="text-lg text-gray-600 mb-10 leading-relaxed">
-            ChatGPT, Claude ve diğer yapay zeka servislerini kullanırken oluşan
-            enerji tüketiminizi ölçün, optimize edin ve sürdürülebilirlik
-            raporlarınızı otomatik oluşturun.
-          </p>
+          ChatGPT kullanırken oluşan enerji tüketiminizi ölçün, optimize
+            edin ve sürdürülebilirlik raporlarınızı otomatik oluşturun.
+</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link
               href="/upload"
@@ -58,8 +57,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-medium text-[#1B4332] mb-3">Ölçüm</h3>
               <p className="text-gray-600 leading-relaxed text-sm">
-                ChatGPT ve Claude kullanımınızın token, kWh CO2 ve su
-                tüketimini gerçek zamanlı takip edin.
+              ChatGPT kullanımınızın token, kWh, CO2 ve su tüketimini gerçek zamanlı takip edin.
               </p>
             </div>
 
@@ -87,6 +85,9 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <p className="text-center text-sm text-gray-400 mt-8">
+          Şu an yalnızca ChatGPT verilerinizi analiz ediyoruz. Gemini ve Claude desteği yol haritamızda.
+          </p>
         </div>
       </section>
 
