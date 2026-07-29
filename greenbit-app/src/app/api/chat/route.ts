@@ -40,7 +40,6 @@ const historyText = limitedHistory
         - Toplam enerji: ${dataSummary.totalEnergy}
         - Toplam CO2: ${dataSummary.totalCO2}
         - Toplam su tüketimi: ${dataSummary.totalWater}
-        - Toplam su tüketimi: ${dataSummary.totalWater}
         - Veri toplama süresi: ${dataSummary.daySpan}
         - Tahmini yıllık CO2 projeksiyonu: ${dataSummary.yearlyProjection}
         - Model kullanımı: ${modelInfo}
