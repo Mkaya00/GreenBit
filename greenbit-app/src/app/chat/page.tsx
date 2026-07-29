@@ -16,16 +16,15 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = sessionStorage.getItem("greenbit_chat_history");
-      if (saved) return JSON.parse(saved);
-    }
-    return [];
-  });
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [dataInfo, setDataInfo] = useState<{ conversations: number; messages: number; fileName: string } | null>(null);
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem("greenbit_chat_history");
+    if (saved) setMessages(JSON.parse(saved));
+  }, []);
 
   useEffect(() => {
     sessionStorage.setItem("greenbit_chat_history", JSON.stringify(messages));
