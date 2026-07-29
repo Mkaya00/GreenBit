@@ -204,7 +204,13 @@ setDataInfo({ conversations: conversations.length, messages: totalMessages, file
               {formatText(msg.text)}
             </div>
           ))}
-          {loading && <p className="text-gray-400 text-sm">Yazıyor...</p>}
+          {loading && (
+            <div className="flex items-center gap-1.5 p-3 bg-[#FAFAF8] rounded-lg max-w-[80px]">
+              <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+              <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+              <span className="w-2 h-2 bg-[#1B4332] rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+            </div>
+          )}
         </div>
           
         <div className="flex flex-wrap gap-2 mb-3">
