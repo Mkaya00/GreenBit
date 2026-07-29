@@ -30,3 +30,20 @@
 - 9'dan fazla küçük hata (metin, regex, görsel tutarlılık) bulunup düzeltildi.
 - Verimlilik Skoru'na teşvik edici mesaj eklendi.
 - Hesaplama Metodolojisi belgesine su tüketimi bölümü eklendi.
+
+## 27 Temmuz Güncellemesi
+
+- Deploy planlaması yapıldı: Groq ve Vercel hesapları oluşturuldu.
+
+## 28 Temmuz Güncellemesi
+
+- **US-011: Deploy tamamlandı.** Proje canlıya alındı (green-bit-seven.vercel.app).
+- Groq API entegrasyonu, güvenlik kontrolü, Web Analytics ve Speed Insights eklendi.
+
+## 29 Temmuz Güncellemesi
+
+- Kritik mimari düzeltme: sayfalar arası veri kaybı sorunu çözüldü.
+- Sohbet deneyimi ve veri doğruluğu iyileştirildi.
+- UI/UX cilası: rozet/badge tasarımı ve accordion eklendi (harici bir UX raporu doğrultusunda).
+- Ana sayfa doğruluk düzeltmesi (Claude ifadesi kaldırıldı, roadmap notu eklendi).
+- Geçmiş Analizler ve Çoklu Dosya Geçmişi özellikleri eklendi.
