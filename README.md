@@ -2,11 +2,13 @@
 
 **AI Karbon Ayak İzi & Prompt Verimlilik Platformu**
 
+**Canlı Site:** [green-bit-seven.vercel.app](https://green-bit-seven.vercel.app)
+
 Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi — Yapay Zeka & Veri Bilimi Kategorisi
 
 ## Proje Hakkında
 
-GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur. Kullanıcılar ChatGPT gibi servislerden indirdikleri kullanım verilerini yükler; GreenBit bu veriyi analiz ederek hem sayısal metrikler hem de lokal bir yapay zeka (Llama 3) aracılığıyla prompt verimlilik önerileri sunar.
+GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur.Kullanıcılar ChatGPT'den indirdikleri kullanım verilerini yükler; GreenBit bu veriyi analiz ederek hem sayısal metrikler hem de lokal bir yapay zeka (Llama 3) aracılığıyla prompt verimlilik önerileri sunar.
 
 ### Üç Temel Değer
 
@@ -30,8 +32,10 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 
 - **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS, Recharts, lucide-react
 - **Backend:** Next.js API Routes
-- **AI:** Ollama + Llama 3.1 (8B, lokal çalışan LLM), basitleştirilmiş RAG mimarisi
+- **AI:** Lokal geliştirmede Ollama + Llama 3.1 (8B); canlı ortamda Groq API (openai/gpt-oss-120b) — ortak bir `callLLM` fonksiyonu, ortama göre otomatik olarak doğru servisi seçer. Basitleştirilmiş RAG mimarisi.
+- **Deploy:** Vercel (hosting) + Groq (AI inference)
 - **Veri Akışı:** Client-side JSON parsing, localStorage (sunucu tarafı veri saklama yok)
+> **Not:** Kullanılan açık kaynak dil modeli, Türkçe çıktılarda bazen doğal olmayan ifadeler üretebiliyor. İngilizce promptlarla daha akıcı sonuçlar alınabiliyor; bu, projenin bilinen bir sınırlamasıdır.
 
 ### Lokal Çalıştırma (AI özelliği için)
 
@@ -161,15 +165,35 @@ Sprint 2'nin temel ve orta katman hedefleri (lib refactor, Llama entegrasyonu, p
 
 </details>
 
+
 ---
 
-## Sprint Takvimi
+## 7. Sprint 3 — Cila, Deploy ve Teslim
 
-| Sprint | Tarih | Hedef |
-|---|---|---|
-| Sprint 1 | 19 Haz – 5 Tem | Temel altyapı, dosya yükleme, karbon hesaplama, MVP dashboard |
-| Sprint 2 | 6 – 19 Tem | Kod tekrarının giderilmesi, Llama 3 entegrasyonu, RAG, prompt verimlilik analizi |
-| Sprint 3 | 20 Tem – 2 Ağu | Sohbet arayüzü, PDF rapor, deploy, demo video |
+Sprint 3'te, ürün "çalışan bir prototip"ten **canlı, kullanıcı testinden geçmiş bir platforma** dönüştürüldü.
+
+### Öne Çıkanlar
+
+- **Agent Orkestrasyonu (US-008):** Prompt analiz, model önerisi ve verimlilik skorunu koordine eden bir sistem; paralel API çağrılarıyla hızlandırıldı.
+- **Sohbet Arayüzü (US-009):** Kullanıcı verisiyle bağlantılı, hafızalı, örnek soru önerili bir sohbet deneyimi.
+- **Bonus özellikler:** Su Ayak İzi Hesaplayıcı, "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Başarı Rozetleri, Anında Verimlilik Skoru, Geçmiş Analizler, Çoklu Dosya Geçmişi.
+- **US-011: Deploy.** Oracle Cloud'da kapasite sorunu yaşandı; Groq API + Vercel'e geçildi. Site canlıda, güvenlik kontrolü ve performans izleme (Analytics/Speed Insights) ile birlikte.
+- **Kapsamlı test ve kalite düzeltmeleri:** Harici bir UX/UI raporu ve kullanıcı testleri doğrultusunda; sayfalar arası veri kalıcılığı, rozet/accordion tasarımı gibi önemli iyileştirmeler yapıldı.
+
+### Bilinçli Kapsam Kararları
+
+Çoklu dosya yönetimi gibi büyük bir özellik isteği geldiğinde, teslim tarihine yakınlık nedeniyle **kapsam bilinçli olarak küçültüldü** ve daha basit, riski düşük bir versiyonu uygulandı — bu, agile prensiplerine uygun bir zaman/kapsam yönetimi kararıdır.
+
+ Tam detaylar: [docs/sprint-3/daily-scrum-notes.md](docs/sprint-3/daily-scrum-notes.md) · [Sprint Review](docs/sprint-3/sprint-review.md) · [Sprint Retrospective](docs/sprint-3/sprint-retrospective.md) · [Sprint Board](docs/sprint-3/sprint-board.md)
+
+---
+
+
+| Sprint | Tarih | Hedef | Durum |
+|---|---|---|---|
+| Sprint 1 | 19 Haz – 5 Tem | Temel altyapı, dosya yükleme, karbon hesaplama, MVP dashboard |  Tamamlandı |
+| Sprint 2 | 6 – 19 Tem | Kod tekrarının giderilmesi, Llama 3 entegrasyonu, RAG, prompt verimlilik analizi |  Tamamlandı (6/6) |
+| Sprint 3 | 20 Tem – 2 Ağu | Sohbet arayüzü, PDF rapor, deploy, demo video | Devam ediyor (Deploy tamamlandı, video kaldı) |
 
 ---
 
