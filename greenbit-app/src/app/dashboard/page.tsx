@@ -273,13 +273,13 @@ if (modelDistribution.length > 1) {
 if (percentSaved < 10) {
   badges.push({ icon: Trophy, title: "Verimlilik Şampiyonu", desc: "Zaten çok verimli çalışıyorsun" });
 }
-
 const avgEnergyPerMessage = totalMessagesAll > 0 ? (actualTotalCO2 / 0.4) / totalMessagesAll : 0;
-const bestPerMessage = 0.6;
-const worstPerMessage = 6;
+const bestPerMessage = 2;
+const worstPerMessage = 30;
 let instantEfficiencyScore = Math.round(
   100 - ((avgEnergyPerMessage - bestPerMessage) / (worstPerMessage - bestPerMessage)) * 100
 );
+
 instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
 const scoreMessage = instantEfficiencyScore >= 80
