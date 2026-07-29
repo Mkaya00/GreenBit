@@ -165,6 +165,7 @@ export default function UploadPage() {
         localStorage.setItem("greenbit_conversations", JSON.stringify(data));
     
         localStorage.setItem("greenbit_filename", file.name);
+        sessionStorage.removeItem("greenbit_chat_history");
 
         setTimeout(() => {
           setResult(computeResult(data));
