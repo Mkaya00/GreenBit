@@ -534,41 +534,24 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
             <p className="mt-4 text-red-600 text-sm">{agentResult.error}</p>
           )}
         </div>
-        {/* Ne Olurdu? Simülatörü */}
-        <div id="ekstra" className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 scroll-mt-24">
-          <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Ne olurdu?</h3>
-          <p className="text-gray-500 text-sm mb-6">
-            Eğer tüm mesajlarınız en verimli model (gpt-4o-mini) ile işlenseydi:
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
-              <p className="text-3xl font-medium text-[#1B4332]">{co2Saved.toFixed(2)}g</p>
-              <p className="text-sm text-gray-600 mt-1">CO2 tasarrufu</p>
-            </div>
-            <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
-              <p className="text-3xl font-medium text-[#1B4332]">{percentSaved.toFixed(0)}%</p>
-              <p className="text-sm text-gray-600 mt-1">azalma potansiyeli</p>
-            </div>
+        {/* Özet Metrikler */}
+        <div id="ekstra" className="grid grid-cols-1 sm:grid-cols-3 gap-6 scroll-mt-24">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+            <h3 className="text-sm font-medium text-gray-500 mb-3">Ne olurdu?</h3>
+            <p className="text-3xl font-medium text-[#1B4332]">{co2Saved.toFixed(0)}g</p>
+            <p className="text-xs text-gray-500 mt-1">CO2 tasarrufu potansiyeli</p>
+            <p className="text-xs text-gray-400 mt-1">%{percentSaved.toFixed(0)} azalma</p>
           </div>
-        </div>
-            
-         {/* Yıllık Projeksiyon */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-2xl font-medium text-[#1B4332] mb-2">Yıllık projeksiyon</h3>
-          <p className="text-gray-500 text-sm mb-6">
-            Mevcut kullanım hızınızla giderseniz, 1 yıl sonunda tahmini karbon ayak iziniz:
-          </p>
-          <div className="bg-[#FAFAF8] p-6 rounded-lg border border-gray-100 text-center">
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+            <h3 className="text-sm font-medium text-gray-500 mb-3">Yıllık projeksiyon</h3>
             <p className="text-3xl font-medium text-[#1B4332]">{(yearlyProjection / 1000).toFixed(2)} kg</p>
-            <p className="text-sm text-gray-600 mt-1">Tahmini yıllık CO2</p>
+            <p className="text-xs text-gray-500 mt-1">Tahmini yıllık CO2</p>
           </div>
-        </div>
-        
-        {/* Verimlilik Skoru (anında) */}
-        <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Verimlilik Skorun</h3>
-          <p className="text-5xl font-medium text-[#1B4332]">{instantEfficiencyScore}<span className="text-2xl text-gray-400">/100</span></p>
-          <p className="text-sm text-gray-600 mt-3">{scoreMessage}</p>
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+            <h3 className="text-sm font-medium text-gray-500 mb-3">Verimlilik Skorun</h3>
+            <p className="text-3xl font-medium text-[#1B4332]">{instantEfficiencyScore}<span className="text-lg text-gray-400">/100</span></p>
+            <p className="text-xs text-gray-500 mt-1">{scoreMessage}</p>
+          </div>
         </div>
         {/* Başarı Rozetleri */}
         {badges.length > 0 && (
