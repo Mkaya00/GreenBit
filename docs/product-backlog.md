@@ -113,7 +113,7 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 ### US-011: Canlıya Alma
 **Sistem olarak** projemin canlıda erişilebilir olmasını istiyorum,  
 **çünkü** herkesin erişebilmesi gerekiyor.
-**Durum:** Devam ediyor. Öncelik: Oracle Cloud Always Free; yedek planlar: Groq API, ücretli VPS.
+**Sprint 3 gerçekleşme:** Oracle Cloud'da kapasite sorunu yaşandığı için Groq API + Vercel'e geçildi. Proje canlıya alındı (green-bit-seven.vercel.app), Groq entegrasyonu, güvenlik kontrolü, Web Analytics ve Speed Insights eklendi.
 
 ### US-012: Demo Video
 **Tanıtım olarak** 3 dakikalık demo video çekilmek istiyorum,  
@@ -170,6 +170,30 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **Kullanıcı olarak** sitenin her yerinde tutarlı ve hatasız bir deneyim istiyorum,  
 **çünkü** küçük hatalar bile güveni sarsar.
 **Sprint 3 gerçekleşme:** Tüm sayfalar ve özellikler sistemli olarak test edildi; hesaplamalar iki farklı test senaryosuyla (düşük/yüksek verimlilik) doğrulandı. 9'dan fazla küçük hata (metin, regex, görsel tutarlılık) bulunup düzeltildi.
+
+### US-023: Sayfalar Arası Veri Kalıcılığı
+**Kullanıcı olarak** sayfalar arasında gezinirken verimin/sonuçlarımın kaybolmamasını istiyorum.
+**Sprint 3 gerçekleşme:** Sohbet, AI Analiz, Agent Orkestrasyonu ve Upload sonuçları artık sessionStorage/localStorage ile kalıcı.
+
+### US-024: Sohbet Deneyimi İyileştirmeleri
+**Kullanıcı olarak** sohbetin verimle bağlantılı hissetmesini ve ne soracağımı bilmek istiyorum.
+**Sprint 3 gerçekleşme:** Örnek soru önerileri, veri göstergesi, dosya adı gösterimi, temizle butonu ve veri doğruluğu düzeltmesi eklendi.
+
+### US-025: UI/UX Cilası (Rozet ve Accordion)
+**Kullanıcı olarak** analiz sonuçlarını daha kolay okumak istiyorum.
+**Sprint 3 gerçekleşme:** Uyum durumları renkli rozetlere, uzun açıklamalar tıklanabilir accordion'lara dönüştürüldü.
+
+### US-026: Platform Desteği Doğruluk Düzeltmesi
+**Kullanıcı olarak** hangi platformların desteklendiğini doğru bilmek istiyorum.
+**Sprint 3 gerçekleşme:** Yanlışlıkla belirtilen Claude desteği kaldırıldı, sadece ChatGPT desteklendiği netleştirildi, gelecek roadmap notu eklendi.
+
+### US-027: Geçmiş Analizler Özelliği
+**Kullanıcı olarak** önceki AI analizlerimi tekrar görebilmek istiyorum.
+**Sprint 3 gerçekleşme:** Son 10 analiz sonucu otomatik kaydedilip Dashboard'da listeleniyor.
+
+### US-028: Çoklu Dosya Geçmişi
+**Kullanıcı olarak** birden fazla dosya yüklediğimde eskilerine dönebilmek istiyorum.
+**Sprint 3 gerçekleşme:** Yeni dosya yüklendiğinde önceki dosya arşivleniyor; son 3 dosya arasında geçiş yapılabiliyor.
 
 ---
 

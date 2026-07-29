@@ -65,3 +65,45 @@
 - Mobil görünüm (Navigation, Upload sonuç ekranı, Dashboard) kontrol edildi, sorunsuz bulundu.
 
 **Engeller:** Yok.
+
+
+## 27 Temmuz 2026 (Pazartesi)
+
+**Son çalışılan gün (26 Temmuz):** Kapsamlı test günü tamamlandı, 9+ küçük hata düzeltildi.
+
+**Bugün ne yapıldı:**
+- Deploy planlaması yapıldı: Groq ve Vercel hesapları oluşturuldu.
+- Deploy güvenliği üzerine değerlendirme yapıldı (API kötüye kullanımı, kota riskleri tartışıldı).
+
+**Engeller:** Yok.
+
+## 28 Temmuz 2026 (Salı)
+
+**Son çalışılan gün (27 Temmuz):** Deploy planlaması ve hesap kurulumları tamamlandı.
+
+**Bugün ne yapıldı:**
+- **US-011: Deploy TAMAMLANDI.** Proje Vercel'e deploy edildi (green-bit-seven.vercel.app).
+- Kodda Ollama'dan Groq API'ye geçiş yapıldı: ortak bir `callLLM` fonksiyonu yazılarak, lokal ortamda Ollama, canlı ortamda Groq otomatik olarak kullanılacak şekilde tasarlandı.
+- Groq API anahtarı Vercel ortam değişkenlerine eklendi; model adı güncellendi (`openai/gpt-oss-120b`).
+- Vercel Web Analytics ve Speed Insights entegre edildi.
+- `robots.txt` eklenerek site arama motorlarından gizlendi.
+- API Route'lara host tabanlı güvenlik kontrolü eklendi, test edilip doğrulandı.
+
+**Engeller:** İlk güvenlik kontrolü denemesi yanlış yapılandırma nedeniyle canlı siteyi geçici olarak bozdu; `host` header tabanlı daha sağlam bir yönteme geçilerek çözüldü.
+
+## 29 Temmuz 2026 (Çarşamba)
+
+**Son çalışılan gün (28 Temmuz):** Deploy tamamlandı, güvenlik kontrolü doğrulandı.
+
+**Bugün ne yapıldı:**
+- **Kritik mimari düzeltme:** Sayfalar arası veri kaybı sorunu çözüldü (Sohbet, AI Analiz, Agent Orkestrasyonu, Upload sonuçları artık kalıcı).
+- Sohbet deneyimi iyileştirmeleri: örnek soru önerileri, veri göstergesi, dosya adı, temizle butonu.
+- Sohbet veri doğruluğu düzeltmesi: su tüketimi, CO2, gün aralığı, yıllık projeksiyon artık gerçek değerlerle hesaplanıp gönderiliyor.
+- Hydration hatası düzeltildi.
+- Android/karanlık mod uyumluluğu için önlem eklendi.
+- UI/UX cilası: analiz sonuçları renkli rozetlere (badge) dönüştürüldü, uzun açıklamalar accordion yapısına alındı.
+- Floating "Sohbete Git" butonu eklendi.
+- Ana sayfa doğruluk düzeltmesi: yanlış "Claude" ifadeleri kaldırıldı, gelecek platform roadmap notu eklendi.
+- Geçmiş Analizler özelliği ve Çoklu dosya geçmişi özellikleri eklendi.
+
+**Engeller:** Kod ekleme sırasında birkaç kez React Hooks kuralı yanlışlıkla ihlal edildi, fark edilip düzeltildi.

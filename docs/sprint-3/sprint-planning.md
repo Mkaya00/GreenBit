@@ -32,3 +32,6 @@ Plan dışında, sprint ilerledikçe şu bonus özellikler eklendi: Su Ayak İzi
 
 25 Temmuz'da ayrıca: "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Sohbet Hafızası, Su Karşılaştırmaları, Başarı Rozetleri eklendi.
 26 Temmuz'da: Kapsamlı test ve kalite kontrolü günü yapıldı — yeni özellik eklenmedi, mevcut özellikler sistematik olarak doğrulandı ve küçük hatalar düzeltildi.
+27 Temmuz'da: Deploy planlaması, Groq/Vercel hesap kurulumları yapıldı.
+28 Temmuz'da: US-011 (Deploy) tamamlandı — Groq + Vercel entegrasyonu, güvenlik kontrolü.
+29 Temmuz'da: Kritik state management düzeltmesi, sohbet iyileştirmeleri, UI cilası (rozet/accordion), geçmiş analizler ve çoklu dosya geçmişi özellikleri eklendi.

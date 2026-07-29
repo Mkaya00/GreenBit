@@ -21,3 +21,15 @@
 ## 26 Temmuz Notu
 
 **İyi giden:** Yeni özellik eklemek yerine bir gün tamamen kaliteye ayrıldı — bu, "hızlı ilerleme" ile "sağlamlık" arasında bilinçli bir denge kurma örneği oldu. Testler sırasında elle hesaplama yapıp siteyle karşılaştırmak, güvenilir bir doğrulama yöntemi olarak işe yaradı.
+
+## 27 Temmuz Notu
+
+**İyi giden:** Deploy öncesi güvenlik önlemleri erkenden planlandı.
+
+## 28 Temmuz Notu
+
+**İyi giden:** Deploy sırasında karşılaşılan sorunlar (env variable, model adı, güvenlik kontrolü) sistematik olarak (loglara bakarak) teşhis edilip çözüldü — rastgele deneme yerine kanıta dayalı debug yapıldı.
+
+## 29 Temmuz Notu
+
+**İyi giden:** Kullanıcı geri bildirimleri (arkadaşlar) ve harici bir UX/UI raporu birlikte değerlendirilip önceliklendirildi. Büyük bir özellik isteği (çoklu dosya yönetimi) için kapsam bilinçli olarak küçültülüp riskli olmayan bir versiyonu uygulandı.
