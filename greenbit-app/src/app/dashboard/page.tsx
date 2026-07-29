@@ -283,7 +283,7 @@ let instantEfficiencyScore = Math.round(
 instantEfficiencyScore = Math.max(0, Math.min(100, instantEfficiencyScore));
 
 const scoreMessage = instantEfficiencyScore >= 80
-  ? "Harika! Zaten çok verimli çalışıyorsun 🎉"
+  ? "Harika! Zaten çok verimli çalışıyorsun"
   : instantEfficiencyScore >= 50
   ? "Fena değil, ama gelişim alanın var. 'Ne Olurdu?' bölümüne göz at."
   : "Verimliliğini artırabilirsin! Daha verimli modeller ve kısa promptlar dene.";
@@ -536,11 +536,11 @@ const lastSuggestion = suggestionMatch ? suggestionMatch[1].replace(/\*\*/g, "")
         </div>
         {/* Özet Metrikler */}
         <div id="ekstra" className="grid grid-cols-1 sm:grid-cols-3 gap-6 scroll-mt-24">
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
-            <h3 className="text-sm font-medium text-gray-500 mb-3">Ne olurdu?</h3>
-            <p className="text-3xl font-medium text-[#1B4332]">{co2Saved.toFixed(0)}g</p>
-            <p className="text-xs text-gray-500 mt-1">CO2 tasarrufu potansiyeli</p>
-            <p className="text-xs text-gray-400 mt-1">%{percentSaved.toFixed(0)} azalma</p>
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
+            <h3 className="text-sm font-medium text-gray-500 mb-1">En verimli modelle kullansaydın</h3>
+            <p className="text-3xl font-medium text-[#1B4332] mt-2">{co2Saved.toFixed(0)}g</p>
+            <p className="text-xs text-gray-500 mt-1">CO2 tasarrufu sağlardın</p>
+            <p className="text-xs text-gray-400 mt-1">%{percentSaved.toFixed(0)} daha az emisyon (gpt-4o-mini ile)</p>
           </div>
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center">
             <h3 className="text-sm font-medium text-gray-500 mb-3">Yıllık projeksiyon</h3>
