@@ -11,9 +11,20 @@ import { BarChart3, Bot, Upload, MessageSquare, Cpu, Gauge, CheckCircle2, Sprout
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [aiAnalysis, setAiAnalysis] = useState("");
+  const [aiAnalysis, setAiAnalysis] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("greenbit_ai_analysis") || "";
+    }
+    return "";
+  });
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [agentResult, setAgentResult] = useState<any>(null);
+  const [agentResult, setAgentResult] = useState<any>(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("greenbit_agent_result");
+      if (saved) return JSON.parse(saved);
+    }
+    return null;
+  });
   const [isAgentAnalyzing, setIsAgentAnalyzing] = useState(false);
   const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -31,6 +42,14 @@ export default function Dashboard() {
 
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if (aiAnalysis) sessionStorage.setItem("greenbit_ai_analysis", aiAnalysis);
+  }, [aiAnalysis]);
+  
+  useEffect(() => {
+    if (agentResult) sessionStorage.setItem("greenbit_agent_result", JSON.stringify(agentResult));
+  }, [agentResult]);
 
   useEffect(() => {
     const handleScroll = () => {
