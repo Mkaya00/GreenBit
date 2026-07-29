@@ -268,7 +268,7 @@ if (totalMessagesAll > 100) {
   badges.push({ icon: TrendingUp, title: "Üretken Kullanıcı", desc: "100'den fazla mesaj gönderdin" });
 }
 if (modelDistribution.length > 1) {
-  badges.push({ icon: Shuffle, title: "Çeşitlilik Ustası", desc: "Birden fazla model deniyorsun" });
+  badges.push({ icon: Shuffle, title: "Model Kaşifi", desc: "Farklı modellerin güçlü yanlarını keşfediyorsun" });
 }
 if (percentSaved < 10) {
   badges.push({ icon: Trophy, title: "Verimlilik Şampiyonu", desc: "Zaten çok verimli çalışıyorsun" });
