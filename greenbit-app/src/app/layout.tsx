@@ -12,6 +12,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "GreenBit - Yapay Zeka Karbon Ayak İzi Platformu",
   description: "AI kullanımınızın enerji tüketimini ölçün, optimize edin ve sürdürülebilirlik raporlarınızı otomatik oluşturun.",
+  other: {
+    "color-scheme": "light",
+  },
 };
 
 export default function RootLayout({
