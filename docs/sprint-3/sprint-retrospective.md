@@ -33,3 +33,7 @@
 ## 29 Temmuz Notu
 
 **İyi giden:** Kullanıcı geri bildirimleri (arkadaşlar) ve harici bir UX/UI raporu birlikte değerlendirilip önceliklendirildi. Büyük bir özellik isteği (çoklu dosya yönetimi) için kapsam bilinçli olarak küçültülüp riskli olmayan bir versiyonu uygulandı.
+
+## 30 Temmuz Notu
+ 
+**Zorlanılan:** Çoklu dosya geçmişi özelliği localStorage limitine takıldı — özellik kaldırılmak zorunda kalındı. Bu, tarayıcı depolama sınırlamalarının (5MB) büyük dosyalarla çalışırken göz önünde bulundurulması gerektiğini gösterdi.

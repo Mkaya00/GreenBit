@@ -96,14 +96,38 @@
 **Son çalışılan gün (28 Temmuz):** Deploy tamamlandı, güvenlik kontrolü doğrulandı.
 
 **Bugün ne yapıldı:**
-- **Kritik mimari düzeltme:** Sayfalar arası veri kaybı sorunu çözüldü (Sohbet, AI Analiz, Agent Orkestrasyonu, Upload sonuçları artık kalıcı).
-- Sohbet deneyimi iyileştirmeleri: örnek soru önerileri, veri göstergesi, dosya adı, temizle butonu.
-- Sohbet veri doğruluğu düzeltmesi: su tüketimi, CO2, gün aralığı, yıllık projeksiyon artık gerçek değerlerle hesaplanıp gönderiliyor.
+- Sayfalar arası veri kaybı sorunu çözüldü (Sohbet, AI Analiz, Agent Orkestrasyonu, Upload sonuçları kalıcı hale getirildi).
+- Sohbet deneyimi iyileştirildi: örnek soru önerileri, dosya adı göstergesi, sohbeti temizle butonu.
+- Sohbet veri doğruluğu düzeltildi: su, CO2, gün aralığı, yıllık projeksiyon gerçek değerlerle hesaplanıyor.
 - Hydration hatası düzeltildi.
-- Android/karanlık mod uyumluluğu için önlem eklendi.
-- UI/UX cilası: analiz sonuçları renkli rozetlere (badge) dönüştürüldü, uzun açıklamalar accordion yapısına alındı.
+- Android/karanlık mod uyumluluğu önlemi eklendi.
+- UI/UX cilası: analiz sonuçları renkli rozetlere dönüştürüldü, accordion yapısı eklendi.
 - Floating "Sohbete Git" butonu eklendi.
-- Ana sayfa doğruluk düzeltmesi: yanlış "Claude" ifadeleri kaldırıldı, gelecek platform roadmap notu eklendi.
-- Geçmiş Analizler özelliği ve Çoklu dosya geçmişi özellikleri eklendi.
+- Ana sayfa "Claude" ifadeleri düzeltildi, gelecek platform roadmap notu eklendi.
+- Geçmiş Analizler özelliği eklendi.
+- Floating "Sohbete Git" butonu eklendi.
+- Gizlilik metni tutarsızlığı düzeltildi (upload sayfası ve README).
+- PDF yazdırma sorunu çözüldü (accordion için ayrı print layout).
+- Sayı hassasiyeti azaltıldı (940.80g → 941g).
+- Dashboard'daki 3 kart tek satıra birleştirildi.
+- Rozet mesajı güncellendi ("Çeşitlilik Ustası" → "Model Kaşifi"). 
+- Skor kalibrasyonu yeniden ayarlandı.
+- Token sınırı eklendi (son 5 mesaj), yeni dosyada eski sohbet temizleniyor. 
+- "Yazıyor..." animasyonu iyileştirildi, veri yokken yönlendirme eklendi.
 
 **Engeller:** Kod ekleme sırasında birkaç kez React Hooks kuralı yanlışlıkla ihlal edildi, fark edilip düzeltildi.
+
+
+## 30 Temmuz 2026 (Perşembe)
+
+**Son çalışılan gün (29 Temmuz):** Kapsamlı iyileştirme ve kalite kontrolü tamamlandı.
+
+**Bugün ne yapıldı:**
+- LocalStorage taşma hatası tespit edildi: çoklu dosya geçmişi özelliği, büyük JSON dosyalarını sakladığı için 5MB localStorage limitini aşıyordu.
+- Çoklu dosya geçmişi özelliği kaldırıldı (sadece metadata saklanıyordu ama localStorage hâlâ taşıyordu).
+- JSX yapısı düzeltildi (eksik kapanış etiketleri)
+- Sprint 3 belgeleri toplu güncellendi.
+
+**Engeller:** localStorage 5MB limiti, çoklu dosya geçmişi özelliğinde taşmaya neden oldu; özellik kaldırılarak çözüldü.
+
+

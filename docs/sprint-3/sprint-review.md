@@ -44,6 +44,14 @@
 
 - Kritik mimari düzeltme: sayfalar arası veri kaybı sorunu çözüldü.
 - Sohbet deneyimi ve veri doğruluğu iyileştirildi.
-- UI/UX cilası: rozet/badge tasarımı ve accordion eklendi (harici bir UX raporu doğrultusunda).
-- Ana sayfa doğruluk düzeltmesi (Claude ifadesi kaldırıldı, roadmap notu eklendi).
-- Geçmiş Analizler ve Çoklu Dosya Geçmişi özellikleri eklendi.
+- UI/UX cilası: rozet/badge tasarımı ve accordion eklendi.
+- Gizlilik metni düzeltmesi, PDF yazdırma düzeltmesi, skor kalibrasyonu.
+- Geçmiş Analizler özelliği eklendi.
+
+
+## 30 Temmuz Güncellemesi
+ 
+- localStorage taşma hatası tespit edilip düzeltildi.
+- Çoklu dosya geçmişi özelliği kaldırıldı (teknik kısıtlama nedeniyle).
+- .env.example dosyası eklendi.
+- Tüm Sprint 3 belgeleri toplu güncellendi.

@@ -191,9 +191,17 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **Kullanıcı olarak** önceki AI analizlerimi tekrar görebilmek istiyorum.
 **Sprint 3 gerçekleşme:** Son 10 analiz sonucu otomatik kaydedilip Dashboard'da listeleniyor.
 
-### US-028: Çoklu Dosya Geçmişi
+### US-028: Çoklu Dosya Geçmişi (Kaldırıldı)
 **Kullanıcı olarak** birden fazla dosya yüklediğimde eskilerine dönebilmek istiyorum.
-**Sprint 3 gerçekleşme:** Yeni dosya yüklendiğinde önceki dosya arşivleniyor; son 3 dosya arasında geçiş yapılabiliyor.
+**Sprint 3 gerçekleşme:** Özellik eklendi ancak localStorage'ın 5MB limiti büyük JSON dosyalarıyla taşmaya neden oldu. Teknik kısıtlama nedeniyle özellik kaldırıldı; gelecek sürümlerde sunucu taraflı depolama ile yeniden değerlendirilebilir.
+ 
+### US-029: Sohbet Optimizasyonu ve API Doğruluğu
+**Kullanıcı olarak** sohbetin hızlı ve doğru çalışmasını istiyorum.
+**Sprint 3 gerçekleşme:** Token sınırı (son 5 mesaj) eklendi, yeni dosya yüklenince eski sohbet temizleniyor, API'deki çift su tüketimi satırı kaldırıldı, yazıyor animasyonu iyileştirildi.
+ 
+### US-030: Teknik ve UI Hata Çözümleri
+**Kullanıcı olarak** siteyi hatasız ve tutarlı deneyimlemek istiyorum.
+**Sprint 3 gerçekleşme:** Hydration hatası, print layout, Android uyumluluğu, skor kalibrasyonu, sayı hassasiyeti, gizlilik metni tutarsızlığı düzeltildi. .env.example eklendi.
 
 ---
 
