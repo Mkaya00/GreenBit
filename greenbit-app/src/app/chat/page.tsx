@@ -28,11 +28,8 @@ const SUGGESTED_QUESTIONS = [
   "Nasıl daha verimli olabilirim?",
   "Toplam kaç mesaj gönderdim?",
   "Karbon ayak izim ne kadar?",
-  "Hangi model daha az enerji harcar?",
   "Verilerim kaç günü kapsıyor?",
-  "En çok hangi konularda soru sormuşum?",
   "Yıllık projeksiyonum ne kadar?",
-  "En çevre dostu kullanıcı sayılır mıyım?",
 ];
 
 export default function ChatPage() {
