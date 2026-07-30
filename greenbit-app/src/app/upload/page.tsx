@@ -25,15 +25,6 @@ export default function UploadPage() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const router = useRouter();
 
-  const [fileHistory, setFileHistory] = useState<{ fileName: string; timestamp: string }[]>([]);
-
-  useEffect(() => {
-    const historyRaw = localStorage.getItem("greenbit_file_history");
-    if (historyRaw) {
-      const history = JSON.parse(historyRaw);
-      setFileHistory(history.map((h: any) => ({ fileName: h.fileName, timestamp: h.timestamp })));
-    }
-  }, []);
 
   useEffect(() => {
     const savedData = localStorage.getItem("greenbit_conversations");
@@ -101,29 +92,6 @@ export default function UploadPage() {
     };
   };
 
-  const restoreFile = (fileName: string) => {
-    const historyRaw = localStorage.getItem("greenbit_file_history");
-    if (!historyRaw) return;
-    const history = JSON.parse(historyRaw);
-    const entry = history.find((h: any) => h.fileName === fileName);
-    if (!entry) return;
-
-    const currentData = localStorage.getItem("greenbit_conversations");
-    const currentFileName = localStorage.getItem("greenbit_filename");
-    let updatedHistory = history.filter((h: any) => h.fileName !== fileName);
-
-    if (currentData && currentFileName && currentFileName !== fileName) {
-      updatedHistory = [{ fileName: currentFileName, data: currentData, timestamp: new Date().toLocaleString('tr-TR') }, ...updatedHistory.filter((h: any) => h.fileName !== currentFileName)].slice(0, 3);
-    }
-
-    localStorage.setItem("greenbit_file_history", JSON.stringify(updatedHistory));
-    localStorage.setItem("greenbit_conversations", entry.data);
-    localStorage.setItem("greenbit_filename", fileName);
-    setResult(computeResult(JSON.parse(entry.data)));
-    setFileHistory(updatedHistory.map((h: any) => ({ fileName: h.fileName, timestamp: h.timestamp })));
-  };
-
-
 
   // DOSYA İŞLEME VE HESAPLAMA
   const processFile = (file: File) => {
@@ -150,15 +118,7 @@ export default function UploadPage() {
         if (!Array.isArray(data)) throw new Error("Geçerli bir ChatGPT dışa aktarma dosyası değil.");
 
 
-        const previousData = localStorage.getItem("greenbit_conversations");
-        const previousFileName = localStorage.getItem("greenbit_filename");
-        if (previousData && previousFileName) {
-          const historyRaw = localStorage.getItem("greenbit_file_history");
-          const history = historyRaw ? JSON.parse(historyRaw) : [];
-          const filtered = history.filter((h: any) => h.fileName !== previousFileName);
-          const updated = [{ fileName: previousFileName, data: previousData, timestamp: new Date().toLocaleString('tr-TR') }, ...filtered].slice(0, 3);
-          localStorage.setItem("greenbit_file_history", JSON.stringify(updated));
-        }
+        
 
     
     
@@ -385,28 +345,9 @@ export default function UploadPage() {
               <ShowerHead className="w-4 h-4 text-[#1B4332] flex-shrink-0" strokeWidth={2} />
               <span>Bir duşun <strong>%{(result.estimatedWater / 65 * 100).toFixed(0)}</strong> kadarı</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {fileHistory.length > 0 && (
-                <div className="mt-6 bg-white rounded-lg p-4 border border-gray-100">
-                  <p className="text-sm font-medium text-gray-700 mb-3">Önceki dosyaların</p>
-                  <div className="space-y-2">
-                    {fileHistory.map((h, i) => (
-                      <button
-                        key={i}
-                        onClick={() => restoreFile(h.fileName)}
-                        className="w-full text-left text-sm bg-[#FAFAF8] hover:bg-gray-100 px-3 py-2 rounded-lg transition flex justify-between items-center"
-                      >
-                        <span className="text-gray-800">{h.fileName}</span>
-                        <span className="text-xs text-gray-400">{h.timestamp}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
+            </div>
+         </div>
+       </div>
               {/* DASHBOARD'A GEÇİŞ BUTONU */}
               <div className="mt-8 text-center border-t border-gray-100 pt-6">
                 <p className="text-gray-600 mb-4">Grafikler ve zaman çizelgeleri için detaylı görünüme geçin:</p>
