@@ -55,3 +55,4 @@
 - Çoklu dosya geçmişi özelliği kaldırıldı (teknik kısıtlama nedeniyle).
 - .env.example dosyası eklendi.
 - Tüm Sprint 3 belgeleri toplu güncellendi.
+- Sohbetteki güvenilir cevap veremeyen örnek sorular kaldırıldı.

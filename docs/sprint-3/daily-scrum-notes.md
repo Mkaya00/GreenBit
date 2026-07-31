@@ -127,6 +127,7 @@
 - Çoklu dosya geçmişi özelliği kaldırıldı (sadece metadata saklanıyordu ama localStorage hâlâ taşıyordu).
 - JSX yapısı düzeltildi (eksik kapanış etiketleri)
 - Sprint 3 belgeleri toplu güncellendi.
+- Sohbetteki güvenilir cevap veremeyen 3 örnek soru kaldırıldı.
 
 **Engeller:** localStorage 5MB limiti, çoklu dosya geçmişi özelliğinde taşmaya neden oldu; özellik kaldırılarak çözüldü.
 

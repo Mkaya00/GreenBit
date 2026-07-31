@@ -35,4 +35,4 @@ Plan dışında, sprint ilerledikçe şu bonus özellikler eklendi: Su Ayak İzi
 27 Temmuz'da: Deploy planlaması, Groq/Vercel hesap kurulumları yapıldı.
 28 Temmuz'da: US-011 (Deploy) tamamlandı — Groq + Vercel entegrasyonu, güvenlik kontrolü.
 29 Temmuz'da: Kritik state management düzeltmesi, sohbet iyileştirmeleri, UI cilası (rozet/accordion), geçmiş analizler,çoklu dosya geçmişi özellikleri ve  kalite kontrolü düzeltmeleri yapıldı.
-30 Temmuz'da: localStorage taşma hatası düzeltildi, çoklu dosya geçmişi özelliği kaldırıldı, belgeler güncellendi.
+30 Temmuz'da: localStorage taşma hatası düzeltildi, çoklu dosya geçmişi özelliği kaldırıldı, belgeler güncellendi ve güvenilir cevap vermeyen 3 soru kaldırıldı.
