@@ -1,51 +1,51 @@
-# Sprint 3 - Retrospective 
+# Sprint 3 - Retrospective
 
 **Sprint Süresi:** 20 Temmuz 2026 – 2 Ağustos 2026
 **Retrospective Tarihi:** 1 Ağustos 2026
 
 ## İyi Gidenler
-- Agent Orkestrasyonu ve Sohbet Arayüzü, planlanandan hızlı tamamlandı.
-- Model enerji tablosundaki eksiklik fark edilip düzeltildi (proaktif kalite kontrolü).
+- Agent Orkestrasyonu ve Sohbet Arayüzü planlanandan hızlı tamamlandı.
+- Kullanıcı geri bildirimleri (arkadaş testleri) ve harici UX raporu hızla aksiyona dönüştürüldü.
+- Bir gün tamamen kalite kontrolüne ayrılması, sağlamlık açısından çok değerli oldu.
+- Deploy sorunları sistematik olarak (loglara bakarak) çözüldü.
 
 ## Zorlanılanlar
--Tarayıcı localStorage 5MB limitine takılması (Çoklu dosya geçmişi eklendiğinde taşma yaşanması).
+- Oracle Cloud'da kapasite sorunu yaşandı, Groq + Vercel'e geçildi.
+- Tarayıcı localStorage 5MB limiti, çoklu dosya geçmişi özelliğinde taşmaya neden oldu — özellik kaldırıldı.
+- Güvenlik kontrolü ilk denemede canlı siteyi bozdu, farklı bir yöntemle düzeltildi.
 
 ## Aksiyon Maddeleri
-- Tüm hedefler tamamlandığı için projeyi stabil şekilde yayında tutmak ve kısıtlı tarayıcı belleği (localStorage) yönetimi tecrübesini gelecekteki projelere aktarmak.
+- Tarayıcı depolama sınırlamalarını gelecek projelerde baştan hesaba katmak.
+- Deploy öncesi staging ortamı kullanmayı değerlendirmek.
+- Gelecek sürümlerde Gemini ve Claude desteği eklemek.
 
-## 23 Temmuz Notu
+---
 
-**İyi giden:** Performans ve şeffaflık konusundaki geri bildirimler (kullanıcının kendi gözlemleri) hızlıca değerlendirilip aksiyona dönüştürüldü — bu, çevik/agile çalışmanın iyi bir örneği.
+## Ek: Günlük Retrospective Notları
 
-## 25 Temmuz Notu
+### 23 Temmuz
+Performans ve şeffaflık geri bildirimleri hızlıca aksiyona dönüştürüldü.
 
-**İyi giden:** Planlanan 5 bonus özelliğin hepsi tek günde tamamlandı — net bir liste yapıp önceliklendirmenin faydası görüldü.
+### 25 Temmuz
+5 bonus özellik tek günde tamamlandı — önceliklendirmenin faydası görüldü.
 
-## 26 Temmuz Notu
+### 26 Temmuz
+Kaliteye ayrılan gün, "hızlı ilerleme" ile "sağlamlık" arasında bilinçli denge örneği oldu.
 
-**İyi giden:** Yeni özellik eklemek yerine bir gün tamamen kaliteye ayrıldı — bu, "hızlı ilerleme" ile "sağlamlık" arasında bilinçli bir denge kurma örneği oldu. Testler sırasında elle hesaplama yapıp siteyle karşılaştırmak, güvenilir bir doğrulama yöntemi olarak işe yaradı.
+### 27 Temmuz
+Deploy öncesi güvenlik önlemleri erkenden planlandı.
 
-## 27 Temmuz Notu
+### 28 Temmuz
+Deploy sorunları loglara bakarak sistematik şekilde çözüldü.
 
-**İyi giden:** Deploy öncesi güvenlik önlemleri erkenden planlandı.
+### 29 Temmuz
+Büyük özellik istekleri bilinçli olarak küçültülüp basit versiyonları yapıldı.
 
-## 28 Temmuz Notu
+### 30 Temmuz
+localStorage limiti öğrenilmiş bir ders oldu.
 
-**İyi giden:** Deploy sırasında karşılaşılan sorunlar (env variable, model adı, güvenlik kontrolü) sistematik olarak (loglara bakarak) teşhis edilip çözüldü — rastgele deneme yerine kanıta dayalı debug yapıldı.
+### 31 Temmuz
+Son kontrollerde kritik hata bulunmadı — önceki testlerin etkisi görüldü.
 
-## 29 Temmuz Notu
-
-**İyi giden:** Kullanıcı geri bildirimleri (arkadaşlar) ve harici bir UX/UI raporu birlikte değerlendirilip önceliklendirildi. Büyük bir özellik isteği (çoklu dosya yönetimi) için kapsam bilinçli olarak küçültülüp riskli olmayan bir versiyonu uygulandı.
-
-## 30 Temmuz Notu
- 
-**Zorlanılan:** Çoklu dosya geçmişi özelliği localStorage limitine takıldı — özellik kaldırılmak zorunda kalındı. Bu, tarayıcı depolama sınırlamalarının (5MB) büyük dosyalarla çalışırken göz önünde bulundurulması gerektiğini gösterdi.
-
-## 31 Temmuz Notu
-
-**İyi giden:** Son kontrollerde kritik hata bulunmadı — önceki günlerde yapılan kapsamlı testlerin etkisi görüldü.
-
-## 1 Ağustos Notu
-
-**İyi giden:** Tüm Sprint 3 hedefleri (5 planlı + 25 bonus iş) başarıyla tamamlandı. Deploy, test, kalite kontrolü ve video zamanında bitirildi.
-**Genel Sprint 3 değerlendirmesi:** Sprint boyunca çevik çalışma prensipleri uygulandı — günlük notlar tutuldu, geri bildirimler hızla aksiyona dönüştürüldü, teknik riskler (localStorage taşması, güvenlik kontrolü) bilinçli kararlarla yönetildi.
+### 1 Ağustos
+Tüm Sprint 3 hedefleri başarıyla tamamlandı.

@@ -6,29 +6,63 @@
 
 Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi — Yapay Zeka & Veri Bilimi Kategorisi
 
-## Proje Hakkında
+---
 
-GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur. Kullanıcılar ChatGPT'den indirdikleri kullanım verilerini yükler; GreenBit bu veriyi analiz ederek hem sayısal metrikler hem de lokal bir yapay zeka (Llama 3) aracılığıyla prompt verimlilik önerileri sunar.
+## Takım Bilgileri
 
-### Üç Temel Değer
+**Takım İsmi:** Takım 329
 
-- **Ölçüm:** Token, kWh, CO2 takibi ve zaman içindeki değişimin görselleştirilmesi
-- **Prompt Koçluğu:** Lokal Llama 3 modeli ile prompt'ların açıklık, uzunluk ve verimlilik açısından analiz edilmesi (RAG destekli)
-- **Gizlilik Odaklı Mimari:** Sayısal hesaplamalar tarayıcıda yapılır; AI analizi için yalnızca örnek promptlar API'ye iletilir, hiçbir veri saklanmaz
-
-## Takım
-
-**Takım 329**
-
-| Rol | İsim |
+| İsim | Rol |
 |---|---|
-| Product Owner | Ege Mert Kaya |
-| Scrum Master | Ege Mert Kaya |
-| Developer | Ege Mert Kaya |
-
-> Bu proje, ekip üyelerine ulaşılamaması nedeniyle bireysel olarak yürütülmektedir.
+| Ege Mert Kaya | Developer, Product Owner, Scrum Master |
 
 ---
+
+## Ürün İsmi
+
+GreenBit
+
+---
+
+## Ürün Açıklaması
+
+GreenBit, ChatGPT kullanım verilerini analiz ederek enerji tüketimi, karbon ayak izi ve su tüketimini hesaplayan, yapay zeka destekli prompt verimlilik analizi sunan bir platformdur. Sayısal hesaplamalar tarayıcıda yapılır; AI analizi için yalnızca örnek promptlar API'ye iletilir, hiçbir veri saklanmaz.
+
+---
+
+## Ürün Özellikleri
+
+- ChatGPT JSON verisinden otomatik token, enerji (kWh), CO2 ve su tüketimi hesaplama
+- Yapay zeka destekli prompt verimlilik analizi (RAG tabanlı)
+- 3 uzman agent ile paralel çalışan Agent Orkestrasyonu
+- Doğal dilde sohbet (kullanıcı verisiyle bağlantılı)
+- "Ne Olurdu?" simülatörü, yıllık projeksiyon, verimlilik skoru
+- Başarı rozetleri ve geçmiş analiz takibi
+- Gizlilik odaklı mimari (sayısal hesaplamalar tarayıcıda)
+
+---
+
+## Hedef Kitle
+
+- Yapay zekayı düzenli kullanan ve çevresel etkisini merak eden bireysel kullanıcılar
+- Sürdürülebilirlik bilinci yüksek öğrenciler ve teknoloji profesyonelleri
+- Kurumsal yapay zeka kullanım maliyetini ve çevresel etkisini raporlamak isteyen ekipler
+
+---
+
+## Product Backlog
+
+[Product Backlog](docs/product-backlog.md)
+
+---
+
+## Nasıl Çalışır?
+
+1. **Veri Yükleme:** ChatGPT'den indirdiğiniz JSON dosyasını platforma yükleyin.
+2. **Analiz:** Token, enerji (kWh), CO2 ve su tüketimi tarayıcınızda anında hesaplanır.
+3. **Dashboard:** Grafikler, karşılaştırmalar ve verimlilik skorunuzu görün.
+4. **AI Koçluk:** Yapay zeka, promptlarınızı analiz edip iyileştirme önerileri sunar.
+5. **Sohbet:** Verileriniz hakkında doğal dilde soru sorun.
 
 ## Teknoloji Yığını
 
@@ -155,12 +189,6 @@ Geliştirme sürecinin sonlanmasıyla birlikte uygulama; dosya yüklemeden yapay
 
 ---
 
-## Hedef Kitle
-
-- Yapay zekayı düzenli kullanan ve çevresel etkisini merak eden bireysel kullanıcılar
-- Sürdürülebilirlik bilinci yüksek öğrenciler ve teknoloji profesyonelleri
-- Kurumsal yapay zeka kullanım maliyetini ve çevresel etkisini raporlamak isteyen ekipler
-
 ---
 ## Nasıl Çalışır?
 
@@ -213,6 +241,19 @@ Sprint 3'te, ürün "çalışan bir prototip"ten **canlı, kullanıcı testinden
 ### Bilinçli Kapsam Kararları
 
 Geliştirme sürecinin sonlarında "Çoklu dosya yönetimi" gibi büyük bir özellik isteği test edilmiş, ancak büyük veri setlerinde tarayıcı localStorage 5MB limitine takıldığı (QuotaExceededError) tespit edilmiştir. İnatla hatalı bir mimariyi canlıya taşımak yerine, kapsam bilinçli olarak küçültülerek bu özellik iptal edilmiş ve uygulamanın stabilizasyonu güvenceye alınmıştır. Bu karar, sağlam bir ürün yönetimi (Product Management) prensibi örneğidir.
+
+### Sprint Board Updates
+
+[Sprint Board Ekran Görüntüleri](docs/sprint-3/screenshots/)
+
+### Ürün Durumu
+
+Proje **canlıda** ve tüm temel özellikler çalışır durumda:
+- [green-bit-seven.vercel.app](https://green-bit-seven.vercel.app)
+- 30 User Story tamamlandı (5 planlı + 25 bonus)
+- AI Analiz, Agent Orkestrasyonu, Sohbet, Dashboard tam fonksiyonel
+
+Tam detaylar: [daily-scrum-notes.md](docs/sprint-3/daily-scrum-notes.md) 
 
 
  Tam detaylar: [docs/sprint-3/daily-scrum-notes.md](docs/sprint-3/daily-scrum-notes.md) · [Sprint Review](docs/sprint-3/sprint-review.md) · [Sprint Retrospective](docs/sprint-3/sprint-retrospective.md) · [Sprint Board](docs/sprint-3/sprint-board.md)
