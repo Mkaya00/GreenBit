@@ -116,9 +116,9 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 **Sprint 3 gerçekleşme:** Oracle Cloud'da kapasite sorunu yaşandığı için Groq API + Vercel'e geçildi. Proje canlıya alındı (green-bit-seven.vercel.app), Groq entegrasyonu, güvenlik kontrolü, Web Analytics ve Speed Insights eklendi.
 
 ### US-012: Demo Video
-**Tanıtım olarak** 3 dakikalık demo video çekilmek istiyorum,  
-**çünkü** bootcamp teslimi için zorunlu.
-**Durum:** Planlanıyor, diğer işler bitince yapılacak.
+**Kullanıcı olarak** projenin nasıl çalıştığını gösteren bir video istiyorum,
+**çünkü** jüri ve kullanıcılar ürünü görmeden değerlendiremez.
+**Sprint 3 gerçekleşme:** 3 dakikalık demo video çekildi, YouTube'a Liste Dışı olarak yüklendi.
 
 ### US-013: Su Ayak İzi Hesaplayıcı
 **Kullanıcı olarak** AI kullanımımın su tüketimini de görmek istiyorum,  
@@ -209,4 +209,4 @@ En son, ürünü sunuma hazır hale getirecek işler: sohbet arayüzü (US-009),
 
 - **Sprint 1:** US-001, US-002, US-003, US-004 → Çalışan MVP
 - **Sprint 2:** US-005, US-006, US-007 (US-008 ertelendi) → AI gücüyle akıllandırma  
-- **Sprint 3:** US-008, US-009, US-010, US-011, US-012, US-013, US-014, US-015 → Teslim + bonus özellikler
+- **Sprint 3:** US-008, US-009, US-010, US-011, US-012 ve eklenen US-013'ten US-030'a kadar olan geliştirme/hata çözüm maddeleri → Teslim, bonus özellikler ve hata çözümleri.

@@ -8,7 +8,7 @@ Yapay Zeka ve Teknoloji Akademisi 2026 Bootcamp Projesi — Yapay Zeka & Veri Bi
 
 ## Proje Hakkında
 
-GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur.Kullanıcılar ChatGPT'den indirdikleri kullanım verilerini yükler; GreenBit bu veriyi analiz ederek hem sayısal metrikler hem de lokal bir yapay zeka (Llama 3) aracılığıyla prompt verimlilik önerileri sunar.
+GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimize eden ve raporlayan AI destekli bir platformdur. Kullanıcılar ChatGPT'den indirdikleri kullanım verilerini yükler; GreenBit bu veriyi analiz ederek hem sayısal metrikler hem de lokal bir yapay zeka (Llama 3) aracılığıyla prompt verimlilik önerileri sunar.
 
 ### Üç Temel Değer
 
@@ -17,6 +17,8 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 - **Gizlilik Odaklı Mimari:** Sayısal hesaplamalar tarayıcıda yapılır; AI analizi için yalnızca örnek promptlar API'ye iletilir, hiçbir veri saklanmaz
 
 ## Takım
+
+**Takım 329**
 
 | Rol | İsim |
 |---|---|
@@ -36,13 +38,6 @@ GreenBit, yapay zeka kullanımının enerji ve karbon ayak izini ölçen, optimi
 - **Deploy:** Vercel (hosting) + Groq (AI inference)
 - **Veri Akışı:** Client-side JSON parsing, localStorage (sunucu tarafı veri saklama yok)
 > **Not:** Kullanılan açık kaynak dil modeli, Türkçe çıktılarda bazen doğal olmayan ifadeler üretebiliyor. İngilizce promptlarla daha akıcı sonuçlar alınabiliyor; bu, projenin bilinen bir sınırlamasıdır.
-
-### Lokal Çalıştırma (AI özelliği için)
-
-```bash
-ollama pull llama3.1
-```
-Uygulama çalışırken Ollama'nın arka planda açık olması gerekir (`localhost:11434`).
 
 ---
 
@@ -101,7 +96,9 @@ Sprint 2 dokümantasyonu (Review, Retrospective, Board, Backlog) son haliyle gü
 
 </details>
 
- Tam günlük kayıtlar: [Sprint 1](docs/sprint-1/daily-scrum-notes.md) · [Sprint 2](docs/sprint-2/daily-scrum-notes.md)
+ Tam günlük kayıtlar: [Sprint 1](docs/sprint-1/daily-scrum-notes.md) · [Sprint 2](docs/sprint-2/daily-scrum-notes.md)   [Sprint 3](docs/sprint-3/daily-scrum-notes.md)
+
+
 
 ---
 
@@ -120,33 +117,66 @@ Farklı günlerden alınan durum görüntüleri, board'daki task akışını gö
 **Sprint 2 sonu:**
 ![Sprint 2 Board Sonu](docs/sprint-2/screenshots/sprint-board-2.1.png)
 
+**Sprint 3(Final) sonu:**
+![Sprint 3 Board Sonu](docs/sprint-3/screenshots/sprint-board-31-1-ağustos.png)
+
 ---
 
 ## 4. Ürün Durumu
 
-Sprint 2 sonunda ulaşılan, çalışan ve test edilmiş en kararlı hâl:
+Geliştirme sürecinin sonlanmasıyla birlikte uygulama; dosya yüklemeden yapay zeka analizine kadar hedeflenen ana akışı başarıyla tamamlamıştır. Projenin güncel arayüzleri aşağıdadır:
 
-**Ana Sayfa:**
-![Ana Sayfa](docs/sprint-2/screenshots/landing-final.png)
+**Ana Sayfa (Landing Page)**
+> Projenin amacını, temel değer önerisini ve platform destek durumunu sunan giriş ekranı.
+![Ana Sayfa](docs/sprint-3/screenshots/landing-page.png)
 
-**Dashboard (Grafikler + AI Analiz Paneli):**
-![Dashboard](docs/sprint-2/screenshots/dashboard-final.png)
+**Veri Yükleme ve Anlık Analiz (Upload & Results)**
+> Kullanıcının ChatGPT `conversations.json` verisini yüklediği, tarayıcıda işlenen verilerin karbon, enerji ve su ayak izi eşdeğerlerine dönüştürüldüğü sonuç ekranı.
+![Dosya Yükleme](docs/sprint-3/screenshots/file-upload.png)
+![Hesaplama Sonuçları](docs/sprint-3/screenshots/upload-results.png)
 
-**AI Prompt Analizi (Öneri Kutusu):**
-![AI Analiz](docs/sprint-2/screenshots/ai-analiz-final.png)
+**Dashboard: Veri Görselleştirme ve Tasarruf Simülasyonu**
+> Model kullanım dağılımları, zaman içindeki karbon trendleri, "Ne Olurdu?" tasarruf simülasyonu ve kazanılan başarı rozetlerini barındıran kontrol paneli.
+![Dashboard Üst Kısım](docs/sprint-3/screenshots/dashboard-top.png)
+![Dashboard Alt Kısım](docs/sprint-3/screenshots/dashboard-bottom.png)
 
-Ürün; dosya yükleme, karbon/enerji hesaplama, görselleştirme ve lokal yapay zeka destekli prompt analizini uçtan uca çalışır durumda sunmaktadır.
+**Yapay Zeka (AI) Analiz ve Prompt Test Ekranı**
+> Kullanıcının mevcut promptlarının verimlilik açısından değerlendirildiği, uyumluluk rozetlerinin verildiği ve yeni prompt testlerinin yapılabildiği analiz arayüzü.
+![AI Analizi](docs/sprint-3/screenshots/ai-analysis.png)
+![AI Prompt Testi](docs/sprint-3/screenshots/prompt-test.png)
+
+**AI Agent Orkestrasyonu**
+> Arka planda paralel olarak çalışan ve üç farklı analiz görevini (prompt verimliliği, model önerisi, skorlama) koordine eden agent sisteminin durum ekranı.
+![Agent Orkestrasyonu](docs/sprint-3/screenshots/agent-orchestration.png)
+
+**Doğal Dil Sohbet Arayüzü (Chat)**
+> Kullanıcının tamamen kendi yüklediği veriler üzerinden RAG benzeri bir yapıyla yapay zekaya sorular sorabildiği, hafızalı sohbet ekranı.
+![Sohbet Ekranı](docs/sprint-3/screenshots/chat-interface.png)
 
 ---
 
+## Hedef Kitle
+
+- Yapay zekayı düzenli kullanan ve çevresel etkisini merak eden bireysel kullanıcılar
+- Sürdürülebilirlik bilinci yüksek öğrenciler ve teknoloji profesyonelleri
+- Kurumsal yapay zeka kullanım maliyetini ve çevresel etkisini raporlamak isteyen ekipler
+
+---
+## Nasıl Çalışır?
+
+1. **Veri Yükleme:** ChatGPT'den indirdiğiniz JSON dosyasını platforma yükleyin.
+2. **Analiz:** Token, enerji (kWh), CO2 ve su tüketimi tarayıcınızda anında hesaplanır.
+3. **Dashboard:** Grafikler, karşılaştırmalar ve verimlilik skorunuzu görün.
+4. **AI Koçluk:** Yapay zeka, promptlarınızı analiz edip iyileştirme önerileri sunar.
+5. **Sohbet:** Verileriniz hakkında doğal dilde soru sorun.
+---
 ## 5. Sprint Review
 
-Sprint 2'nin temel ve orta katman hedefleri (lib refactor, Llama entegrasyonu, prompt analizi, RAG) eksiksiz tamamlanmış; ayrıca planlanmamış bir kalite/tasarım iyileştirme çalışması yürütülmüştür. İleri katman (fine-tuning, agent orkestrasyonu) araştırılmış, gerekçeli biçimde ertelenmiştir.
-
+Sprint 3 itibarıyla ürün, çalışan bir prototipten canlı, kullanıcı testinden geçmiş bir platforma dönüştürülmüştür.
 <details>
 <summary><strong>Tam Sprint Review içeriğini görüntüle</strong></summary>
 
- [docs/sprint-2/sprint-review.md](docs/sprint-2/sprint-review.md) dosyasında tamamlanan/ertelenen işlerin tam listesi, gösterilebilir çıktı tanımı ve gerekçeler yer almaktadır.
+ [docs/sprint-3/sprint-review.md](docs/sprint-3/sprint-review.md) dosyasında tamamlanan/ertelenen işlerin tam listesi, gösterilebilir çıktı tanımı ve gerekçeler yer almaktadır.
 
 </details>
 
@@ -154,14 +184,14 @@ Sprint 2'nin temel ve orta katman hedefleri (lib refactor, Llama entegrasyonu, p
 
 ## 6. Sprint Retrospective
 
-**İyi gidenler:** Refactor disiplini, kademeli AI entegrasyonu (basitten karmaşığa), UX'e duyarlılık, strateji esnekliği.
-**Zorlanılanlar:** Model seçimi (3B → 8B geçişi), import yolu hataları, paralel çalışma ortamı karmaşası.
-**Aksiyon maddeleri:** Tek çalışma ortamına odaklanma, yeni özellik eklemeden önce küçük ölçekli test, Sprint 3'te agent orkestrasyonuna geçiş.
+**İyi gidenler:** Agent Orkestrasyonu ve Sohbet Arayüzünün beklenenden hızlı tamamlanması, yeni özellik ekleme hırsına kapılmadan test günlerine ayrılan zaman, loglara dayalı sistematik debug.
+**Zorlanılanlar:** İstemci tarafında büyük JSON dosyalarını tutarken tarayıcının localStorage 5MB limitine (QuotaExceededError) takılmak, React hydration hataları.
+**Aksiyon maddeleri:** Süreç boyunca geliştirilen esnek kapsam yönetimi (scope control) becerisinin ve tarayıcı kısıtlamalarına dair alınan derslerin sonraki projelere aktarılması
 
 <details>
 <summary><strong>Tam Retrospective içeriğini görüntüle</strong></summary>
 
- [docs/sprint-2/sprint-retrospective.md](docs/sprint-2/sprint-retrospective.md)
+ [docs/sprint-3/sprint-retrospective.md](docs/sprint-3/sprint-retrospective.md)
 
 </details>
 
@@ -176,13 +206,14 @@ Sprint 3'te, ürün "çalışan bir prototip"ten **canlı, kullanıcı testinden
 
 - **Agent Orkestrasyonu (US-008):** Prompt analiz, model önerisi ve verimlilik skorunu koordine eden bir sistem; paralel API çağrılarıyla hızlandırıldı.
 - **Sohbet Arayüzü (US-009):** Kullanıcı verisiyle bağlantılı, hafızalı, örnek soru önerili bir sohbet deneyimi.
-- **Bonus özellikler:** Su Ayak İzi Hesaplayıcı, "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Başarı Rozetleri, Anında Verimlilik Skoru, Geçmiş Analizler, Çoklu Dosya Geçmişi.
+- **Bonus özellikler:** Su Ayak İzi Hesaplayıcı, "Ne Olurdu?" Simülatörü, Yıllık Projeksiyon, Başarı Rozetleri, Anında Verimlilik Skoru, Geçmiş Analizler.
 - **US-011: Deploy.** Oracle Cloud'da kapasite sorunu yaşandı; Groq API + Vercel'e geçildi. Site canlıda, güvenlik kontrolü ve performans izleme (Analytics/Speed Insights) ile birlikte.
 - **Kapsamlı test ve kalite düzeltmeleri:** Harici bir UX/UI raporu ve kullanıcı testleri doğrultusunda; sayfalar arası veri kalıcılığı, rozet/accordion tasarımı gibi önemli iyileştirmeler yapıldı.
 
 ### Bilinçli Kapsam Kararları
 
-Çoklu dosya yönetimi gibi büyük bir özellik isteği geldiğinde, teslim tarihine yakınlık nedeniyle **kapsam bilinçli olarak küçültüldü** ve daha basit, riski düşük bir versiyonu uygulandı — bu, agile prensiplerine uygun bir zaman/kapsam yönetimi kararıdır.
+Geliştirme sürecinin sonlarında "Çoklu dosya yönetimi" gibi büyük bir özellik isteği test edilmiş, ancak büyük veri setlerinde tarayıcı localStorage 5MB limitine takıldığı (QuotaExceededError) tespit edilmiştir. İnatla hatalı bir mimariyi canlıya taşımak yerine, kapsam bilinçli olarak küçültülerek bu özellik iptal edilmiş ve uygulamanın stabilizasyonu güvenceye alınmıştır. Bu karar, sağlam bir ürün yönetimi (Product Management) prensibi örneğidir.
+
 
  Tam detaylar: [docs/sprint-3/daily-scrum-notes.md](docs/sprint-3/daily-scrum-notes.md) · [Sprint Review](docs/sprint-3/sprint-review.md) · [Sprint Retrospective](docs/sprint-3/sprint-retrospective.md) · [Sprint Board](docs/sprint-3/sprint-board.md)
 
@@ -193,15 +224,20 @@ Sprint 3'te, ürün "çalışan bir prototip"ten **canlı, kullanıcı testinden
 |---|---|---|---|
 | Sprint 1 | 19 Haz – 5 Tem | Temel altyapı, dosya yükleme, karbon hesaplama, MVP dashboard |  Tamamlandı |
 | Sprint 2 | 6 – 19 Tem | Kod tekrarının giderilmesi, Llama 3 entegrasyonu, RAG, prompt verimlilik analizi |  Tamamlandı (6/6) |
-| Sprint 3 | 20 Tem – 2 Ağu | Sohbet arayüzü, PDF rapor, deploy, demo video | Devam ediyor (Deploy tamamlandı, video kaldı) |
-
+| Sprint 3 | 20 Tem – 2 Ağu | Sohbet arayüzü, PDF rapor, deploy, demo video |  Tamamlandı |
 ---
 
 ## Tüm Belgeler
 
 - [Product Backlog](docs/product-backlog.md)
+
 - **Sprint 1:** [Planning](docs/sprint-1/sprint-planning.md) · [Board](docs/sprint-1/sprint-board.md) · [Daily Notes](docs/sprint-1/daily-scrum-notes.md) · [Review](docs/sprint-1/sprint-review.md) · [Retrospective](docs/sprint-1/sprint-retrospective.md)
+
 - **Sprint 2:** [Planning](docs/sprint-2/sprint-planning.md) · [Board](docs/sprint-2/sprint-board.md) · [Daily Notes](docs/sprint-2/daily-scrum-notes.md) · [Review](docs/sprint-2/sprint-review.md) · [Retrospective](docs/sprint-2/sprint-retrospective.md) · [Fine-tuning Araştırması](docs/sprint-2/fine-tuning-arastirmasi.md)
+
+
+- **Sprint 3:** [Planning](docs/sprint-3/sprint-planning.md) · [Board](docs/sprint-3/sprint-board.md) · [Daily Notes](docs/sprint-3/daily-scrum-notes.md) · [Review](docs/sprint-3/sprint-review.md) · [Retrospective](docs/sprint-3/sprint-retrospective.md) 
+
 
 ---
 

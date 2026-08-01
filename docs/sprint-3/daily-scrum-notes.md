@@ -1,3 +1,5 @@
+# Sprint 3 - Daily Scrum Notes
+
 **Not:** 20-21 Temmuz günlerinde çalışmaya ara verildi.
 
 
@@ -105,7 +107,6 @@
 - Floating "Sohbete Git" butonu eklendi.
 - Ana sayfa "Claude" ifadeleri düzeltildi, gelecek platform roadmap notu eklendi.
 - Geçmiş Analizler özelliği eklendi.
-- Floating "Sohbete Git" butonu eklendi.
 - Gizlilik metni tutarsızlığı düzeltildi (upload sayfası ve README).
 - PDF yazdırma sorunu çözüldü (accordion için ayrı print layout).
 - Sayı hassasiyeti azaltıldı (940.80g → 941g).
@@ -127,8 +128,27 @@
 - Çoklu dosya geçmişi özelliği kaldırıldı (sadece metadata saklanıyordu ama localStorage hâlâ taşıyordu).
 - JSX yapısı düzeltildi (eksik kapanış etiketleri)
 - Sprint 3 belgeleri toplu güncellendi.
-- Sohbetteki güvenilir cevap veremeyen 3 örnek soru kaldırıldı.
 
 **Engeller:** localStorage 5MB limiti, çoklu dosya geçmişi özelliğinde taşmaya neden oldu; özellik kaldırılarak çözüldü.
+
+
+## 31 Temmuz 2026 (Cuma)
+
+**Bugün ne yapıldı:**
+- Notion board güncellendi (US-023 — US-030 Done sütununa eklendi), ekran görüntüsü alındı.
+- Sohbetteki güvenilir cevap veremeyen 3 örnek soru kaldırıldı.
+- Canlı sitede son kontroller yapıldı, sorun bulunmadı.
+- Demo video senaryosu hazırlandı.
+
+**Engeller:** Yok.
+
+## 1 Ağustos 2026 (Cumartesi)
+
+**Bugün ne yapıldı:**
+- US-012: Demo Video çekildi ve YouTube'a yüklendi.
+- Sprint 3 belgeleri son kez güncellendi.
+- Tüm Sprint 3 işleri tamamlandı.
+
+**Engeller:** Yok.
 
 

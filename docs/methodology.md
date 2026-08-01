@@ -141,5 +141,5 @@ Gelecek sürümlerde bu sınırlamalar giderilecek:
 
 ---
 
-**Son güncelleme:** 30 Temmuz 2026  
+**Son güncelleme:** 1 Ağustos 2026
 **Yazar:** Mkaya00 (Ege Mert Kaya)

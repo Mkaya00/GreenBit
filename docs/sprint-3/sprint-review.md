@@ -1,16 +1,16 @@
-# Sprint 3 - Review (Devam Ediyor)
+# Sprint 3 - Review 
 
-## Tamamlanan İşler (22 Temmuz itibarıyla)
+**Sprint Süresi:** 20 Temmuz 2026 – 2 Ağustos 2026
+**Review Tarihi:** 1 Ağustos 2026
+
+## Tamamlanan İşler
 
 - **US-008: AI Agent Orkestrasyonu** — Prompt analiz, model önerisi ve verimlilik skorunu koordine eden bir orkestrasyon sistemi kuruldu. Üç "alt agent" tek bir birleşik raporda sunuluyor.
 - **US-009: Sohbet Arayüzü** — Kullanıcı, yüklediği verisi hakkında doğal dilde soru sorup, gerçek veriye dayalı cevap alabiliyor.
-- **Yan iyileştirme:** Model enerji hesaplama tablosu, gelecekteki/bilinmeyen modelleri de akıllıca tahmin edecek şekilde güncellendi.
-
-## Devam Eden/Planlanan
-
-- US-010: PDF Rapor
-- US-011: Canlıya Alma (Deploy) — Oracle Cloud denemesi sürüyor, Groq/VPS yedek planları belirlendi.
-- US-012: Demo Video
+- **Yan iyileştirme:** - Model enerji hesaplama tablosu, gelecekteki/bilinmeyen modelleri de akıllıca tahmin edecek şekilde güncellendi.
+- **US-010: PDF Rapor** — Özel yazdırma (print) layout'u ile raporun temiz bir çıktısı alınabiliyor.
+- **US-011: Canlıya Alma (Deploy)** — Proje Groq API ve Vercel altyapısıyla canlıya alındı. Güvenlik kontrolleri sağlandı.
+- **US-012: Demo Video** — 3 dakikalık ürün demosu çekildi ve sisteme eklendi.
 
 ## 23 Temmuz Güncellemesi
 
@@ -53,6 +53,16 @@
  
 - localStorage taşma hatası tespit edilip düzeltildi.
 - Çoklu dosya geçmişi özelliği kaldırıldı (teknik kısıtlama nedeniyle).
-- .env.example dosyası eklendi.
 - Tüm Sprint 3 belgeleri toplu güncellendi.
-- Sohbetteki güvenilir cevap veremeyen örnek sorular kaldırıldı.
+
+## 31 Temmuz Güncellemesi
+
+- Notion board güncellendi.
+- Güvenilir cevap veremeyen 3 sohbet sorusu kaldırıldı.
+- Canlı sitede son kontroller yapıldı, sorun bulunmadı.
+
+## 1 Ağustos Güncellemesi
+
+- US-012: Demo Video tamamlandı ve YouTube'a yüklendi.
+- Tüm Sprint 3 işleri tamamlandı.
+- Sprint 3 kapanış belgeleri güncellendi.
